@@ -1,0 +1,302 @@
+---
+import Layout from '../layouts/Layout.astro';
+const { brandName } = Astro.props;
+---
+
+<header class="navbar">
+  <div class="container">
+    <div class="logo">
+      <a href="/">{brandName}</a>
+      <span class="tagline">creative design</span>
+    </div>
+    <nav class="desktop-nav">
+      <ul>
+        <li><a href="/">HOME</a></li>
+        <li><a href="#services">SERVICES</a></li>
+        <li><a href="#about">ABOUT US</a></li>
+        <li><a href="#contact">CONTACT US</a></li>
+      </ul>
+    </nav>
+    <div class="theme-toggle">
+      <button id="theme-toggle-btn" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+  
+  <div class="mobile-nav">
+    <ul>
+      <li><a href="/">HOME</a></li>
+      <li><a href="#services">SERVICES</a></li>
+      <li><a href="#about">ABOUT US</a></li>
+      <li><a href="#contact">CONTACT US</a></li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  // Theme toggle functionality
+  const themeToggleBtn = document.getElementById('theme-toggle-btn');
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  
+  // Set initial icon visibility based on current theme
+  updateThemeIcons(currentTheme);
+  
+  themeToggleBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    // Dispatch theme toggle event
+    document.dispatchEvent(new CustomEvent('themeToggle', {
+      detail: { theme: newTheme }
+    }));
+    
+    // Update icon visibility
+    updateThemeIcons(newTheme);
+  });
+  
+  function updateThemeIcons(theme) {
+    const sunIcon = document.querySelector('.sun-icon');
+    const moonIcon = document.querySelector('.moon-icon');
+    
+    if (theme === 'dark') {
+      sunIcon.style.display = 'block';
+      moonIcon.style.display = 'none';
+    } else {
+      sunIcon.style.display = 'none';
+      moonIcon.style.display = 'block';
+    }
+  }
+  
+  // Mobile menu functionality
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+  const mobileNav = document.querySelector('.mobile-nav');
+  
+  mobileMenuToggle.addEventListener('click', () => {
+    mobileMenuToggle.classList.toggle('active');
+    mobileNav.classList.toggle('active');
+    document.body.classList.toggle('menu-open');
+  });
+  
+  // Close mobile menu when clicking on a link
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+  mobileNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenuToggle.classList.remove('active');
+      mobileNav.classList.remove('active');
+      document.body.classList.remove('menu-open');
+    });
+  });
+</script>
+
+<style>
+  .navbar {
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-color: var(--navbar-bg);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo a {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+    letter-spacing: 1px;
+  }
+
+  .tagline {
+    font-size: 12px;
+    color: var(--text-gray);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .desktop-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .desktop-nav a {
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    color: var(--text-color);
+  }
+
+  .desktop-nav a:hover {
+    color: var(--primary-color);
+  }
+
+  .theme-toggle {
+    margin-right: 15px;
+  }
+
+  #theme-toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+  }
+
+  #theme-toggle-btn:hover {
+    color: var(--primary-color);
+  }
+
+  .sun-icon, .moon-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Mobile menu toggle button */
+  .mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 24px;
+    position: relative;
+    z-index: 101;
+  }
+  
+  .bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-color);
+    margin: 6px 0;
+    transition: 0.4s;
+    border-radius: 2px;
+  }
+  
+  /* Mobile navigation */
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--navbar-bg);
+    backdrop-filter: blur(10px);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: right 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+  }
+  
+  .mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .mobile-nav li {
+    margin: 20px 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition-delay: 0.1s;
+  }
+  
+  .mobile-nav a {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+  }
+  
+  .mobile-nav a:hover {
+    color: var(--primary-color);
+  }
+  
+  /* Active states for mobile menu */
+  .mobile-menu-toggle.active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+  
+  .mobile-menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .mobile-menu-toggle.active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+  
+  .mobile-nav.active {
+    right: 0;
+  }
+  
+  .mobile-nav.active li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .mobile-nav.active li:nth-child(1) { transition-delay: 0.2s; }
+  .mobile-nav.active li:nth-child(2) { transition-delay: 0.3s; }
+  .mobile-nav.active li:nth-child(3) { transition-delay: 0.4s; }
+  .mobile-nav.active li:nth-child(4) { transition-delay: 0.5s; }
+  
+  /* Prevent scrolling when menu is open */
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  @media (max-width: 768px) {
+    .desktop-nav {
+      display: none;
+    }
+    
+    .mobile-menu-toggle {
+      display: block;
+    }
+    
+    .theme-toggle {
+      margin-right: 20px;
+    }
+  }
+</style>
