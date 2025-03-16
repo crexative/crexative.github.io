@@ -3,6 +3,6 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://crexative.github.io/',
+    site: 'https://crexative.com',
     base: '/',
 });
