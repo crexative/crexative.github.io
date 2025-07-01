@@ -9,9 +9,20 @@ import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 
 const brandName = "CREXATIVE";
+
+// SEO-optimized meta data for homepage
+const pageTitle = "CREXATIVE - Premium Software Development Agency in Medellín, Colombia";
+const pageDescription = "Transform your business with custom software solutions. Expert web development, mobile apps, UI/UX design, and e-commerce solutions in Medellín, Colombia. 5+ years experience, 100+ projects delivered.";
+const pageKeywords = "software development agency, web development, mobile app development, UI UX design, custom software solutions, React development, Node.js development, e-commerce development, Medellín Colombia, software company";
 ---
 
-<Layout>
+<Layout 
+	title={pageTitle}
+	description={pageDescription}
+	keywords={pageKeywords}
+	image="https://crexative.com/images/crexative-og.png"
+	canonical="https://crexative.com/"
+>
 	<Navbar brandName={brandName} />
 	<Hero />
 	<Services />

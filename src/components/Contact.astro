@@ -1,86 +1,184 @@
 ---
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "CREXATIVE",
+    "url": "https://crexative.com",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+57-300-123-4567",
+      "email": "hello@crexative.com",
+      "contactType": "Customer Service",
+      "areaServed": "CO",
+      "availableLanguage": ["Spanish", "English"]
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Calle 10 #43-15, El Poblado",
+      "addressLocality": "Medellín",
+      "addressRegion": "Antioquia",
+      "postalCode": "050021",
+      "addressCountry": "CO"
+    }
+  }
+};
 ---
 
-<section id="contact" class="contact">
+<section id="contact" class="contact" itemscope itemtype="https://schema.org/ContactPage">
   <div class="container">
     <div class="section-header">
       <p class="subtitle">CONTACT US</p>
       <h2>LET'S WORK <span class="primary-color">TOGETHER</span></h2>
+      <p class="section-description">
+        Ready to transform your business with custom software solutions? Get in touch with our expert team in Medellín, Colombia for a free consultation.
+      </p>
     </div>
     
     <div class="contact-content">
-      <div class="contact-info">
+      <div class="contact-info" itemprop="mainEntity" itemscope itemtype="https://schema.org/Organization">
         <h3>Ready to build something amazing?</h3>
         <p>We're excited to learn about your project and discuss how our expertise can bring your vision to life. Let's collaborate and create a powerful software solution together.</p>
         
         <div class="contact-details">
-          <div class="contact-item">
+          <div class="contact-item" itemprop="contactPoint" itemscope itemtype="https://schema.org/ContactPoint">
             <div class="contact-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
             </div>
             <div>
               <h4>Email</h4>
-              <p>hello@crexative.com</p>
+              <p><a href="mailto:hello@crexative.com" itemprop="email">hello@crexative.com</a></p>
+              <span class="contact-note">Response within 24 hours</span>
             </div>
           </div>
           
-          <div class="contact-item">
+          <div class="contact-item" itemprop="contactPoint" itemscope itemtype="https://schema.org/ContactPoint">
             <div class="contact-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
               </svg>
             </div>
             <div>
-              <h4>Phone</h4>
-              <p>+57 300 123 4567</p>
+              <h4>WhatsApp</h4>
+              <p><a href="https://wa.me/573001234567" itemprop="telephone" target="_blank" rel="noopener">+57 300 123 4567</a></p>
+              <span class="contact-note">Available 9 AM - 6 PM COT</span>
             </div>
           </div>
           
-          <div class="contact-item">
+          <div class="contact-item" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
             <div class="contact-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
             </div>
             <div>
-              <h4>Location</h4>
-              <p>Medellín, Colombia</p>
+              <h4>Office Location</h4>
+              <address>
+                <span itemprop="streetAddress">Calle 10 #43-15, El Poblado</span><br>
+                <span itemprop="addressLocality">Medellín</span>, <span itemprop="addressRegion">Antioquia</span><br>
+                <span itemprop="postalCode">050021</span>, <span itemprop="addressCountry">Colombia</span>
+              </address>
+              <span class="contact-note">El Poblado business district</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="business-hours">
+          <h4>Business Hours</h4>
+          <div class="hours-list">
+            <div class="hours-item">
+              <span>Monday - Friday:</span>
+              <span>9:00 AM - 6:00 PM COT</span>
+            </div>
+            <div class="hours-item">
+              <span>Saturday:</span>
+              <span>10:00 AM - 2:00 PM COT</span>
+            </div>
+            <div class="hours-item">
+              <span>Sunday:</span>
+              <span>Closed</span>
             </div>
           </div>
         </div>
       </div>
       
       <div class="contact-form">
-        <form>
-          <div class="form-group">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" required>
+        <h3>Get Your Free Quote</h3>
+        <p>Tell us about your project and we'll provide a detailed proposal within 48 hours.</p>
+        <form name="contact-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contact-form" />
+          <div class="form-group" style="display: none;">
+            <label for="bot-field">Don't fill this out if you're human:</label>
+            <input type="text" id="bot-field" name="bot-field" />
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" required aria-describedby="name-error">
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" required aria-describedby="email-error">
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="company">Company Name</label>
+              <input type="text" id="company" name="company">
+            </div>
+            
+            <div class="form-group">
+              <label for="budget">Project Budget</label>
+              <select id="budget" name="budget">
+                <option value="">Select budget range</option>
+                <option value="under-5k">Under $5,000</option>
+                <option value="5k-15k">$5,000 - $15,000</option>
+                <option value="15k-50k">$15,000 - $50,000</option>
+                <option value="50k-plus">$50,000+</option>
+              </select>
+            </div>
           </div>
           
           <div class="form-group">
-            <label for="email">Your Email</label>
-            <input type="email" id="email" name="email" required>
+            <label for="service">Service Needed</label>
+            <select id="service" name="service">
+              <option value="">Select a service</option>
+              <option value="web-development">Web Application Development</option>
+              <option value="mobile-development">Mobile App Development</option>
+              <option value="ui-ux-design">UI/UX Design & Prototyping</option>
+              <option value="ecommerce">E-commerce Solutions</option>
+              <option value="consulting">Technical Consulting</option>
+              <option value="other">Other</option>
+            </select>
           </div>
           
           <div class="form-group">
-            <label for="subject">Subject</label>
-            <input type="text" id="subject" name="subject" required>
+            <label for="message">Project Description *</label>
+            <textarea id="message" name="message" rows="6" required aria-describedby="message-error" placeholder="Tell us about your project goals, timeline, and any specific requirements..."></textarea>
           </div>
           
-          <div class="form-group">
-            <label for="message">Your Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-          </div>
-          
-          <button type="submit" class="submit-btn">Send Message</button>
+          <button type="submit" class="submit-btn">
+            <span>Get Free Quote</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22,2 15,22 11,13 2,9 22,2"></polygon>
+            </svg>
+          </button>
         </form>
       </div>
     </div>
   </div>
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(contactSchema)} />
 </section>
 
 <style>
@@ -159,76 +257,170 @@
     color: var(--text-gray);
   }
   
+  .contact-item a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .contact-item a:hover {
+    text-decoration: underline;
+  }
+
+  .contact-note {
+    display: block;
+    font-size: 12px;
+    color: var(--text-gray);
+    opacity: 0.8;
+    margin-top: 2px;
+  }
+
+  .business-hours {
+    margin-top: 40px;
+    padding: 25px;
+    background-color: rgba(0, 225, 199, 0.05);
+    border-radius: 10px;
+    border-left: 4px solid var(--primary-color);
+  }
+
+  .business-hours h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--text-color);
+  }
+
+  .hours-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .hours-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+  }
+
+  .hours-item span:first-child {
+    color: var(--text-color);
+    font-weight: 500;
+  }
+
+  .hours-item span:last-child {
+    color: var(--text-gray);
+  }
+
+  .contact-form h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: var(--text-color);
+  }
+
+  .contact-form > p {
+    color: var(--text-gray);
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+  
   .contact-form form {
     display: flex;
     flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
   }
   
   .form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
   }
   
-  label {
-    font-size: 14px;
+  .form-group label {
     font-weight: 500;
+    margin-bottom: 8px;
     color: var(--text-color);
-  }
-  
-  input, textarea {
-    padding: 12px 15px;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    background-color: transparent;
-    color: var(--text-color);
-    font-family: inherit;
     font-size: 14px;
-    transition: border-color 0.3s ease;
   }
   
-  input:focus, textarea:focus {
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
     outline: none;
     border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 225, 199, 0.1);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
   }
   
   .submit-btn {
     background-color: var(--primary-color);
     color: #000;
-    border: none;
-    padding: 14px 25px;
-    font-size: 16px;
+    border: 2px solid var(--primary-color);
+    padding: 18px 40px;
+    border-radius: 8px;
     font-weight: 600;
-    border-radius: 4px;
+    font-size: 16px;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     align-self: flex-start;
-    margin-top: 10px;
   }
   
   .submit-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 225, 199, 0.3);
+    background-color: transparent;
+    color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 225, 199, 0.3);
+  }
+
+  .submit-btn svg {
+    transition: transform 0.3s ease;
+  }
+
+  .submit-btn:hover svg {
+    transform: translateX(3px);
   }
   
   @media (max-width: 768px) {
     .contact-content {
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .form-row {
       grid-template-columns: 1fr;
     }
-    
-    .contact-info {
-      order: 2;
-    }
-    
-    .contact-form {
-      order: 1;
-      margin-bottom: 40px;
-    }
-    
+
     .submit-btn {
-      width: 100%;
-      align-self: center;
+      align-self: stretch;
+    }
+    
+    h2 {
+      font-size: 32px;
     }
   }
 </style>
