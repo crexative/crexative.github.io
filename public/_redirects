@@ -1,0 +1,25 @@
+# Redirects for SEO
+/home              /                    301
+/index             /                    301
+/index.html        /                    301
+/contact           /#contact            301
+/services          /#services           301
+/about             /#about              301
+
+# Trailing slash redirects
+/services/         /#services           301
+/about/            /#about              301
+/contact/          /#contact            301
+
+# Legacy URL redirects
+/portfolio         /#services           301
+/work              /#services           301
+/team              /#about              301
+
+# Language redirects
+/es                /                    302
+/en                /                    302
+
+# Old sitemap redirects
+/sitemap           /sitemap.xml         301
+/robots            /robots.txt          301
