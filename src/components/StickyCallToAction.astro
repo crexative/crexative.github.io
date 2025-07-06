@@ -1,0 +1,210 @@
+---
+// Sticky CTA button component
+---
+
+<div class="sticky-cta" id="stickyCTA">
+  <a href="#contact" class="sticky-btn" aria-label="Get free quote">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="22" y1="2" x2="11" y2="13"></line>
+      <polygon points="22,2 15,22 11,13 2,9 22,2"></polygon>
+    </svg>
+    <span class="sticky-text">Get Quote</span>
+  </a>
+  
+  <div class="sticky-tooltip">
+    Get your free consultation now!
+  </div>
+</div>
+
+<style>
+  .sticky-cta {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .sticky-cta.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .sticky-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px;
+    background: var(--gradient-primary);
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    box-shadow: var(--shadow-xl);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .sticky-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+  }
+  
+  .sticky-btn:hover::before {
+    left: 100%;
+  }
+  
+  .sticky-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 225, 199, 0.4);
+  }
+  
+  .sticky-btn svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .sticky-btn:hover svg {
+    transform: rotate(15deg);
+  }
+  
+  .sticky-text {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  
+  .sticky-tooltip {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    background: var(--text-color);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    margin-bottom: 8px;
+  }
+  
+  .sticky-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    border: 6px solid transparent;
+    border-top-color: var(--text-color);
+  }
+  
+  .sticky-btn:hover + .sticky-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Pulse animation */
+  .sticky-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-color);
+    border-radius: 50px;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    animation: pulse 3s infinite;
+    z-index: -1;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.8;
+    }
+    70% {
+      transform: translate(-50%, -50%) scale(1.3);
+      opacity: 0;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1.3);
+      opacity: 0;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .sticky-cta {
+      bottom: 20px;
+      right: 20px;
+    }
+    
+    .sticky-btn {
+      padding: 14px 20px;
+      font-size: 14px;
+    }
+    
+    .sticky-text {
+      display: none;
+    }
+    
+    .sticky-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      justify-content: center;
+      padding: 0;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const stickyCTA = document.getElementById('stickyCTA');
+    const heroSection = document.querySelector('.hero');
+    
+    // Show/hide sticky CTA based on scroll position
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          stickyCTA.classList.add('visible');
+        } else {
+          stickyCTA.classList.remove('visible');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+    
+    if (heroSection) {
+      observer.observe(heroSection);
+    }
+    
+    // Smooth scroll to contact section
+    const stickyBtn = document.querySelector('.sticky-btn');
+    stickyBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const contactSection = document.querySelector('#contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+</script>

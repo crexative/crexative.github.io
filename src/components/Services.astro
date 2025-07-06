@@ -63,8 +63,8 @@ const structuredData = {
             <line x1="9" y1="21" x2="9" y2="9"></line>
           </svg>
         </div>
-        <h3 itemprop="name">Web Application Development</h3>
-        <p itemprop="description">We build robust, scalable, and secure web applications tailored to your business needs, from single-page applications to complex enterprise systems using React, Node.js, and modern frameworks.</p>
+        <h3 itemprop="name">Website Design</h3>
+        <p itemprop="description">Custom website design and development tailored to your brand and business goals, fully responsive and optimized for performance.</p>
         <div class="service-tech">
           <span class="tech-tag">React</span>
           <span class="tech-tag">Node.js</span>
@@ -79,8 +79,8 @@ const structuredData = {
             <line x1="12" y1="18" x2="12" y2="18"></line>
           </svg>
         </div>
-        <h3 itemprop="name">Mobile App Development</h3>
-        <p itemprop="description">We create beautiful and performant native and cross-platform mobile apps for both iOS and Android, delivering seamless user experiences with React Native and Flutter.</p>
+        <h3 itemprop="name">Mobile & Desktop App</h3>
+        <p itemprop="description">Native and cross-platform mobile applications, plus desktop software solutions designed for seamless user experiences across all devices.</p>
         <div class="service-tech">
           <span class="tech-tag">React Native</span>
           <span class="tech-tag">Flutter</span>
@@ -95,8 +95,8 @@ const structuredData = {
             <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
           </svg>
         </div>
-        <h3 itemprop="name">UI/UX Design & Prototyping</h3>
-        <p itemprop="description">Our design team creates intuitive, user-centric interfaces and interactive prototypes that enhance usability and drive engagement using Figma and Adobe Creative Suite.</p>
+        <h3 itemprop="name">UI & UX Design</h3>
+        <p itemprop="description">User-centered design solutions that prioritize usability and aesthetics, creating intuitive interfaces that engage and convert users.</p>
         <div class="service-tech">
           <span class="tech-tag">Figma</span>
           <span class="tech-tag">Adobe XD</span>
@@ -112,8 +112,8 @@ const structuredData = {
             <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
           </svg>
         </div>
-        <h3 itemprop="name">E-commerce Solutions</h3>
-        <p itemprop="description">We develop complete e-commerce platforms with secure payment integration, inventory management, and optimized checkout processes to maximize your online sales.</p>
+        <h3 itemprop="name">Visual Content Creation</h3>
+        <p itemprop="description">Professional photo editing, graphic design, and visual content creation to enhance your brand's visual identity and marketing materials.</p>
         <div class="service-tech">
           <span class="tech-tag">Shopify</span>
           <span class="tech-tag">WooCommerce</span>
@@ -160,10 +160,13 @@ const structuredData = {
   }
   
   .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    gap: 40px;
     margin-top: 20px;
+    width: 100%;
   }
   
   .service-card {
@@ -178,6 +181,9 @@ const structuredData = {
     position: relative;
     overflow: hidden;
     will-change: transform;
+    flex: 1 1 calc(50% - 20px);
+    min-width: 300px;
+    max-width: 500px;
   }
   
   .service-card::before {
@@ -250,16 +256,58 @@ const structuredData = {
   }
   
   @media (max-width: 768px) {
+    .services {
+      padding: 80px 0;
+    }
+
     .services-grid {
-      grid-template-columns: 1fr;
+      gap: 25px;
+      justify-content: center;
+    }
+
+    .service-card {
+      flex: 1 1 100%;
+      max-width: 100%;
+      min-width: auto;
+      padding: 25px 20px;
     }
     
     h2 {
       font-size: 32px;
     }
 
+    .service-card h3 {
+      font-size: 20px;
+    }
+
+    .section-description {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .services {
+      padding: 60px 0;
+    }
+
+    .services-grid {
+      gap: 20px;
+    }
+
     .service-card {
-      padding: 25px;
+      padding: 20px 16px;
+    }
+
+    h2 {
+      font-size: 28px;
+    }
+
+    .service-card h3 {
+      font-size: 18px;
+    }
+
+    .service-card p {
+      font-size: 14px;
     }
   }
 </style>
