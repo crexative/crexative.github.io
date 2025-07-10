@@ -1,22 +1,32 @@
 ---
-import Layout from '../layouts/Layout.astro';
-const { brandName } = Astro.props;
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { useTranslations } from '../i18n';
+
+interface Props {
+  brandName: string;
+  lang: string;
+}
+
+const { brandName, lang } = Astro.props;
+const t = useTranslations(lang as 'en' | 'es');
 ---
 
 <header class="navbar">
   <div class="container">
     <div class="logo">
-      <a href="/">{brandName}</a>
+      <a href={lang === 'en' ? '/en' : '/'}>{brandName}</a>
     </div>
     <nav class="desktop-nav">
       <ul>
-        <li><a href="/">HOME</a></li>
-        <li><a href="#services">SERVICES</a></li>
-        <li><a href="#about">ABOUT</a></li>
-        <li><a href="#contact">CONTACT</a></li>
+        <li><a href={lang === 'en' ? '/en' : '/'}>{t('nav.home')}</a></li>
+        <li><a href="#services">{t('nav.services')}</a></li>
+        <li><a href="#about">{t('nav.about')}</a></li>
+        <li><a href="#contact">{t('nav.contact')}</a></li>
       </ul>
     </nav>
-    <div class="theme-toggle">
+    <div class="nav-actions">
+      <LanguageSwitcher currentLang={lang} />
+      <div class="theme-toggle">
       <button id="theme-toggle-btn" aria-label="Toggle theme">
         <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="5"></circle>
@@ -33,6 +43,7 @@ const { brandName } = Astro.props;
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
       </button>
+      </div>
     </div>
     <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
       <span class="bar"></span>
@@ -43,10 +54,10 @@ const { brandName } = Astro.props;
   
   <div class="mobile-nav">
     <ul>
-      <li><a href="/">HOME</a></li>
-      <li><a href="#services">SERVICES</a></li>
-      <li><a href="#about">ABOUT</a></li>
-      <li><a href="#contact">CONTACT</a></li>
+      <li><a href={lang === 'en' ? '/en' : '/'}>{t('nav.home')}</a></li>
+      <li><a href="#services">{t('nav.services')}</a></li>
+      <li><a href="#about">{t('nav.about')}</a></li>
+      <li><a href="#contact">{t('nav.contact')}</a></li>
     </ul>
   </div>
 </header>
@@ -163,8 +174,14 @@ const { brandName } = Astro.props;
     color: var(--primary-color);
   }
 
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
   .theme-toggle {
-    margin-right: 15px;
+    margin: 0;
   }
 
   #theme-toggle-btn {
@@ -294,8 +311,12 @@ const { brandName } = Astro.props;
       display: block;
     }
     
+    .nav-actions {
+      gap: 0.5rem;
+    }
+    
     .theme-toggle {
-      margin-right: 20px;
+      margin: 0;
     }
   }
 </style>

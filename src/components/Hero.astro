@@ -1,21 +1,29 @@
 ---
+import { useTranslations } from '../i18n';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang as 'en' | 'es');
 ---
 
 <section class="hero" itemscope itemtype="https://schema.org/Organization">
   <div class="container">
     <div class="hero-content">
       <div class="hero-text">
-        <p class="subtitle" itemprop="description">CREATIVE DESIGN AGENCY</p>
-        <h1 itemprop="name">WE TRANSFORM <span class="primary-color">IDEAS</span> INTO REALITY</h1>
+        <p class="subtitle" itemprop="description">CREXATIVE</p>
+        <h1 itemprop="name">{t('hero.title')}</h1>
         <p class="description" itemprop="description">
-          We are a global creative design agency specializing in web design, mobile applications, and digital experiences. Our team of skilled designers and developers work remotely to deliver exceptional results for clients worldwide.
+          {t('hero.description')}
         </p>
         <div class="cta-buttons">
-          <a href="#contact" class="btn btn-primary" aria-label="Get a free consultation for your creative project">
-            Get Free Quote
+          <a href="#contact" class="btn btn-primary" aria-label={t('hero.cta')}>
+            {t('hero.cta')}
           </a>
-          <a href="#services" class="btn btn-secondary" aria-label="View our services">
-            Our Services
+          <a href="#services" class="btn btn-secondary" aria-label={t('hero.ctaSecondary')}>
+            {t('hero.ctaSecondary')}
           </a>
         </div>
       </div>
@@ -23,7 +31,7 @@
         <div class="image-container">
           <img 
             src="/images/hero.jpg" 
-            alt="CREXATIVE software development team working on innovative solutions in Medellín, Colombia"
+            alt={lang === 'es' ? 'Equipo de desarrollo de software CREXATIVE trabajando en soluciones innovadoras en Colombia' : 'CREXATIVE software development team working on innovative solutions in Colombia'}
             width="600"
             height="400"
             loading="eager"
@@ -117,12 +125,15 @@
     border-color: var(--text-color);
   }
 
+
   .btn-secondary:hover {
     background-color: var(--text-color);
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   }
+
+  /* Dark mode styles will be handled globally in Layout.astro */
 
   .hero-image {
     flex: 1;

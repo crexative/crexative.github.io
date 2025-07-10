@@ -1,26 +1,31 @@
 ---
+import { useTranslations } from '../i18n';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang as 'en' | 'es');
+
 const contactSchema = {
-  "@context": "https://schema.org",
-  "@type": "ContactPage",
-  "mainEntity": {
-    "@type": "Organization",
-    "name": "CREXATIVE",
-    "url": "https://crexative.com",
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+57-300-123-4567",
-      "email": "hello@crexative.com",
-      "contactType": "Customer Service",
-      "areaServed": "CO",
-      "availableLanguage": ["Spanish", "English"]
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  mainEntity: {
+    '@type': 'Organization',
+    name: 'CREXATIVE',
+    url: 'https://crexative.com',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+57-300-123-4567',
+      email: 'hello@crexative.com',
+      contactType: 'Customer Service',
+      areaServed: 'CO',
+      availableLanguage: ['Spanish', 'English']
     },
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Calle 10 #43-15, El Poblado",
-      "addressLocality": "Medellín",
-      "addressRegion": "Antioquia",
-      "postalCode": "050021",
-      "addressCountry": "CO"
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'CO'
     }
   }
 };
@@ -29,17 +34,17 @@ const contactSchema = {
 <section id="contact" class="contact" itemscope itemtype="https://schema.org/ContactPage">
   <div class="container">
     <div class="section-header">
-      <p class="subtitle">CONTACT US</p>
-      <h2>LET'S WORK <span class="primary-color">TOGETHER</span></h2>
+      <p class="subtitle">{t('contact.title')}</p>
+      <h2>{t('contact.subtitle')}</h2>
       <p class="section-description">
-        Ready to start your next project? Get in touch with our global team of creative professionals for a free consultation.
+        {t('contact.description')}
       </p>
     </div>
     
     <div class="contact-content">
       <div class="contact-info" itemprop="mainEntity" itemscope itemtype="https://schema.org/Organization">
-        <h3>Ready to start your next project?</h3>
-        <p>We're excited to hear about your ideas and help bring them to life. Our global team of creative professionals is ready to collaborate with you remotely, delivering exceptional results regardless of your location.</p>
+        <h3>{t('contact.subtitle')}</h3>
+        <p>{t('contact.description')}</p>
         
         <div class="contact-details">
           <div class="contact-item" itemprop="contactPoint" itemscope itemtype="https://schema.org/ContactPoint">
@@ -50,9 +55,9 @@ const contactSchema = {
               </svg>
             </div>
             <div>
-              <h4>Email</h4>
-              <p><a href="mailto:hello@crexative.com" itemprop="email">hello@crexative.com</a></p>
-              <span class="contact-note">Response within 24 hours</span>
+              <h4>{t('contact.info.email')}</h4>
+              <p><a href={`mailto:${t('contact.details.email')}`} itemprop="email">{t('contact.details.email')}</a></p>
+              <span class="contact-note">{t('misc.responseTime')}</span>
             </div>
           </div>
           
@@ -63,9 +68,9 @@ const contactSchema = {
               </svg>
             </div>
             <div>
-              <h4>Phone</h4>
-              <p>Available via video call</p>
-              <span class="contact-note">Schedule online consultation</span>
+              <h4>{t('contact.info.phone')}</h4>
+              <p>{t('contact.details.phone')}</p>
+              <span class="contact-note">{t('misc.scheduleConsultation')}</span>
             </div>
           </div>
           
@@ -77,35 +82,35 @@ const contactSchema = {
               </svg>
             </div>
             <div>
-              <h4>Global Service</h4>
-              <p>Remote collaboration worldwide</p>
-              <span class="contact-note">Working with clients globally</span>
+              <h4>{t('contact.info.address')}</h4>
+              <p>{t('contact.details.address')}</p>
+              <span class="contact-note">{t('misc.workingGlobally')}</span>
             </div>
           </div>
         </div>
 
         <div class="business-hours">
-          <h4>Business Hours</h4>
+          <h4>{t('contact.info.hours')}</h4>
           <div class="hours-list">
             <div class="hours-item">
-              <span>Monday - Friday:</span>
-              <span>9:00 AM - 6:00 PM COT</span>
+              <span>{t('misc.mondayFriday')}</span>
+              <span>{t('contact.details.hours')}</span>
             </div>
             <div class="hours-item">
-              <span>Saturday:</span>
-              <span>10:00 AM - 2:00 PM COT</span>
+              <span>{t('misc.saturday')}</span>
+              <span>{t('misc.saturdayHours')}</span>
             </div>
             <div class="hours-item">
-              <span>Sunday:</span>
-              <span>Closed</span>
+              <span>{t('misc.sunday')}</span>
+              <span>{t('misc.closed')}</span>
             </div>
           </div>
         </div>
       </div>
       
       <div class="contact-form">
-        <h3>Get Your Free Quote</h3>
-        <p>Tell us about your project and we'll provide a detailed proposal within 48 hours.</p>
+        <h3>{t('misc.getQuote')}</h3>
+        <p>{t('misc.quoteDescription')}</p>
         <form name="contact-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <input type="hidden" name="form-name" value="contact-form" />
           <div class="form-group" style="display: none;">
@@ -115,54 +120,54 @@ const contactSchema = {
           
           <div class="form-row">
             <div class="form-group">
-              <label for="name">Full Name *</label>
-              <input type="text" id="name" name="name" required aria-describedby="name-error">
+              <label for="name">{t('contact.form.name')} *</label>
+              <input type="text" id="name" name="name" required aria-describedby="name-error" placeholder={t('contact.form.namePlaceholder')}>
             </div>
             
             <div class="form-group">
-              <label for="email">Email Address *</label>
-              <input type="email" id="email" name="email" required aria-describedby="email-error">
+              <label for="email">{t('contact.form.email')} *</label>
+              <input type="email" id="email" name="email" required aria-describedby="email-error" placeholder={t('contact.form.emailPlaceholder')}>
             </div>
           </div>
           
           <div class="form-row">
             <div class="form-group">
-              <label for="company">Company Name</label>
-              <input type="text" id="company" name="company">
+              <label for="company">{t('contact.form.company')}</label>
+              <input type="text" id="company" name="company" placeholder={t('contact.form.companyPlaceholder')}>
             </div>
             
             <div class="form-group">
-              <label for="budget">Project Budget</label>
+              <label for="budget">{t('misc.projectBudget')}</label>
               <select id="budget" name="budget">
-                <option value="">Select budget range</option>
-                <option value="under-5k">Under $5,000</option>
+                <option value="">{t('misc.selectBudget')}</option>
+                <option value="under-5k">{t('misc.under5k')}</option>
                 <option value="5k-15k">$5,000 - $15,000</option>
                 <option value="15k-50k">$15,000 - $50,000</option>
-                <option value="50k-plus">$50,000+</option>
+                <option value="50k-plus">{t('misc.over50k')}</option>
               </select>
             </div>
           </div>
           
           <div class="form-group">
-            <label for="service">Service Needed</label>
+            <label for="service">{t('contact.form.service')}</label>
             <select id="service" name="service">
-              <option value="">Select a service</option>
-              <option value="web-development">Web Application Development</option>
-              <option value="mobile-development">Mobile App Development</option>
-              <option value="ui-ux-design">UI/UX Design & Prototyping</option>
-              <option value="ecommerce">E-commerce Solutions</option>
-              <option value="consulting">Technical Consulting</option>
-              <option value="other">Other</option>
+              <option value="">{t('contact.form.servicePlaceholder')}</option>
+              <option value="web-development">{t('services.web.title')}</option>
+              <option value="mobile-development">{t('services.mobile.title')}</option>
+              <option value="ui-ux-design">{t('services.uiux.title')}</option>
+              <option value="ecommerce">{t('services.ecommerce.title')}</option>
+              <option value="consulting">{t('services.consulting.title')}</option>
+              <option value="other">{t('misc.other')}</option>
             </select>
           </div>
           
           <div class="form-group">
-            <label for="message">Project Description *</label>
-            <textarea id="message" name="message" rows="6" required aria-describedby="message-error" placeholder="Tell us about your project goals, timeline, and any specific requirements..."></textarea>
+            <label for="message">{t('contact.form.message')} *</label>
+            <textarea id="message" name="message" rows="6" required aria-describedby="message-error" placeholder={t('contact.form.messagePlaceholder')}></textarea>
           </div>
           
           <button type="submit" class="submit-btn">
-            <span>Get Free Quote</span>
+            <span>{t('contact.form.submit')}</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="22" y1="2" x2="11" y2="13"></line>
               <polygon points="22,2 15,22 11,13 2,9 22,2"></polygon>
@@ -174,7 +179,7 @@ const contactSchema = {
   </div>
   
   <!-- Structured Data -->
-  <script type="application/ld+json" set:html={JSON.stringify(contactSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(contactSchema)} is:inline />
 </section>
 
 <style>
@@ -392,6 +397,13 @@ const contactSchema = {
     color: var(--primary-color);
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(0, 225, 199, 0.3);
+  }
+
+  /* Dark mode specific styles for submit button */
+  [data-theme="dark"] .submit-btn:hover {
+    background-color: rgba(0, 225, 199, 0.1) !important;
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
   }
 
   .submit-btn svg {

@@ -1,17 +1,23 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n';
+
 export interface Props {
 	title?: string;
 	description?: string;
 	keywords?: string;
 	image?: string;
 	canonical?: string;
+	lang?: string;
 }
 
 const brandName = "CREXATIVE";
+const currentLang = Astro.props.lang || getLangFromUrl(Astro.url) || 'en';
+const t = useTranslations(currentLang as 'en' | 'es');
+
 const { 
-	title = `${brandName} - Premium Software Development Agency in Medellín, Colombia`,
-	description = "Transform your business with custom software solutions. Expert web development, mobile apps, UI/UX design, and e-commerce solutions in Medellín, Colombia. 5+ years experience, 100+ projects delivered.",
-	keywords = "software development, web development, mobile app development, UI UX design, e-commerce, custom software, Medellín, Colombia, software agency, React, Node.js, Python, JavaScript",
+	title = t('seo.title'),
+	description = t('seo.description'),
+	keywords = t('seo.keywords'),
 	image = "/images/crexative-og.png",
 	canonical = Astro.url.href
 } = Astro.props;
@@ -32,8 +38,6 @@ const structuredData = {
 	},
 	"address": {
 		"@type": "PostalAddress",
-		"addressLocality": "Medellín",
-		"addressRegion": "Antioquia",
 		"addressCountry": "CO"
 	},
 	"sameAs": [
@@ -54,7 +58,7 @@ const structuredData = {
 ---
 
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang={currentLang} data-theme="light">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -67,7 +71,7 @@ const structuredData = {
 		<meta name="description" content={description} />
 		<meta name="keywords" content={keywords} />
 		<meta name="robots" content="index, follow" />
-		<meta name="language" content="English" />
+		<meta name="language" content={currentLang === 'es' ? 'Spanish' : 'English'} />
 		<meta name="author" content="CREXATIVE" />
 		<link rel="canonical" href={canonical} />
 		
@@ -78,7 +82,7 @@ const structuredData = {
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={image} />
 		<meta property="og:site_name" content="CREXATIVE" />
-		<meta property="og:locale" content="en_US" />
+		<meta property="og:locale" content={currentLang === 'es' ? 'es_CO' : 'en_US'} />
 		
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
@@ -89,13 +93,11 @@ const structuredData = {
 		<meta property="twitter:creator" content="@crexative" />
 		
 		<!-- Additional SEO Meta Tags -->
-		<meta name="geo.region" content="CO-ANT" />
-		<meta name="geo.placename" content="Medellín" />
-		<meta name="geo.position" content="6.2442;-75.5812" />
-		<meta name="ICBM" content="6.2442, -75.5812" />
+		<meta name="geo.region" content="CO" />
+		<meta name="geo.placename" content="Colombia" />
 		
 		<!-- Structured Data -->
-		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
 		
 		<!-- DNS Prefetch for external resources -->
 		<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -106,7 +108,7 @@ const structuredData = {
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		
 		<!-- Enhanced typography with modern font combination -->
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" onload="this.media='all'">
 		<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 		
 		<!-- Preload critical resources -->
@@ -175,11 +177,34 @@ const structuredData = {
 	/* Dark theme */
 	[data-theme="dark"] {
 		--bg-color: #0a0a0a;
+		--bg-secondary: #1a1a1a;
+		--bg-tertiary: #2a2a2a;
 		--text-color: #ffffff;
-		--text-gray: #aaaaaa;
+		--text-secondary: #e2e8f0;
+		--text-gray: #a0aec0;
+		--text-light: #718096;
 		--navbar-bg: rgba(10, 10, 10, 0.8);
 		--footer-bg: rgba(10, 10, 10, 0.9);
-		--border-color: rgba(255, 255, 255, 0.05);
+		--border-color: rgba(255, 255, 255, 0.1);
+		--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+		--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+		--shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4);
+		--shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5);
+	}
+
+	/* Dark mode button fixes - Global styles */
+	[data-theme="dark"] .btn-secondary:hover {
+		background-color: #e2e8f0 !important;
+		color: #000000 !important;
+		border-color: #00e1c7 !important;
+		transform: translateY(-2px) !important;
+		box-shadow: 0 8px 20px rgba(0, 225, 199, 0.3) !important;
+	}
+
+	[data-theme="dark"] .btn-secondary {
+		color: #e2e8f0 !important;
+		border-color: #e2e8f0 !important;
+		background-color: transparent !important;
 	}
 
 	html,

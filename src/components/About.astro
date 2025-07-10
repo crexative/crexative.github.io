@@ -1,18 +1,26 @@
 ---
+import { useTranslations } from '../i18n';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang as 'en' | 'es');
 ---
 
 <section id="about" class="about" itemscope itemtype="https://schema.org/Organization">
   <div class="container">
     <div class="section-header">
-      <p class="subtitle">ABOUT US</p>
-      <h2>WHO ARE <span class="primary-color">WE</span>?</h2>
+      <p class="subtitle">{t('about.title')}</p>
+      <h2>{t('about.subtitle')}</h2>
     </div>
     
     <div class="about-content">
       <div class="about-image">
         <img 
           src="/images/about.png" 
-          alt="CREXATIVE software development team - Expert developers and engineers working on innovative projects in Medellín, Colombia"
+          alt={lang === 'es' ? 'Equipo de desarrollo de software CREXATIVE - Desarrolladores e ingenieros expertos trabajando en proyectos innovadores en Colombia' : 'CREXATIVE software development team - Expert developers and engineers working on innovative projects in Colombia'}
           width="500"
           height="400"
           loading="lazy"
@@ -22,29 +30,29 @@
       
       <div class="about-text">
         <p itemprop="description">
-          We are a passionate team of creative professionals dedicated to bringing your vision to life. With years of experience in digital design and development, we specialize in creating exceptional user experiences that drive results. Our collaborative approach ensures that every project reflects your unique brand identity while meeting the highest standards of quality and innovation.
+          {t('about.description')}
         </p>
         
         <div class="company-values">
           <div class="value-item">
-            <span class="value-icon">🎯</span>
+            <span class="value-icon">💡</span>
             <div class="value-content">
-              <h4>Quality First</h4>
-              <p>We prioritize quality over quantity in every project</p>
+              <h4>{t('about.values.innovation')}</h4>
+              <p>{t('about.values.innovationDesc')}</p>
             </div>
           </div>
           <div class="value-item">
-            <span class="value-icon">⚡</span>
+            <span class="value-icon">⭐</span>
             <div class="value-content">
-              <h4>Fast Delivery</h4>
-              <p>Quick turnaround times without compromising quality</p>
+              <h4>{t('about.values.quality')}</h4>
+              <p>{t('about.values.qualityDesc')}</p>
             </div>
           </div>
           <div class="value-item">
-            <span class="value-icon">💬</span>
+            <span class="value-icon">🤝</span>
             <div class="value-content">
-              <h4>Clear Communication</h4>
-              <p>Regular updates and transparent project progress</p>
+              <h4>{t('about.values.partnership')}</h4>
+              <p>{t('about.values.partnershipDesc')}</p>
             </div>
           </div>
         </div>
@@ -57,8 +65,8 @@
               </svg>
             </div>
             <div class="feature-text">
-              <h3>Clean Code</h3>
-              <p>We write maintainable, scalable code that follows industry best practices and ensures long-term project success.</p>
+              <h3>{t('misc.cleanCode')}</h3>
+              <p>{t('misc.cleanCodeDesc')}</p>
             </div>
           </article>
           
@@ -71,8 +79,8 @@
               </svg>
             </div>
             <div class="feature-text">
-              <h3>Modern Design</h3>
-              <p>Our designs blend contemporary aesthetics with functional usability, creating experiences that are both beautiful and effective.</p>
+              <h3>{t('misc.modernDesign')}</h3>
+              <p>{t('misc.modernDesignDesc')}</p>
             </div>
           </article>
 
@@ -85,15 +93,14 @@
               </svg>
             </div>
             <div class="feature-text">
-              <h3>Scalable Architecture</h3>
-              <p>We design and implement robust, scalable architectures that grow with your business, ensuring optimal performance and reliability at any scale.</p>
+              <h3>{t('misc.scalableArchitecture')}</h3>
+              <p>{t('misc.scalableArchitectureDesc')}</p>
             </div>
           </article>
         </div>
       </div>
     </div>
   </div>
-</section>
 </section>
 
 <style>
