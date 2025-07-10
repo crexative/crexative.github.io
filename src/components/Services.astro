@@ -1,45 +1,54 @@
 ---
+import { useTranslations } from '../i18n';
+
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang as 'en' | 'es');
+
 const services = [
   {
-    name: "Web Application Development",
-    description: "We build robust, scalable, and secure web applications tailored to your business needs, from single-page applications to complex enterprise systems using React, Node.js, and modern frameworks.",
-    icon: "web-development",
-    keywords: "web development, React, Node.js, full-stack development, responsive design"
+    name: t('services.web.title'),
+    description: t('services.web.description'),
+    icon: 'web-development',
+    techTags: ['React', 'Node.js', 'TypeScript']
   },
   {
-    name: "Mobile App Development", 
-    description: "We create beautiful and performant native and cross-platform mobile apps for both iOS and Android, delivering seamless user experiences with React Native and Flutter.",
-    icon: "mobile-development",
-    keywords: "mobile app development, iOS, Android, React Native, Flutter"
+    name: t('services.mobile.title'),
+    description: t('services.mobile.description'),
+    icon: 'mobile-development',
+    techTags: ['React Native', 'Flutter', 'iOS', 'Android']
   },
   {
-    name: "UI/UX Design & Prototyping",
-    description: "Our design team creates intuitive, user-centric interfaces and interactive prototypes that enhance usability and drive engagement using Figma and Adobe Creative Suite.",
-    icon: "ui-ux-design", 
-    keywords: "UI UX design, prototyping, user experience, interface design, Figma"
+    name: t('services.uiux.title'),
+    description: t('services.uiux.description'),
+    icon: 'ui-ux-design',
+    techTags: ['Figma', 'Adobe XD', 'Prototyping']
   },
   {
-    name: "E-commerce Solutions",
-    description: "We develop complete e-commerce platforms with secure payment integration, inventory management, and optimized checkout processes to maximize your online sales.",
-    icon: "ecommerce",
-    keywords: "e-commerce development, online store, payment integration, Shopify, WooCommerce"
+    name: t('services.ecommerce.title'),
+    description: t('services.ecommerce.description'),
+    icon: 'ecommerce',
+    techTags: ['Shopify', 'WooCommerce', t('misc.paymentIntegration')]
   }
 ];
 
 const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "provider": {
-    "@type": "Organization",
-    "name": "CREXATIVE",
-    "url": "https://crexative.com"
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  provider: {
+    '@type': 'Organization',
+    name: 'CREXATIVE',
+    url: 'https://crexative.com'
   },
-  "serviceType": "Software Development",
-  "offers": services.map(service => ({
-    "@type": "Offer",
-    "name": service.name,
-    "description": service.description,
-    "category": "Software Development"
+  serviceType: 'Software Development',
+  offers: services.map(service => ({
+    '@type': 'Offer',
+    name: service.name,
+    description: service.description,
+    category: 'Software Development'
   }))
 };
 ---
@@ -47,84 +56,59 @@ const structuredData = {
 <section id="services" class="services" itemscope itemtype="https://schema.org/Organization">
   <div class="container">
     <div class="section-header">
-      <p class="subtitle">OUR SERVICES</p>
-      <h2>WHAT WE <span class="primary-color">DO</span>?</h2>
+      <p class="subtitle">{t('services.title')}</p>
+      <h2>{t('services.subtitle')}</h2>
       <p class="section-description">
-        We provide comprehensive software development services to help businesses thrive in the digital age. Our expert team delivers cutting-edge solutions tailored to your specific needs.
+        {t('services.subtitle')}
       </p>
     </div>
     
     <div class="services-grid" itemprop="makesOffer" itemscope itemtype="https://schema.org/Offer">
-      <article class="service-card" itemscope itemtype="https://schema.org/Service">
-        <div class="service-icon">
+      {services.map((service, index) => {
+        const icons = [
+          // Web Development Icon
           <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
             <line x1="3" y1="9" x2="21" y2="9"></line>
             <line x1="9" y1="21" x2="9" y2="9"></line>
-          </svg>
-        </div>
-        <h3 itemprop="name">Website Design</h3>
-        <p itemprop="description">Custom website design and development tailored to your brand and business goals, fully responsive and optimized for performance.</p>
-        <div class="service-tech">
-          <span class="tech-tag">React</span>
-          <span class="tech-tag">Node.js</span>
-          <span class="tech-tag">TypeScript</span>
-        </div>
-      </article>
-      
-      <article class="service-card" itemscope itemtype="https://schema.org/Service">
-        <div class="service-icon">
+          </svg>,
+          // Mobile Development Icon
           <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
             <line x1="12" y1="18" x2="12" y2="18"></line>
-          </svg>
-        </div>
-        <h3 itemprop="name">Mobile & Desktop App</h3>
-        <p itemprop="description">Native and cross-platform mobile applications, plus desktop software solutions designed for seamless user experiences across all devices.</p>
-        <div class="service-tech">
-          <span class="tech-tag">React Native</span>
-          <span class="tech-tag">Flutter</span>
-          <span class="tech-tag">iOS</span>
-          <span class="tech-tag">Android</span>
-        </div>
-      </article>
-      
-      <article class="service-card" itemscope itemtype="https://schema.org/Service">
-        <div class="service-icon">
+          </svg>,
+          // UI/UX Design Icon
           <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-          </svg>
-        </div>
-        <h3 itemprop="name">UI & UX Design</h3>
-        <p itemprop="description">User-centered design solutions that prioritize usability and aesthetics, creating intuitive interfaces that engage and convert users.</p>
-        <div class="service-tech">
-          <span class="tech-tag">Figma</span>
-          <span class="tech-tag">Adobe XD</span>
-          <span class="tech-tag">Prototyping</span>
-        </div>
-      </article>
-      
-      <article class="service-card" itemscope itemtype="https://schema.org/Service">
-        <div class="service-icon">
+          </svg>,
+          // E-commerce Icon
           <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="8" cy="21" r="1"></circle>
             <circle cx="19" cy="21" r="1"></circle>
             <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
           </svg>
-        </div>
-        <h3 itemprop="name">Visual Content Creation</h3>
-        <p itemprop="description">Professional photo editing, graphic design, and visual content creation to enhance your brand's visual identity and marketing materials.</p>
-        <div class="service-tech">
-          <span class="tech-tag">Shopify</span>
-          <span class="tech-tag">WooCommerce</span>
-          <span class="tech-tag">Payment Integration</span>
-        </div>
-      </article>
+        ];
+        
+        return (
+          <article class="service-card" itemscope itemtype="https://schema.org/Service">
+            <div class="service-icon">
+              {icons[index]}
+            </div>
+            <h3 itemprop="name">{service.name}</h3>
+            <p itemprop="description">{service.description}</p>
+            <div class="service-tech">
+              {service.techTags.map(tag => (
+                <span class="tech-tag">{tag}</span>
+              ))}
+            </div>
+          </article>
+        );
+      })}
     </div>
   </div>
   
   <!-- Structured Data -->
-  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
 </section>
 
 <style>

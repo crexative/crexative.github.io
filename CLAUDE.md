@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a **Crexative** website built with **Astro** - a modern landing page for a creative design agency operating across Colombia. The project is configured to deploy to https://crexative.com and uses pnpm as the package manager.
+This is a **Crexative** website built with **Astro** - a modern landing page for a creative design agency operating across Colombia. The project is configured to deploy to https://crexative.com and uses pnpm as the package manager. The website supports both English and Spanish languages with complete internationalization (i18n) implementation.
 
 ## Development Commands
 
@@ -77,3 +77,30 @@ The homepage (`src/pages/index.astro`) follows this structure:
 - **Compression**: HTML compression enabled
 - **Minification**: ESBuild minification with CSS code splitting
 - **Source Maps**: Disabled for production builds
+
+## Internationalization (i18n)
+
+### Language Support
+- **Spanish**: Default language at `/` (es)
+- **English**: Available at `/en/`
+- **Structure**: Clean separation with locale files in `src/i18n/locales/`
+
+### Translation System
+- **Configuration**: `src/i18n/index.ts` - Main i18n utilities and type definitions
+- **English Translations**: `src/i18n/locales/en.ts`
+- **Spanish Translations**: `src/i18n/locales/es.ts`
+- **Component Integration**: All components accept `lang` prop and use `useTranslations()` hook
+- **Language Switcher**: Dropdown component with localStorage persistence and URL routing
+
+### Key Features
+- **Automatic Fallback**: Falls back to Spanish (default) if translation missing
+- **Type Safety**: Complete TypeScript support with `TranslationKey` type
+- **SEO Optimization**: Language-specific meta tags, structured data, and OpenGraph locale
+- **URL Structure**: Clean URLs with language prefix (`/en/`) for English, Spanish at root
+- **Browser Storage**: Language preference saved in localStorage
+
+### Component Architecture
+All components are internationalized and accept a `lang` prop:
+- Hero, Services, About, Contact, Footer, Navbar, StickyCallToAction
+- Language-aware internal linking and content rendering
+- Structured translation keys for maintainability

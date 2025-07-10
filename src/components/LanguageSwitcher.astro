@@ -1,0 +1,181 @@
+---
+import { languages } from '../i18n';
+
+interface Props {
+  currentLang: string;
+}
+
+const { currentLang } = Astro.props;
+---
+
+<div class="language-switcher">
+  <button id="lang-toggle" class="lang-button" aria-label="Switch Language">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M5 8l6 6 6-6" />
+    </svg>
+    <span>{languages[currentLang as keyof typeof languages]}</span>
+  </button>
+  
+  <div id="lang-menu" class="lang-menu hidden">
+    {Object.entries(languages).map(([code, name]) => (
+      <button 
+        class={`lang-option ${currentLang === code ? 'active' : ''}`}
+        data-lang={code}
+        aria-label={`Switch to ${name}`}
+      >
+        {name}
+      </button>
+    ))}
+  </div>
+</div>
+
+<script>
+  const langToggle = document.getElementById('lang-toggle');
+  const langMenu = document.getElementById('lang-menu');
+  const langOptions = document.querySelectorAll('.lang-option');
+  
+  langToggle?.addEventListener('click', () => {
+    langMenu?.classList.toggle('hidden');
+  });
+  
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!langToggle?.contains(e.target as Node) && !langMenu?.contains(e.target as Node)) {
+      langMenu?.classList.add('hidden');
+    }
+  });
+  
+  langOptions.forEach(option => {
+    option.addEventListener('click', (e) => {
+      const selectedLang = (e.target as HTMLElement).dataset.lang;
+      if (selectedLang) {
+        // Store language preference
+        localStorage.setItem('preferred-language', selectedLang);
+        
+        // Get current path without language prefix
+        const currentPath = window.location.pathname;
+        const pathWithoutLang = currentPath.replace(/^\/[a-z]{2}/, '') || '/';
+        
+        // Navigate to new language
+        const newPath = selectedLang === 'es' ? pathWithoutLang : `/${selectedLang}${pathWithoutLang}`;
+        window.location.href = newPath;
+      }
+    });
+  });
+</script>
+
+<style>
+  .language-switcher {
+    position: relative;
+  }
+  
+  .lang-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .lang-button:hover {
+    background: var(--bg-secondary);
+    border-color: var(--primary-color);
+    color: var(--text-color);
+  }
+  
+  /* Dark mode specific styles */
+  [data-theme="dark"] .lang-button {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: #e2e8f0 !important;
+  }
+  
+  [data-theme="dark"] .lang-button:hover {
+    background: rgba(0, 225, 199, 0.1) !important;
+    border-color: var(--primary-color) !important;
+    color: var(--primary-color) !important;
+  }
+  
+  .lang-button svg {
+    transition: transform 0.2s ease;
+  }
+  
+  .lang-button:hover svg {
+    transform: rotate(180deg);
+  }
+  
+  .lang-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    box-shadow: var(--shadow-lg);
+    z-index: 50;
+    min-width: 120px;
+  }
+  
+  .lang-menu.hidden {
+    display: none;
+  }
+  
+  .lang-option {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .lang-option:hover {
+    background: var(--bg-secondary);
+    color: var(--text-color);
+  }
+  
+  .lang-option.active {
+    background: var(--primary-color);
+    color: white;
+  }
+  
+  /* Dark mode specific styles for menu */
+  [data-theme="dark"] .lang-menu {
+    background: rgba(10, 10, 10, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+  }
+  
+  [data-theme="dark"] .lang-option {
+    color: #e2e8f0 !important;
+  }
+  
+  [data-theme="dark"] .lang-option:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: var(--primary-color) !important;
+  }
+  
+  [data-theme="dark"] .lang-option.active {
+    background: var(--primary-color) !important;
+    color: #000 !important;
+  }
+  
+  .lang-option:first-child {
+    border-radius: 0.375rem 0.375rem 0 0;
+  }
+  
+  .lang-option:last-child {
+    border-radius: 0 0 0.375rem 0.375rem;
+  }
+</style>
