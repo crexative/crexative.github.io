@@ -1,0 +1,67 @@
+---
+/**
+ * Tag Component
+ * Reusable tag/badge component for displaying labels
+ */
+
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'outline';
+  class?: string;
+}
+
+const {
+  variant = 'primary',
+  class: className = ''
+} = Astro.props;
+---
+
+<span class:list={['tag', `tag--${variant}`, className]}>
+  <slot />
+</span>
+
+<style>
+  .tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .tag--primary {
+    background-color: rgba(0, 225, 199, 0.1);
+    color: var(--primary-color);
+    border: 1px solid rgba(0, 225, 199, 0.2);
+  }
+
+  .tag--primary:hover {
+    background-color: var(--primary-color);
+    color: #000;
+    transform: scale(1.05);
+  }
+
+  .tag--secondary {
+    background-color: rgba(99, 102, 241, 0.1);
+    color: var(--secondary-color);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+  }
+
+  .tag--secondary:hover {
+    background-color: var(--secondary-color);
+    color: white;
+    transform: scale(1.05);
+  }
+
+  .tag--outline {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+  }
+
+  .tag--outline:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: scale(1.05);
+  }
+</style>

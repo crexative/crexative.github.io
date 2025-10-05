@@ -1,0 +1,71 @@
+---
+/**
+ * Card Component
+ * Reusable card with hover effects and optional gradient border
+ */
+
+export interface Props {
+  class?: string;
+  withGradient?: boolean;
+}
+
+const {
+  class: className = '',
+  withGradient = false
+} = Astro.props;
+---
+
+<article class:list={['card', { 'card--gradient': withGradient }, className]}>
+  <slot />
+</article>
+
+<style>
+  .card {
+    background-color: var(--bg-color);
+    border-radius: 12px;
+    padding: 35px 30px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s ease;
+    border: 2px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+  }
+
+  .card--gradient::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), rgba(0, 225, 199, 0.6));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card--gradient:hover::before {
+    transform: scaleX(1);
+  }
+
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 225, 199, 0.15);
+    border-color: var(--primary-color);
+  }
+
+  @media (max-width: 768px) {
+    .card {
+      padding: 25px 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .card {
+      padding: 20px 16px;
+    }
+  }
+</style>

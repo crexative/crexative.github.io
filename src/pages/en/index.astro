@@ -1,16 +1,23 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Navbar from '../../components/Navbar.astro';
-import Hero from '../../components/Hero.astro';
-import Services from '../../components/Services.astro';
-import About from '../../components/About.astro';
-import Contact from '../../components/Contact.astro';
-import Footer from '../../components/Footer.astro';
-import StickyCallToAction from '../../components/StickyCallToAction.astro';
-import { useTranslations } from '../../i18n';
+/**
+ * Homepage (English)
+ * Main landing page in English
+ */
 
-const t = useTranslations('en');
-const brandName = "CREXATIVE";
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/layout/Navbar.astro';
+import Hero from '../../components/sections/Hero.astro';
+import Services from '../../components/sections/Services.astro';
+import About from '../../components/sections/About.astro';
+import Contact from '../../components/sections/Contact.astro';
+import Footer from '../../components/layout/Footer.astro';
+import StickyCallToAction from '../../components/sections/StickyCallToAction.astro';
+import { useTranslations } from '../../i18n/i18n.config';
+import { SITE_CONFIG } from '../../config/site.config';
+import { getCanonicalUrl } from '../../utils/url.utils';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
 
 // SEO-optimized meta data for English homepage
 const pageTitle = t('seo.title');
@@ -18,19 +25,19 @@ const pageDescription = t('seo.description');
 const pageKeywords = t('seo.keywords');
 ---
 
-<Layout 
+<Layout
 	title={pageTitle}
 	description={pageDescription}
 	keywords={pageKeywords}
-	image="https://crexative.com/images/crexative-og.png"
-	canonical="https://crexative.com/en/"
-	lang="en"
+	image={`${SITE_CONFIG.url}/images/crexative-og.png`}
+	canonical={getCanonicalUrl('/en/')}
+	lang={lang}
 >
-	<Navbar brandName={brandName} lang="en" />
-	<Hero lang="en" />
-	<Services lang="en" />
-	<About lang="en" />
-	<Contact lang="en" />
-	<Footer lang="en" />
-	<StickyCallToAction lang="en" />
+	<Navbar brandName={SITE_CONFIG.name} lang={lang} />
+	<Hero lang={lang} />
+	<Services lang={lang} />
+	<About lang={lang} />
+	<Contact lang={lang} />
+	<Footer lang={lang} />
+	<StickyCallToAction lang={lang} />
 </Layout>
