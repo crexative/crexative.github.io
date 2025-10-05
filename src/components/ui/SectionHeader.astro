@@ -1,0 +1,96 @@
+---
+/**
+ * SectionHeader Component
+ * Reusable section header with subtitle, title, and description
+ */
+
+export interface Props {
+  subtitle?: string;
+  title: string;
+  description?: string;
+  align?: 'left' | 'center' | 'right';
+}
+
+const {
+  subtitle,
+  title,
+  description,
+  align = 'center'
+} = Astro.props;
+---
+
+<div class={`section-header section-header--${align}`}>
+  {subtitle && <p class="subtitle">{subtitle}</p>}
+  <h2>{title}</h2>
+  {description && <p class="section-description">{description}</p>}
+</div>
+
+<style>
+  .section-header {
+    margin-bottom: 60px;
+  }
+
+  .section-header--center {
+    text-align: center;
+  }
+
+  .section-header--left {
+    text-align: left;
+  }
+
+  .section-header--right {
+    text-align: right;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    color: var(--text-gray);
+    font-weight: 500;
+  }
+
+  h2 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-color);
+  }
+
+  .section-description {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-gray);
+  }
+
+  .section-header--left .section-description {
+    margin-left: 0;
+  }
+
+  .section-header--right .section-description {
+    margin-right: 0;
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 32px;
+    }
+
+    .section-description {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    h2 {
+      font-size: 28px;
+    }
+
+    .section-description {
+      font-size: 15px;
+    }
+  }
+</style>

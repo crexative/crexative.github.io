@@ -1,0 +1,103 @@
+---
+/**
+ * Button Component
+ * Reusable button with variants (primary, secondary, outline)
+ */
+
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'outline';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  ariaLabel?: string;
+}
+
+const {
+  variant = 'primary',
+  href,
+  type = 'button',
+  class: className = '',
+  ariaLabel
+} = Astro.props;
+
+const Element = href ? 'a' : 'button';
+---
+
+<Element
+  class:list={['btn', `btn-${variant}`, className]}
+  href={href}
+  type={!href ? type : undefined}
+  aria-label={ariaLabel}
+>
+  <slot />
+</Element>
+
+<style>
+  .btn {
+    padding: 16px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .btn-primary {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+  }
+
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 225, 199, 0.3);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--text-color);
+    border-color: var(--text-color);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--text-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 225, 199, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .btn {
+      padding: 14px 24px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .btn {
+      padding: 12px 20px;
+      font-size: 15px;
+    }
+  }
+</style>

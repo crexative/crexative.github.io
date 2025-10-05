@@ -1,0 +1,30 @@
+---
+/**
+ * Container Component
+ * Reusable container wrapper with consistent max-width and padding
+ */
+
+export interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['container', className]}>
+  <slot />
+</div>
+
+<style is:global>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 16px;
+    }
+  }
+</style>

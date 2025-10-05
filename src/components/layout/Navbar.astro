@@ -6,9 +6,9 @@
  */
 
 import LanguageSwitcher from './LanguageSwitcher.astro';
-import { useTranslations } from '../i18n/i18n.config';
-import { buildLocalizedUrl } from '../utils/url.utils';
-import type { BaseComponentProps } from '../types/common.types';
+import { useTranslations } from '../../i18n/i18n.config';
+import { buildLocalizedUrl } from '../../utils/url.utils';
+import type { BaseComponentProps } from '../../types/common.types';
 
 interface Props extends BaseComponentProps {
   brandName: string;
@@ -71,7 +71,7 @@ const homeUrl = buildLocalizedUrl(lang);
 </header>
 
 <script>
-  import { THEME, THEME_STORAGE_KEY } from '../constants/theme.constants';
+  import { THEME, THEME_STORAGE_KEY } from '../../constants/theme.constants';
 
   // Theme toggle functionality
   const themeToggleBtn = document.getElementById('theme-toggle-btn');
