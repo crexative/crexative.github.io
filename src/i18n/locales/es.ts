@@ -67,7 +67,9 @@ export default {
   contact: {
     title: 'Comencemos Tu Proyecto',
     subtitle: '¿Tienes una idea? Hagámosla realidad',
-    description: 'Cuéntanos tu desafío y te mostraremos cómo la tecnología puede resolverlo. Sin compromiso, sin tecnicismos innecesarios.',
+    description: 'Escríbenos por WhatsApp y conversemos sobre tu proyecto. Respuesta rápida, sin compromiso, sin tecnicismos innecesarios.',
+    whatsappCTA: 'Escribir por WhatsApp',
+    whatsappMessage: '¡Hola! Me gustaría conversar sobre un proyecto.',
     form: {
       name: 'Nombre Completo',
       namePlaceholder: 'Ingresa tu nombre completo',
@@ -92,7 +94,7 @@ export default {
       hours: 'Horario de Atención',
     },
     details: {
-      email: 'hola@crexative.com',
+      email: 'contact@crexative.com',
       address: 'Colombia',
       hours: 'Lun - Vie: 9:00 AM - 6:00 PM COT',
     },
@@ -135,8 +137,8 @@ export default {
   // Sticky CTA
   sticky: {
     title: 'Hablemos de Tu Proyecto',
-    subtitle: '¿Listo para dar el siguiente paso?',
-    cta: 'Contactar Ahora',
+    subtitle: 'Chatea con nosotros por WhatsApp',
+    cta: 'WhatsApp',
     ctaSecondary: 'Ver Servicios',
   },
 
