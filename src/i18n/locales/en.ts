@@ -10,50 +10,43 @@ export default {
 
   // Hero Section
   hero: {
-    title: 'Transform Your Business with Custom Software Solutions',
-    subtitle: 'Expert web development, mobile apps, UI/UX design, and e-commerce solutions across Colombia',
-    description: 'We deliver innovative digital solutions that drive growth and success for businesses of all sizes.',
-    cta: 'Get Started',
-    ctaSecondary: 'View Our Work',
+    title: 'Technology That Takes Your Business to the Next Level',
+    subtitle: 'Intelligent automation, cross-platform mobile apps, and web development that transform your vision into results',
+    description: 'From automating processes with AI to building cross-platform apps and high-performance websites. Solutions designed to grow your business.',
+    cta: 'Let\'s Talk About Your Project',
+    ctaSecondary: 'View Our Services',
   },
 
   // Services Section
   services: {
     title: 'Our Services',
-    subtitle: 'Comprehensive software development solutions tailored to your needs',
-    web: {
-      title: 'Web Development',
-      description: 'Modern, responsive websites and web applications built with cutting-edge technologies like React, Next.js, and Node.js.',
+    subtitle: 'Technology solutions that drive your business forward',
+    description: 'We combine intelligent automation, mobile and web development to create solutions that deliver real, measurable results',
+    automation: {
+      title: 'Intelligent Automation',
+      description: 'Eliminate repetitive tasks and save up to 20 hours weekly. We connect your favorite tools to work on autopilot while you focus on growing your business.',
     },
     mobile: {
       title: 'Mobile Apps',
-      description: 'Native and cross-platform mobile applications for iOS and Android using React Native and Flutter.',
+      description: 'Your app working flawlessly on iPhone and Android. Fast development, native performance, and an experience that keeps users coming back.',
     },
-    uiux: {
-      title: 'UI/UX Design',
-      description: 'User-centered design solutions that enhance user experience and engagement with modern design principles.',
-    },
-    ecommerce: {
-      title: 'E-commerce',
-      description: 'Complete online store solutions with secure payment integration and inventory management systems.',
+    web: {
+      title: 'Web Development',
+      description: 'Fast, modern websites that sell. From pages that convert visitors into customers to complex platforms that scale with your growth.',
     },
     custom: {
-      title: 'Custom Software',
-      description: 'Tailored software solutions to meet your specific business requirements and workflow automation.',
-    },
-    consulting: {
-      title: 'Tech Consulting',
-      description: 'Strategic technology consulting to guide your digital transformation and technology stack decisions.',
+      title: 'Custom Solutions',
+      description: 'Your business has unique challenges. We build software exactly as you need it: no unnecessary features, no paying for what you don\'t use.',
     },
   },
 
   // About Section
   about: {
-    title: 'About CREXATIVE',
-    subtitle: 'Your trusted partner in digital transformation',
-    description: 'We are a team of passionate developers and designers committed to delivering high-quality software solutions. With over 5 years of experience and 100+ successful projects, we help businesses across Colombia achieve their digital goals.',
-    mission: 'Our mission is to empower businesses through innovative technology solutions that drive growth and efficiency.',
-    vision: 'We envision a future where every business can leverage technology to reach its full potential.',
+    title: 'Why Choose Us',
+    subtitle: 'Technology that delivers real results',
+    description: 'We don\'t sell code, we create solutions that solve problems. Our team combines technical expertise with deep business understanding to deliver results that matter.',
+    mission: 'We make technology work for you, not the other way around. We automate the tedious, optimize the complex, and build what you need.',
+    vision: 'We believe every business deserves technology that drives growth, without unnecessary complications or exorbitant costs.',
     stats: {
       experience: 'Years of Experience',
       projects: 'Projects Completed',
@@ -61,20 +54,22 @@ export default {
       team: 'Team Members',
     },
     values: {
-      innovation: 'Innovation',
-      innovationDesc: 'We stay ahead of technology trends to provide cutting-edge solutions.',
-      quality: 'Quality',
-      qualityDesc: 'We maintain the highest standards in code quality and project delivery.',
-      partnership: 'Partnership',
-      partnershipDesc: 'We work closely with our clients as true partners in their success.',
+      innovation: 'Cutting-Edge Technology',
+      innovationDesc: 'We use the most modern and effective tools on the market so your solution never becomes obsolete.',
+      quality: 'Guaranteed Delivery',
+      qualityDesc: 'We meet deadlines, respect budgets, and deliver exactly what we promise. No surprises.',
+      partnership: 'Your Success is Our Success',
+      partnershipDesc: 'We\'re not just vendors, we\'re your tech team. We\'re with you from idea to growth.',
     },
   },
 
   // Contact Section
   contact: {
-    title: 'Get In Touch',
-    subtitle: 'Ready to start your project? Let\'s talk!',
-    description: 'We\'d love to hear about your project and discuss how we can help you achieve your goals.',
+    title: 'Let\'s Start Your Project',
+    subtitle: 'Have an idea? Let\'s make it happen',
+    description: 'Message us on WhatsApp and let\'s talk about your project. Quick response, no commitment, no unnecessary jargon.',
+    whatsappCTA: 'Chat on WhatsApp',
+    whatsappMessage: 'Hi! I\'d like to talk about a project.',
     form: {
       name: 'Full Name',
       namePlaceholder: 'Enter your full name',
@@ -94,22 +89,20 @@ export default {
       error: 'Error sending message. Please try again.',
     },
     info: {
-      phone: 'Phone',
       email: 'Email',
-      address: 'Address',
+      address: 'Location',
       hours: 'Business Hours',
     },
     details: {
-      phone: '+57 (300) 123-4567',
-      email: 'hello@crexative.com',
+      email: 'contact@crexative.com',
       address: 'Colombia',
-      hours: 'Mon - Fri: 9:00 AM - 6:00 PM',
+      hours: 'Mon - Fri: 9:00 AM - 6:00 PM COT',
     },
   },
 
   // Footer
   footer: {
-    description: 'Premium software development agency delivering innovative solutions across Colombia',
+    description: 'Technology solutions that drive businesses forward. Automation, mobile apps, and web development worldwide',
     sections: {
       company: 'Company',
       services: 'Services',
@@ -126,12 +119,10 @@ export default {
       terms: 'Terms of Service',
     },
     servicesList: {
-      web: 'Web Development',
+      automation: 'Intelligent Automation',
       mobile: 'Mobile Apps',
-      uiux: 'UI/UX Design',
-      ecommerce: 'E-commerce',
-      custom: 'Custom Software',
-      consulting: 'Consulting',
+      web: 'Web Development',
+      custom: 'Custom Solutions',
     },
     social: {
       linkedin: 'LinkedIn',
@@ -140,22 +131,22 @@ export default {
       instagram: 'Instagram',
     },
     copyright: 'All rights reserved.',
-    madeWith: 'Made with ❤️ in Colombia',
+    madeWith: 'Made with ❤️ from Colombia to the world',
   },
 
   // Sticky CTA
   sticky: {
-    title: 'Start Your Project',
-    subtitle: 'Ready to transform your business?',
-    cta: 'Get Started',
-    ctaSecondary: 'Learn More',
+    title: 'Let\'s Talk About Your Project',
+    subtitle: 'Chat with us on WhatsApp',
+    cta: 'WhatsApp',
+    ctaSecondary: 'View Services',
   },
 
   // SEO
   seo: {
-    title: 'CREXATIVE - Software Development Agency in Colombia',
-    description: 'Transform your business with custom software solutions. Expert web development, mobile apps, UI/UX design, and e-commerce solutions. 5+ years experience, 100+ projects delivered.',
-    keywords: 'software development agency, web development, mobile app development, UI UX design, custom software solutions, React development, Node.js development, e-commerce development, Colombia, software company',
+    title: 'CREXATIVE - Automation, Mobile Apps & Web Development | Custom Software',
+    description: 'Intelligent automation, mobile apps for iOS and Android, and web development that drives your business. Technology solutions delivering real results worldwide from Colombia.',
+    keywords: 'process automation, business automation, mobile app development, iOS Android apps, web development, custom software, technology solutions, software development agency',
   },
 
   // Common
@@ -199,12 +190,12 @@ export default {
     under5k: 'Under $5,000',
     over50k: '$50,000+',
     other: 'Other',
-    cleanCode: 'Clean Code',
-    cleanCodeDesc: 'We write maintainable, scalable code that follows industry best practices and ensures long-term project success.',
-    modernDesign: 'Modern Design',
-    modernDesignDesc: 'Our designs blend contemporary aesthetics with functional usability, creating experiences that are both beautiful and effective.',
-    scalableArchitecture: 'Scalable Architecture',
-    scalableArchitectureDesc: 'We design and implement robust, scalable architectures that grow with your business, ensuring optimal performance and reliability at any scale.',
+    cleanCode: 'Built to Last',
+    cleanCodeDesc: 'We build professional-quality software that works today and stays efficient tomorrow. Your investment is protected for the long run.',
+    modernDesign: 'Experiences Users Love',
+    modernDesignDesc: 'We create intuitive, attractive interfaces that your users will enjoy using. Beauty and functionality in perfect harmony.',
+    scalableArchitecture: 'Grow Without Limits',
+    scalableArchitectureDesc: 'Your business will grow, and so will your technology. We design solutions that adapt to your growth without headaches or surprise costs.',
     paymentIntegration: 'Payment Integration',
   },
 };

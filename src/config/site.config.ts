@@ -7,8 +7,8 @@
 export const SITE_CONFIG = {
   name: 'CREXATIVE',
   url: 'https://crexative.com',
-  title: 'CREXATIVE - Premium Software Development Agency',
-  description: 'Expert web development, mobile apps, UI/UX design, and e-commerce solutions in Medellín, Colombia',
+  title: 'CREXATIVE - Automation, Mobile Apps & Web Development',
+  description: 'Intelligent automation with n8n & AI, cross-platform mobile apps with Kotlin Multiplatform, and modern web development worldwide',
   author: 'CREXATIVE',
   defaultLanguage: 'es' as const,
   supportedLanguages: ['en', 'es'] as const,
@@ -24,10 +24,11 @@ export const SEO_CONFIG = {
 } as const;
 
 export const CONTACT_INFO = {
-  phone: '+57-300-123-4567',
-  email: 'hello@crexative.com',
-  address: 'Medellín, Colombia',
-  hours: 'Mon - Fri: 9:00 AM - 6:00 PM',
+  email: 'contact@crexative.com',
+  whatsapp: '+573207797762',
+  whatsappNumber: '3207797762',
+  address: 'Colombia',
+  hours: 'Mon - Fri: 9:00 AM - 6:00 PM COT',
 } as const;
 
 export const SOCIAL_LINKS = {
@@ -42,9 +43,9 @@ export const COMPANY_INFO = {
   numberOfEmployees: '10-50',
   industry: 'Software Development',
   services: [
-    'Web Application Development',
-    'Mobile App Development',
-    'UI/UX Design',
-    'E-commerce Solutions',
+    'Intelligent Automation with n8n & AI',
+    'Mobile App Development with Kotlin Multiplatform',
+    'Web Development',
+    'Custom Software Solutions',
   ],
 } as const;
