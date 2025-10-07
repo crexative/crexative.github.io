@@ -17,15 +17,10 @@ const contactSchema = {
     url: 'https://crexative.com',
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+57-300-123-4567',
       email: 'hello@crexative.com',
       contactType: 'Customer Service',
-      areaServed: 'CO',
+      areaServed: 'Worldwide',
       availableLanguage: ['Spanish', 'English']
-    },
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'CO'
     }
   }
 };
@@ -58,19 +53,6 @@ const contactSchema = {
               <h4>{t('contact.info.email')}</h4>
               <p><a href={`mailto:${t('contact.details.email')}`} itemprop="email">{t('contact.details.email')}</a></p>
               <span class="contact-note">{t('misc.responseTime')}</span>
-            </div>
-          </div>
-          
-          <div class="contact-item" itemprop="contactPoint" itemscope itemtype="https://schema.org/ContactPoint">
-            <div class="contact-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-              </svg>
-            </div>
-            <div>
-              <h4>{t('contact.info.phone')}</h4>
-              <p>{t('contact.details.phone')}</p>
-              <span class="contact-note">{t('misc.scheduleConsultation')}</span>
             </div>
           </div>
           
@@ -152,11 +134,10 @@ const contactSchema = {
             <label for="service">{t('contact.form.service')}</label>
             <select id="service" name="service">
               <option value="">{t('contact.form.servicePlaceholder')}</option>
-              <option value="web-development">{t('services.web.title')}</option>
+              <option value="automation">{t('services.automation.title')}</option>
               <option value="mobile-development">{t('services.mobile.title')}</option>
-              <option value="ui-ux-design">{t('services.uiux.title')}</option>
-              <option value="ecommerce">{t('services.ecommerce.title')}</option>
-              <option value="consulting">{t('services.consulting.title')}</option>
+              <option value="web-development">{t('services.web.title')}</option>
+              <option value="custom-solutions">{t('services.custom.title')}</option>
               <option value="other">{t('misc.other')}</option>
             </select>
           </div>

@@ -10,6 +10,12 @@ const t = useTranslations(lang as 'en' | 'es');
 
 const services = [
   {
+    name: t('services.automation.title'),
+    description: t('services.automation.description'),
+    icon: 'automation',
+    techTags: ['n8n', 'AI', 'Zapier', 'Make']
+  },
+  {
     name: t('services.web.title'),
     description: t('services.web.description'),
     icon: 'web-development',
@@ -19,19 +25,13 @@ const services = [
     name: t('services.mobile.title'),
     description: t('services.mobile.description'),
     icon: 'mobile-development',
-    techTags: ['React Native', 'Flutter', 'iOS', 'Android']
+    techTags: ['Kotlin Multiplatform', 'iOS', 'Android']
   },
   {
-    name: t('services.uiux.title'),
-    description: t('services.uiux.description'),
-    icon: 'ui-ux-design',
-    techTags: ['Figma', 'Adobe XD', 'Prototyping']
-  },
-  {
-    name: t('services.ecommerce.title'),
-    description: t('services.ecommerce.description'),
-    icon: 'ecommerce',
-    techTags: ['Shopify', 'WooCommerce', t('misc.paymentIntegration')]
+    name: t('services.custom.title'),
+    description: t('services.custom.description'),
+    icon: 'custom-software',
+    techTags: ['API', 'Cloud', 'DevOps']
   }
 ];
 
@@ -59,13 +59,18 @@ const structuredData = {
       <p class="subtitle">{t('services.title')}</p>
       <h2>{t('services.subtitle')}</h2>
       <p class="section-description">
-        {t('services.subtitle')}
+        {t('services.description')}
       </p>
     </div>
     
     <div class="services-grid" itemprop="makesOffer" itemscope itemtype="https://schema.org/Offer">
       {services.map((service, index) => {
         const icons = [
+          // Automation Icon
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>,
           // Web Development Icon
           <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
@@ -77,15 +82,10 @@ const structuredData = {
             <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
             <line x1="12" y1="18" x2="12" y2="18"></line>
           </svg>,
-          // UI/UX Design Icon
+          // Custom Software Icon
           <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-          </svg>,
-          // E-commerce Icon
-          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="8" cy="21" r="1"></circle>
-            <circle cx="19" cy="21" r="1"></circle>
-            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
           </svg>
         ];
         

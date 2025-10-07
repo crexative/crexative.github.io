@@ -7,6 +7,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang as 'en' | 'es');
+const currentYear = new Date().getFullYear();
 ---
 
 <footer class="footer">
@@ -33,10 +34,10 @@ const t = useTranslations(lang as 'en' | 'es');
         <div class="footer-section">
           <h4>{t('footer.sections.services')}</h4>
           <ul>
-            <li><a href="#services">{t('footer.servicesList.web')}</a></li>
+            <li><a href="#services">{t('footer.servicesList.automation')}</a></li>
             <li><a href="#services">{t('footer.servicesList.mobile')}</a></li>
-            <li><a href="#services">{t('footer.servicesList.uiux')}</a></li>
-            <li><a href="#services">{t('footer.servicesList.ecommerce')}</a></li>
+            <li><a href="#services">{t('footer.servicesList.web')}</a></li>
+            <li><a href="#services">{t('footer.servicesList.custom')}</a></li>
           </ul>
         </div>
         
@@ -44,7 +45,6 @@ const t = useTranslations(lang as 'en' | 'es');
           <h4>{t('footer.sections.contact')}</h4>
           <ul>
             <li><a href={`mailto:${t('contact.details.email')}`}>{t('contact.details.email')}</a></li>
-            <li><span>{t('contact.details.phone')}</span></li>
             <li><span>{t('contact.details.address')}</span></li>
           </ul>
         </div>
@@ -89,7 +89,7 @@ const t = useTranslations(lang as 'en' | 'es');
     
     <div class="footer-bottom">
       <div class="footer-copyright">
-        <p>&copy; 2024 CREXATIVE. {t('footer.copyright')}</p>
+        <p>&copy; {currentYear} CREXATIVE. {t('footer.copyright')}</p>
         <p class="footer-made">{t('footer.madeWith')}</p>
       </div>
     </div>
