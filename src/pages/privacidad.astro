@@ -1,0 +1,216 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+import { useTranslations } from '../i18n';
+import { SITE_CONFIG } from '../config/site.config';
+
+const lang = SITE_CONFIG.defaultLanguage;
+const t = useTranslations(lang);
+---
+
+<Layout
+  title={`${t('legal.privacy.title')} | ${SITE_CONFIG.name}`}
+  description={t('legal.privacy.metaDescription')}
+  lang={lang}
+>
+  <Navbar lang={lang} />
+
+  <main class="legal-page">
+    <div class="container">
+      <article class="legal-content">
+        <header class="legal-header">
+          <h1>{t('legal.privacy.title')}</h1>
+          <p class="last-updated">{t('legal.lastUpdated')}</p>
+        </header>
+
+        <p class="intro">{t('legal.privacy.intro')}</p>
+
+        <section class="legal-section">
+          <h2>{t('legal.privacy.section1.title')}</h2>
+          <p>{t('legal.privacy.section1.content')}</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>{t('legal.privacy.section2.title')}</h2>
+          <p>{t('legal.privacy.section2.content')}</p>
+          <ul>
+            <li>{t('legal.privacy.section2.item1')}</li>
+            <li>{t('legal.privacy.section2.item2')}</li>
+            <li>{t('legal.privacy.section2.item3')}</li>
+          </ul>
+        </section>
+
+        <section class="legal-section">
+          <h2>{t('legal.privacy.section3.title')}</h2>
+          <p>{t('legal.privacy.section3.content')}</p>
+          <ul>
+            <li>{t('legal.privacy.section3.item1')}</li>
+            <li>{t('legal.privacy.section3.item2')}</li>
+            <li>{t('legal.privacy.section3.item3')}</li>
+          </ul>
+        </section>
+
+        <section class="legal-section">
+          <h2>{t('legal.privacy.section4.title')}</h2>
+          <p>{t('legal.privacy.section4.content')}</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>{t('legal.privacy.section5.title')}</h2>
+          <p>{t('legal.privacy.section5.content')}</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>{t('legal.privacy.section6.title')}</h2>
+          <p>{t('legal.privacy.section6.content')}</p>
+          <ul>
+            <li>{t('legal.privacy.section6.item1')}</li>
+            <li>{t('legal.privacy.section6.item2')}</li>
+            <li>{t('legal.privacy.section6.item3')}</li>
+            <li>{t('legal.privacy.section6.item4')}</li>
+          </ul>
+          <p>{t('legal.privacy.section6.footer')}</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>{t('legal.privacy.section7.title')}</h2>
+          <p>{t('legal.privacy.section7.content')}</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>{t('legal.privacy.section8.title')}</h2>
+          <p>{t('legal.privacy.section8.content')}</p>
+        </section>
+
+        <section class="legal-section">
+          <h2>{t('legal.privacy.section9.title')}</h2>
+          <p>{t('legal.privacy.section9.content')}</p>
+          <p class="contact-info">{t('legal.privacy.section9.email')}</p>
+          <p class="contact-info">{t('legal.privacy.section9.website')}</p>
+        </section>
+
+        <div class="back-home">
+          <a href="/" class="btn-back">{t('legal.backToHome')}</a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <Footer lang={lang} />
+</Layout>
+
+<style>
+  .legal-page {
+    padding: 120px 0 60px;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+  }
+
+  .legal-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .legal-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .legal-header h1 {
+    color: var(--text-color);
+    margin-bottom: 15px;
+  }
+
+  .last-updated {
+    color: var(--text-gray);
+    font-size: 14px;
+  }
+
+  .intro {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+  }
+
+  .legal-section {
+    margin-bottom: 35px;
+  }
+
+  .legal-section h2 {
+    font-size: 1.4rem;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+
+  .legal-section p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 15px;
+  }
+
+  .legal-section ul {
+    margin: 15px 0;
+    padding-left: 25px;
+  }
+
+  .legal-section li {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+
+  .contact-info {
+    font-weight: 500;
+    color: var(--primary-color) !important;
+  }
+
+  .back-home {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .btn-back {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--primary-color);
+    color: #000;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-back:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 225, 199, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .legal-page {
+      padding: 100px 0 40px;
+    }
+
+    .legal-header h1 {
+      font-size: 1.8rem;
+    }
+
+    .intro {
+      font-size: 16px;
+    }
+
+    .legal-section h2 {
+      font-size: 1.2rem;
+    }
+  }
+</style>

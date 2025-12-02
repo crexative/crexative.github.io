@@ -90,6 +90,13 @@ const currentYear = new Date().getFullYear();
     <div class="footer-bottom">
       <div class="footer-copyright">
         <p>&copy; {currentYear} CREXATIVE. {t('footer.copyright')}</p>
+        <div class="footer-legal">
+          <a href="/privacidad">{t('footer.links.privacy')}</a>
+          <span class="separator">|</span>
+          <a href="/terminos">{t('footer.links.terms')}</a>
+          <span class="separator">|</span>
+          <a href="/eliminar-datos">Eliminación de Datos</a>
+        </div>
         <p class="footer-made">{t('footer.madeWith')}</p>
       </div>
     </div>
@@ -220,6 +227,30 @@ const currentYear = new Date().getFullYear();
   .footer-made {
     color: var(--primary-color) !important;
     font-weight: 500;
+  }
+
+  .footer-legal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+  }
+
+  .footer-legal a {
+    color: #e2e8f0;
+    font-size: 13px;
+    transition: color 0.3s ease;
+  }
+
+  .footer-legal a:hover {
+    color: var(--primary-color);
+  }
+
+  .footer-legal .separator {
+    color: #64748b;
+    font-size: 12px;
   }
   
   @media (max-width: 1024px) {
