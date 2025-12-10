@@ -24,11 +24,17 @@ export const SEO_CONFIG = {
 } as const;
 
 export const CONTACT_INFO = {
-  email: 'contact@crexative.com',
+  email: 'crexative@gmail.com',
   whatsapp: '+573207797762',
   whatsappNumber: '3207797762',
   address: 'Colombia',
   hours: 'Mon - Fri: 9:00 AM - 6:00 PM COT',
+} as const;
+
+// Web3Forms configuration
+export const FORM_CONFIG = {
+  web3formsAccessKey: '43c51b5d-14d7-4aa7-be8d-1fa069c0dbfc',
+  redirectUrl: '',
 } as const;
 
 export const SOCIAL_LINKS = {

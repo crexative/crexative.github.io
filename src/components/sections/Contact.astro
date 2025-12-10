@@ -1,6 +1,6 @@
 ---
 import { useTranslations } from '../../i18n';
-import { CONTACT_INFO } from '../../config/site.config';
+import { CONTACT_INFO, FORM_CONFIG } from '../../config/site.config';
 
 interface Props {
   lang: string;
@@ -43,17 +43,15 @@ const contactSchema = {
       <!-- Left: Contact Form -->
       <div class="contact-form-wrapper">
         <form
-          name="contact"
+          action="https://api.web3forms.com/submit"
           method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
           class="contact-form"
           id="contact-form"
         >
-          <input type="hidden" name="form-name" value="contact" />
-          <p class="hidden">
-            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-          </p>
+          <input type="hidden" name="access_key" value={FORM_CONFIG.web3formsAccessKey} />
+          <input type="hidden" name="subject" value="Nuevo mensaje de contacto - CREXATIVE" />
+          <input type="hidden" name="from_name" value="CREXATIVE Website" />
+          <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
 
           <div class="form-group">
             <input
@@ -163,26 +161,22 @@ const contactSchema = {
     try {
       const formData = new FormData(form);
 
-      // Encode form data for Netlify
-      const encodedData = new URLSearchParams();
-      formData.forEach((value, key) => {
-        encodedData.append(key, value.toString());
-      });
-
-      const response = await fetch(form.action || '/', {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: encodedData.toString()
+        body: JSON.stringify(Object.fromEntries(formData))
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (result.success) {
         modal.classList.add('active');
         form.reset();
       } else {
-        console.error('Form submission failed:', response.status, response.statusText);
+        console.error('Form submission failed:', result);
         alert('Error al enviar el mensaje. Por favor intenta de nuevo.');
       }
     } catch (error) {
