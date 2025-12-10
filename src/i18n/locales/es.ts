@@ -3,7 +3,7 @@ export default {
   nav: {
     home: 'Inicio',
     services: 'Servicios',
-    about: 'Acerca de',
+    projects: 'Proyectos',
     contact: 'Contacto',
     portfolio: 'Portafolio',
   },
@@ -40,6 +40,14 @@ export default {
     },
   },
 
+  // Project Showcase Section
+  project: {
+    label: 'APLICACIONES MÓVILES',
+    title: 'Tómate tu Tiempo',
+    description: 'Aplicación de gestión personal diseñada para ayudar a los usuarios a administrar su tiempo y mejorar su productividad diaria.\n\nUna app intuitiva para organizar tareas, crear rutinas y alcanzar un equilibrio entre trabajo y vida personal.',
+    tags: ['Android', 'UI/UX Design'],
+  },
+
   // About Section
   about: {
     title: 'Por Qué Elegirnos',
@@ -60,6 +68,10 @@ export default {
       qualityDesc: 'Cumplimos fechas, respetamos presupuestos y entregamos exactamente lo que prometemos. Sin sorpresas.',
       partnership: 'Tu Éxito es Nuestro Éxito',
       partnershipDesc: 'No somos solo proveedores, somos tu equipo tecnológico. Estamos contigo desde la idea hasta el crecimiento.',
+    },
+    featured: {
+      title: 'Soluciones Duraderas',
+      description: 'Construimos software de calidad profesional que funciona hoy y se mantiene eficiente mañana. Tu inversión está protegida a largo plazo.',
     },
   },
 

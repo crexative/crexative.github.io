@@ -30,7 +30,7 @@ const languageName = getLanguageName(currentLang);
 ---
 
 <!doctype html>
-<html lang={currentLang} data-theme={THEME.LIGHT}>
+<html lang={currentLang} data-theme={THEME.DARK}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -79,12 +79,12 @@ const languageName = getLanguageName(currentLang);
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-		<!-- Enhanced typography with modern font combination -->
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" onload="this.media='all'">
-		<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+		<!-- Poppins typography for new design -->
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" onload="this.media='all'">
+		<noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 
 		<!-- Preload critical resources -->
-		<link rel="preload" href="/images/hero.jpg" as="image" type="image/jpeg">
+		<link rel="preload" href="/images/hero-bg-new.png" as="image" type="image/png">
 		<link rel="preload" href="/images/crexative.svg" as="image" type="image/svg+xml">
 		<link rel="preload" href="/favicon.svg" as="image" type="image/svg+xml">
 
@@ -107,8 +107,8 @@ const languageName = getLanguageName(currentLang);
 		<script>
 			import { THEME, THEME_STORAGE_KEY } from '../constants/theme.constants';
 
-			// Check for saved theme preference or default to light theme
-			const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || THEME.LIGHT;
+			// Check for saved theme preference or default to dark theme
+			const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || THEME.DARK;
 			document.documentElement.setAttribute('data-theme', savedTheme);
 
 			// Listen for theme toggle events
@@ -123,42 +123,57 @@ const languageName = getLanguageName(currentLang);
 
 <style is:global>
 	:root {
-		/* Enhanced color palette */
-		--primary-color: #00e1c7;
-		--secondary-color: #6366f1;
-		--accent-color: #f59e0b;
-		--success-color: #10b981;
-		--gradient-primary: linear-gradient(135deg, #00e1c7 0%, #6366f1 100%);
-		--gradient-accent: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+		/* New Figma Design Tokens */
+		--color-black: #000000;
+		--color-white: #FFFFFF;
+		--color-cyan: #00E1C6;
+		--color-lime: #CCFE12;
+		--color-info: #D1D6FD;
 
-		/* Light theme (default) */
-		--bg-color: #ffffff;
-		--bg-secondary: #f8fafc;
-		--bg-tertiary: #f1f5f9;
-		--text-color: #1e293b;
-		--text-secondary: #475569;
-		--text-gray: #64748b;
-		--text-light: #94a3b8;
+		/* Gray palette */
+		--color-gray-900: #1D1D1D;
+		--color-gray-800: #262C2D;
+		--color-gray-600: #636F73;
+		--color-gray-500: #8E8E93;
+		--color-gray-400: #CCCCCC;
+
+		/* Icon container background */
+		--icon-bg: rgba(60, 60, 67, 0.6);
+
+		/* Semantic colors */
+		--primary-color: #00E1C6;
+		--accent-color: #CCFE12;
+		--success-color: #10b981;
+
+		/* Light theme - Crexative Palette */
+		--bg-color: #FFFFFF;
+		--bg-primary: #EDEDED;
+		--bg-secondary: #F5F5F5;
+		--bg-tertiary: #EDEDED;
+		--text-color: #1A1A1A;
+		--text-secondary: #1A1A1A;
+		--text-gray: #636F73;
+		--text-light: #8E8E93;
 		--navbar-bg: rgba(255, 255, 255, 0.95);
-		--footer-bg: #1e293b;
-		--border-color: rgba(0, 0, 0, 0.08);
+		--footer-bg: #1D1D1D;
+		--border-color: rgba(26, 26, 26, 0.08);
 		--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 		--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 		--shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
 		--shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
 	}
 
-	/* Dark theme */
+	/* Dark theme (default) */
 	[data-theme="dark"] {
-		--bg-color: #0a0a0a;
-		--bg-secondary: #1a1a1a;
-		--bg-tertiary: #2a2a2a;
+		--bg-color: #000000;
+		--bg-secondary: #1D1D1D;
+		--bg-tertiary: #262C2D;
 		--text-color: #ffffff;
 		--text-secondary: #e2e8f0;
-		--text-gray: #a0aec0;
-		--text-light: #718096;
-		--navbar-bg: rgba(10, 10, 10, 0.8);
-		--footer-bg: rgba(10, 10, 10, 0.9);
+		--text-gray: #CCCCCC;
+		--text-light: #8E8E93;
+		--navbar-bg: #000000;
+		--footer-bg: #1D1D1D;
 		--border-color: rgba(255, 255, 255, 0.1);
 		--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
 		--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
@@ -186,7 +201,7 @@ const languageName = getLanguageName(currentLang);
 		margin: 0;
 		width: 100%;
 		min-height: 100%;
-		font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+		font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 		background-color: var(--bg-color);
 		color: var(--text-color);
 		overflow-x: hidden;
@@ -194,33 +209,36 @@ const languageName = getLanguageName(currentLang);
 		text-rendering: optimizeLegibility;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
-		line-height: 1.6;
-		letter-spacing: -0.01em;
+		line-height: 1.5;
+		letter-spacing: 0;
 	}
 
-	/* Enhanced typography hierarchy */
+	/* Typography hierarchy - Poppins */
 	h1, h2, h3, h4, h5, h6 {
-		font-family: 'Playfair Display', serif;
+		font-family: 'Poppins', sans-serif;
 		font-weight: 600;
-		line-height: 1.2;
-		letter-spacing: -0.02em;
+		line-height: 1.45;
+		letter-spacing: 0;
 		margin: 0;
 		color: var(--text-color);
 	}
 
 	h1 {
-		font-size: clamp(2.5rem, 5vw, 4rem);
-		font-weight: 700;
+		font-size: 44px;
+		line-height: 64px;
+		font-weight: 600;
 	}
 
 	h2 {
-		font-size: clamp(2rem, 4vw, 3rem);
+		font-size: 44px;
+		line-height: 64px;
 		font-weight: 600;
 	}
 
 	h3 {
-		font-size: clamp(1.5rem, 3vw, 2rem);
-		font-weight: 600;
+		font-size: 26px;
+		line-height: 28px;
+		font-weight: 500;
 	}
 
 	/* Performance optimizations */
@@ -269,5 +287,58 @@ const languageName = getLanguageName(currentLang);
 
 	.primary-color {
 		color: var(--primary-color);
+	}
+
+	/* Global button styles */
+	.btn-lime {
+		background-color: var(--color-lime);
+		color: #000000;
+		border: none;
+		padding: 16px 32px;
+		border-radius: 8px;
+		font-family: 'Poppins', sans-serif;
+		font-weight: 600;
+		font-size: 16px;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.btn-lime:hover {
+		background-color: #b8e510;
+		transform: translateY(-2px);
+		box-shadow: 0 8px 20px rgba(204, 254, 18, 0.3);
+	}
+
+	.btn-outline-white {
+		background: rgba(0, 0, 0, 0.75);
+		border: 2px solid white;
+		color: white;
+		padding: 16px 32px;
+		border-radius: 50px;
+		font-family: 'Poppins', sans-serif;
+		font-weight: 600;
+		font-size: 16px;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		display: inline-flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	.btn-outline-white:hover {
+		background: rgba(255, 255, 255, 0.1);
+		transform: translateY(-2px);
+	}
+
+	/* Text highlight style */
+	.highlight {
+		background-color: var(--color-cyan);
+		color: #000000;
+		padding: 2px 8px;
+	}
+
+	/* Hidden class for honeypot */
+	.hidden {
+		display: none !important;
 	}
 </style>

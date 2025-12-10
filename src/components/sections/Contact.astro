@@ -37,64 +37,95 @@ const contactSchema = {
     <div class="section-header">
       <p class="subtitle">{t('contact.title')}</p>
       <h2>{t('contact.subtitle')}</h2>
-      <p class="section-description">
-        {t('contact.description')}
-      </p>
     </div>
-    
-    <div class="contact-content">
-      <!-- WhatsApp CTA Card -->
-      <div class="whatsapp-card">
-        <div class="whatsapp-icon-large">
-          <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-          </svg>
+
+    <div class="contact-grid">
+      <!-- Left: Contact Form -->
+      <div class="contact-form-wrapper">
+        <form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          class="contact-form"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <p class="hidden">
+            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+          </p>
+
+          <div class="form-group">
+            <input
+              type="text"
+              name="name"
+              placeholder={t('contact.form.namePlaceholder')}
+              required
+              autocomplete="name"
+            />
+          </div>
+
+          <div class="form-group">
+            <input
+              type="email"
+              name="email"
+              placeholder={t('contact.form.emailPlaceholder')}
+              required
+              autocomplete="email"
+            />
+          </div>
+
+          <div class="form-group">
+            <textarea
+              name="message"
+              placeholder={t('contact.form.messagePlaceholder')}
+              rows="5"
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn-lime">
+            {t('contact.form.submit')}
+          </button>
+        </form>
+      </div>
+
+      <!-- Right: Info Cards + WhatsApp -->
+      <div class="contact-info">
+        <div class="info-card">
+          <div class="info-icon">
+            <img src="/images/icons/contact-clock.svg" alt="" aria-hidden="true" width="32" height="32" />
+          </div>
+          <div class="info-content">
+            <span class="info-text">{t('misc.responseTime')}</span>
+          </div>
         </div>
 
-        <h3>{t('contact.subtitle')}</h3>
-        <p class="whatsapp-description">{t('contact.description')}</p>
+        <div class="info-card">
+          <div class="info-icon">
+            <img src="/images/icons/contact-globe.svg" alt="" aria-hidden="true" width="32" height="32" />
+          </div>
+          <div class="info-content">
+            <span class="info-text">{t('misc.workingGlobally')}</span>
+          </div>
+        </div>
 
-        <a href={whatsappLink} target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
-          <span>{t('contact.whatsappCTA')}</span>
+        <div class="info-card">
+          <div class="info-icon">
+            <img src="/images/icons/contact-calendar.svg" alt="" aria-hidden="true" width="32" height="32" />
+          </div>
+          <div class="info-content">
+            <span class="info-text">{t('contact.details.hours')}</span>
+          </div>
+        </div>
+
+        <a href={whatsappLink} target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
+          <img src="/images/icons/contact-whatsapp.svg" alt="" aria-hidden="true" width="24" height="24" />
+          <span>{lang === 'es' ? 'Escribir al Whatsapp' : 'Message on WhatsApp'}</span>
         </a>
-
-        <div class="contact-features">
-          <div class="feature">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            <span>{t('misc.responseTime')}</span>
-          </div>
-          <div class="feature">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            <span>{t('misc.workingGlobally')}</span>
-          </div>
-          <div class="feature">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            <span>{t('contact.info.hours')}: {t('contact.details.hours')}</span>
-          </div>
-        </div>
-
-        <div class="contact-secondary">
-          <a href={`mailto:${t('contact.details.email')}`} class="email-cta">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            {t('contact.details.email')}
-          </a>
-        </div>
       </div>
     </div>
   </div>
-  
+
   <!-- Structured Data -->
   <script type="application/ld+json" set:html={JSON.stringify(contactSchema)} is:inline />
 </section>
@@ -114,213 +145,192 @@ const contactSchema = {
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 2px;
+    color: var(--text-gray);
     margin-bottom: 15px;
-    color: var(--text-gray);
-  }
-
-  .section-description {
-    max-width: 600px;
-    margin: 0 auto;
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--text-gray);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
   }
 
   h2 {
-    font-size: 42px;
-    font-weight: 700;
-    margin-bottom: 20px;
-  }
-
-  .contact-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  /* WhatsApp Card */
-  .whatsapp-card {
-    background: linear-gradient(135deg, rgba(37, 211, 102, 0.08) 0%, rgba(37, 211, 102, 0.03) 100%);
-    border: 3px solid rgba(37, 211, 102, 0.3);
-    border-radius: 30px;
-    padding: 60px 50px;
-    text-align: center;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    width: 100%;
-    box-shadow: 0 10px 40px rgba(37, 211, 102, 0.1);
-  }
-
-  .whatsapp-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 25px 50px rgba(37, 211, 102, 0.2);
-    border-color: rgba(37, 211, 102, 0.6);
-  }
-
-  .whatsapp-icon-large {
-    color: #25D366;
-    margin: 0 auto 35px;
-    display: flex;
-    justify-content: center;
-    animation: float 3s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .whatsapp-card h3 {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    color: var(--text-color);
-    line-height: 1.3;
-  }
-
-  .whatsapp-description {
-    color: var(--text-gray);
-    margin-bottom: 35px;
-    line-height: 1.7;
-    font-size: 17px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .whatsapp-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    background-color: #25D366;
-    color: white;
-    padding: 20px 50px;
-    border-radius: 60px;
+    font-size: 44px;
+    line-height: 64px;
     font-weight: 600;
-    font-size: 19px;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 10px 35px rgba(37, 211, 102, 0.35);
-    margin-bottom: 40px;
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
   }
 
-  .whatsapp-btn:hover {
-    background-color: #128C7E;
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 20px 45px rgba(37, 211, 102, 0.45);
-  }
-
-  .whatsapp-btn svg {
-    width: 26px;
-    height: 26px;
-  }
-
-  .contact-features {
-    margin-top: 45px;
-    margin-bottom: 35px;
+  .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 0 20px;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
   }
 
-  .feature {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    color: var(--text-gray);
-    font-size: 14px;
-    padding: 12px;
-    background-color: rgba(37, 211, 102, 0.05);
+  /* Form Styles */
+  .contact-form-wrapper {
+    background-color: var(--bg-secondary);
     border-radius: 12px;
+    padding: 40px;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    background-color: var(--bg-color);
+    border: 1px solid var(--color-gray-500);
+    border-radius: 12px;
+    padding: 16px 20px;
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--text-gray);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 225, 198, 0.1);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .btn-lime {
+    width: 100%;
+    background-color: var(--color-lime);
+    color: #000000;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
     transition: all 0.3s ease;
   }
 
-  .feature:hover {
-    background-color: rgba(37, 211, 102, 0.1);
+  .btn-lime:hover {
+    background-color: #b8e510;
     transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(204, 254, 18, 0.3);
   }
 
-  .feature svg {
-    color: #25D366;
-    flex-shrink: 0;
-  }
-
-  /* Secondary Contact Info */
-  .contact-secondary {
-    margin-top: 45px;
-    padding-top: 35px;
-    border-top: 2px solid rgba(37, 211, 102, 0.12);
+  /* Info Cards */
+  .contact-info {
     display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .info-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 20px 24px;
+    border: 1px solid var(--border-color);
+  }
+
+  .info-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    background: var(--icon-bg);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
     justify-content: center;
   }
 
-  .email-cta {
-    display: inline-flex;
+  .info-icon img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  .info-text {
+    font-size: 16px;
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+  }
+
+  /* WhatsApp CTA */
+  .whatsapp-cta {
+    display: flex;
     align-items: center;
-    gap: 10px;
-    color: var(--text-gray);
+    justify-content: center;
+    gap: 12px;
+    background-color: var(--color-lime);
+    color: #000000;
+    padding: 20px 32px;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
     text-decoration: none;
-    font-size: 15px;
-    font-weight: 500;
-    padding: 12px 24px;
-    background-color: rgba(0, 225, 199, 0.08);
-    border: 2px solid rgba(0, 225, 199, 0.2);
-    border-radius: 50px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
+    margin-top: 12px;
   }
 
-  .email-cta:hover {
-    background-color: rgba(0, 225, 199, 0.15);
-    border-color: rgba(0, 225, 199, 0.4);
-    color: var(--primary-color);
+  .whatsapp-cta:hover {
+    background-color: #b8e510;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 225, 199, 0.15);
+    box-shadow: 0 8px 20px rgba(204, 254, 18, 0.3);
   }
 
-  .email-cta svg {
-    color: var(--primary-color);
-    transition: transform 0.3s ease;
+  .whatsapp-cta img {
+    width: 24px;
+    height: 24px;
   }
 
-  .email-cta:hover svg {
-    transform: translateX(-3px);
+  /* Hidden honeypot field */
+  .hidden {
+    display: none !important;
   }
-  
+
+  @media (max-width: 1024px) {
+    .contact-grid {
+      gap: 40px;
+    }
+  }
+
   @media (max-width: 768px) {
     .contact {
       padding: 80px 0;
     }
 
-    .section-header {
-      margin-bottom: 40px;
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
     }
 
     h2 {
       font-size: 32px;
+      line-height: 48px;
     }
 
-    .whatsapp-card {
-      padding: 45px 35px;
+    .contact-form-wrapper {
+      padding: 32px 24px;
     }
 
-    .whatsapp-card h3 {
-      font-size: 26px;
-    }
-
-    .whatsapp-btn {
-      padding: 18px 40px;
-      font-size: 17px;
-      width: 100%;
-    }
-
-    .contact-features {
-      grid-template-columns: 1fr;
-      gap: 15px;
-      padding: 0;
+    .info-card {
+      padding: 16px 20px;
     }
   }
 
@@ -331,37 +341,27 @@ const contactSchema = {
 
     h2 {
       font-size: 28px;
+      line-height: 40px;
     }
 
-    .whatsapp-card {
-      padding: 35px 25px;
+    .contact-form-wrapper {
+      padding: 24px 20px;
     }
 
-    .whatsapp-icon-large svg {
-      width: 70px;
-      height: 70px;
+    .form-group input,
+    .form-group textarea {
+      padding: 14px 16px;
+      font-size: 15px;
     }
 
-    .whatsapp-card h3 {
-      font-size: 24px;
+    .btn-lime {
+      padding: 14px 24px;
+      font-size: 15px;
     }
 
-    .whatsapp-description {
-      font-size: 16px;
-    }
-
-    .whatsapp-btn {
-      padding: 16px 35px;
-      font-size: 16px;
-    }
-
-    .contact-features {
-      margin-top: 35px;
-    }
-
-    .feature {
-      font-size: 13px;
-      padding: 10px;
+    .whatsapp-cta {
+      padding: 16px 24px;
+      font-size: 15px;
     }
   }
 </style>

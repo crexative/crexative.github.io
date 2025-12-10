@@ -1,0 +1,846 @@
+---
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+
+// Projects data - strategically ordered alternating web/mobile for visual variety
+// Only showing projects with live links
+const projects = [
+  {
+    id: 'busticket',
+    label: lang === 'es' ? 'APLICACIONES MÓVILES' : 'MOBILE APPS',
+    title: 'BusTicket',
+    description: lang === 'es'
+      ? 'Aplicación para compra y gestión de boletos de autobús interurbano. Búsqueda de rutas, selección de asientos y pago digital.\n\nNotificaciones en tiempo real sobre el estado del viaje.'
+      : 'App for purchasing and managing intercity bus tickets. Route search, seat selection and digital payment.\n\nReal-time notifications about trip status.',
+    tags: ['Android', 'iOS', 'Fintech'],
+    image: '/images/busticket.webp',
+    mockupType: 'phone',
+    link: 'https://play.google.com/store/apps/details?id=com.smartgeeks.busticket'
+  },
+  {
+    id: 'best-coffee',
+    label: lang === 'es' ? 'DESARROLLO WEB' : 'WEB DEVELOPMENT',
+    title: 'Best Coffee of Colombia',
+    description: lang === 'es'
+      ? 'Sitio web para una marca premium de café colombiano. Diseño elegante que resalta la calidad del producto y facilita la compra online.\n\nIntegración con pasarela de pagos y sistema de seguimiento de pedidos.'
+      : 'Website for a premium Colombian coffee brand. Elegant design that highlights product quality and facilitates online purchasing.\n\nPayment gateway integration and order tracking system.',
+    tags: ['Web', 'E-commerce', 'Shopify'],
+    image: '/images/bestcoffeecolombia.png',
+    mockupType: 'browser',
+    link: 'https://bestcoffeecolombia.github.io/'
+  },
+  {
+    id: 'afina-tu-memoria',
+    label: lang === 'es' ? 'DESARROLLO WEB' : 'WEB DEVELOPMENT',
+    title: 'Afina tu Memoria',
+    description: lang === 'es'
+      ? 'Juego de memoria musical que ayuda a mejorar la concentración y las habilidades cognitivas a través de ejercicios de audio.\n\nDiseño accesible y divertido para todas las edades.'
+      : 'Musical memory game that helps improve concentration and cognitive skills through audio exercises.\n\nAccessible and fun design for all ages.',
+    tags: ['JavaScript', 'Game', 'Web'],
+    image: '/images/afinaTuMemoria.png',
+    mockupType: 'browser',
+    link: 'https://jocode.github.io/fundamentos-js/'
+  },
+  {
+    id: 'offitec-colombia',
+    label: lang === 'es' ? 'DESARROLLO WEB Y MÓVIL' : 'WEB & MOBILE DEVELOPMENT',
+    title: 'Offitec Colombia',
+    description: lang === 'es'
+      ? 'Sitio web corporativo para empresa de tecnología. Showcase de servicios, portafolio de proyectos y sistema de contacto integrado.\n\nDiseño moderno y optimizado para SEO.'
+      : 'Corporate website for technology company. Services showcase, project portfolio and integrated contact system.\n\nModern design optimized for SEO.',
+    tags: ['Web', 'Mobile', 'Astro'],
+    image: '/images/offitec.png',
+    phoneImage: '/images/offitec_mobile.png',
+    mockupType: 'browser-phone',
+    link: 'https://offitec.github.io/'
+  },
+  {
+    id: 'react-tetris',
+    label: lang === 'es' ? 'DESARROLLO WEB' : 'WEB DEVELOPMENT',
+    title: 'React Tetris',
+    description: lang === 'es'
+      ? 'Juego clásico de Tetris recreado con React. Proyecto open source que demuestra el uso de hooks y manejo de estado en juegos.\n\nAnimaciones fluidas y controles responsivos.'
+      : 'Classic Tetris game recreated with React. Open source project demonstrating hooks usage and state management in games.\n\nSmooth animations and responsive controls.',
+    tags: ['React', 'Game', 'Open Source'],
+    image: '/images/tetris.png',
+    mockupType: 'browser',
+    link: 'https://jocode.github.io/react-tetris/'
+  }
+];
+---
+
+<section id="projects" class="project-showcase">
+  <div class="carousel-container">
+    <!-- Navigation arrow left -->
+    <button class="nav-arrow prev" aria-label={lang === 'es' ? 'Proyecto anterior' : 'Previous project'}>
+      <svg width="32" height="52" viewBox="0 0 32 52" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);">
+        <path d="M9.14087 15.9521C9.14087 16.5043 9.58871 16.952 10.1409 16.9521L14.5012 16.9522L14.6233 16.9561C15.8431 17.0399 15.9295 18.3742 15.9299 18.3809L15.9299 22.0254C15.9301 22.5775 16.3778 23.0254 16.9299 23.0254L21.717 23.0254C22.2692 23.0254 22.7168 22.5775 22.717 22.0254L22.717 17.9522C22.717 17.3999 22.2693 16.9522 21.717 16.9522L17.4485 16.9522L17.3137 16.9463C16.6367 16.8937 15.9302 16.4443 15.9299 15.5234C15.9299 15.5296 15.929 15.5358 15.929 15.542L15.929 11.8789C15.9288 11.3269 15.481 10.879 14.929 10.8789L10.1409 10.8789C9.58883 10.8791 9.14106 11.3269 9.14087 11.8789L9.14087 15.9521Z" fill="currentColor"/>
+        <path d="M22.7151 24.4536C22.7151 24.4536 22.6258 23.0247 21.2861 23.0247C21.9113 23.0247 22.7151 22.4888 22.7151 21.5957C22.7151 22.5781 23.5189 23.0247 24.2334 23.0247C22.8044 23.0247 22.7151 24.4536 22.7151 24.4536Z" fill="currentColor"/>
+        <rect width="6.07304" height="6.78755" rx="1" transform="matrix(-4.37114e-08 1 1 4.37114e-08 2.49609 5)" fill="currentColor"/>
+        <path d="M9.28174 12.5024C9.28174 12.5024 9.19243 11.0735 7.85278 11.0735C8.47795 11.0735 9.28174 10.5376 9.28174 9.64453C9.28174 10.6269 10.0855 11.0735 10.8 11.0735C9.37105 11.0735 9.28174 12.5024 9.28174 12.5024Z" fill="currentColor"/>
+        <rect width="6.07304" height="6.78755" rx="1" transform="matrix(-4.37114e-08 1 1 4.37114e-08 22.7166 23.0244)" fill="currentColor"/>
+        <path d="M9.14087 36.0488C9.14093 35.4967 9.58875 35.049 10.1409 35.0488L14.5012 35.0488L14.6233 35.0449C15.8461 34.9609 15.9299 33.6201 15.9299 33.6201L15.9299 29.9766C15.9299 29.4243 16.3777 28.9766 16.9299 28.9766L21.717 28.9766C22.2693 28.9766 22.717 29.4243 22.717 29.9766L22.717 34.0488C22.717 34.6011 22.2693 35.0488 21.717 35.0488L17.4485 35.0488L17.3137 35.0547C16.6366 35.1072 15.9299 35.5574 15.9299 36.4785C15.9299 36.4724 15.929 36.466 15.929 36.46L15.929 40.1221C15.9289 40.6742 15.4811 41.1219 14.929 41.1221L10.1409 41.1221C9.58874 41.1219 9.14092 40.6742 9.14087 40.1221L9.14087 36.0488Z" fill="currentColor"/>
+        <path d="M22.7151 27.5474C22.7151 27.5474 22.6258 28.9763 21.2861 28.9763C21.9113 28.9763 22.7151 29.5122 22.7151 30.4053C22.7151 29.4229 23.5189 28.9763 24.2334 28.9763C22.8044 28.9763 22.7151 27.5474 22.7151 27.5474Z" fill="currentColor"/>
+        <rect x="2.49634" y="46.999" width="6.07304" height="6.78755" rx="1" transform="rotate(-90 2.49634 46.999)" fill="currentColor"/>
+        <path d="M9.28199 39.4966C9.28199 39.4966 9.19268 40.9255 7.85303 40.9255C8.4782 40.9255 9.28199 41.4614 9.28199 42.3545C9.28199 41.3721 10.0858 40.9255 10.8003 40.9255C9.3713 40.9255 9.28199 39.4966 9.28199 39.4966Z" fill="currentColor"/>
+        <rect x="22.7166" y="28.835" width="6.07304" height="6.78755" rx="1" transform="rotate(-90 22.7166 28.835)" fill="currentColor"/>
+      </svg>
+    </button>
+
+    <!-- Carousel viewport (overflow hidden here) -->
+    <div class="carousel-viewport">
+      <!-- Carousel track -->
+      <div class="carousel-track" data-current="0">
+      {projects.map((project, index) => (
+        <div class="carousel-slide" data-index={index}>
+          <div class="slide-content">
+            <!-- Left: Project Info -->
+            <div class="project-info">
+              <div class="project-text">
+                <p class="project-label">{project.label}</p>
+                <h2 class="project-title">
+                  <span class="title-highlight">{project.title}</span>
+                </h2>
+                <p class="project-description">{project.description}</p>
+                <div class="project-tags">
+                  {project.tags.map(tag => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+                <a href={project.link} class="view-project-link" target="_blank" rel="noopener noreferrer">
+                  {lang === 'es' ? 'Ver proyecto' : 'View project'}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Right: Mockup with molecules -->
+            <div class="mockup-container">
+              {project.mockupType === 'phone' ? (
+                <!-- Phone mockup with molecule frame -->
+                <div class="phone-mockup-wrapper">
+                  <svg class="phone-molecule-frame" viewBox="0 0 538 544" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Top left molecules -->
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(-1 0 0 1 502.421 0)" fill="#00E1C6"/>
+                    <path d="M414.845 79.2346C414.845 79.2346 431.526 78.1921 431.526 62.5537C431.526 69.8516 437.781 79.2346 448.207 79.2346C436.738 79.2346 431.526 88.6176 431.526 96.9581C431.526 80.2772 414.845 79.2346 414.845 79.2346Z" fill="#00E1C6"/>
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(-1 0 0 1 431.527 79.2354)" fill="#00E1C6"/>
+                    <path d="M71.0034 94.7656C71.0034 85.9291 78.1669 78.7656 87.0034 78.7656H415.304C424.141 78.7656 431.304 85.9291 431.304 94.7656V310.766C431.304 319.602 424.141 326.766 415.304 326.766H87.0034C78.1669 326.766 71.0034 319.602 71.0034 310.766V94.7656Z" fill="#00E1C6"/>
+                    <!-- Bottom left molecules -->
+                    <rect x="70.894" y="405.898" width="70.8939" height="79.2344" rx="16" transform="rotate(180 70.894 405.898)" fill="#00E1C6"/>
+                    <rect x="141.788" y="484.091" width="70.8939" height="79.2344" rx="16" transform="rotate(180 141.788 484.091)" fill="#00E1C6"/>
+                    <path d="M54.2119 405.899C54.2119 405.899 70.8928 405.899 70.8928 421.537C70.8928 414.239 77.1482 404.856 87.5737 404.856C76.1056 404.856 70.8928 395.473 70.8928 387.133C70.8928 403.814 54.2119 405.899 54.2119 405.899Z" fill="#00E1C6"/>
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(1 0 0 -1 71.2534 327)" fill="#00E1C6"/>
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(1 0 0 -1 0.363037 405.192)" fill="#00E1C6"/>
+                    <path d="M87.9356 327C87.9356 327 71.2547 327 71.2547 342.639C71.2547 335.341 64.9993 325.958 54.5737 325.958C66.0419 325.958 71.2547 316.575 71.2547 308.234C71.2547 324.915 87.9356 327 87.9356 327Z" fill="#00E1C6"/>
+                    <!-- Phone frame -->
+                    <path d="M381.565 121.852H382.131C382.756 121.852 383.263 122.362 383.263 122.992V179.597C383.263 180.227 382.756 180.737 382.131 180.737H381.565V121.852Z" fill="#121515"/>
+                    <path d="M381.565 212.656H382.131C382.756 212.656 383.263 213.167 383.263 213.796V242.335C383.263 242.964 382.756 243.475 382.131 243.475H381.565V212.656Z" fill="#121515"/>
+                    <path d="M162 84.0989C162 62.6836 162 51.9759 168.236 44.8743C169.122 43.8659 170.088 42.9267 171.125 42.0654C178.427 36 189.438 36 211.458 36H332.106C354.127 36 365.138 36 372.44 42.0654C373.477 42.9267 374.443 43.8659 375.329 44.8743C381.565 51.9759 381.565 62.6836 381.565 84.0989V460.085C381.565 481.5 381.565 492.208 375.329 499.31C374.443 500.318 373.477 501.257 372.44 502.119C365.138 508.184 354.127 508.184 332.106 508.184H211.458C189.438 508.184 178.427 508.184 171.125 502.119C170.088 501.257 169.122 500.318 168.236 499.31C162 492.208 162 481.5 162 460.085V84.0989Z" fill="#3A4245"/>
+                    <path d="M163.131 80.4945C163.131 62.4923 163.131 53.4912 168.112 47.3466C169.242 45.9532 170.536 44.6944 171.969 43.596C178.287 38.752 187.543 38.752 206.054 38.752H337.511C356.022 38.752 365.278 38.752 371.596 43.596C373.029 44.6944 374.323 45.9532 375.453 47.3466C380.434 53.4912 380.434 62.4923 380.434 80.4945V463.69C380.434 481.692 380.434 490.693 375.453 496.838C374.323 498.231 373.029 499.49 371.596 500.589C365.278 505.433 356.022 505.433 337.511 505.433H206.054C187.543 505.433 178.287 505.433 171.969 500.589C170.536 499.49 169.242 498.231 168.112 496.838C163.131 490.693 163.131 481.692 163.131 463.69V80.4945Z" fill="#121515"/>
+                    <!-- Bottom right molecules -->
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(1 0 0 -1 466.902 465.234)" fill="#00E1C6"/>
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(1 0 0 -1 396.003 543.426)" fill="#00E1C6"/>
+                    <path d="M483.576 465.234C483.576 465.234 466.895 465.234 466.895 480.872C466.895 473.574 460.64 464.191 450.214 464.191C461.682 464.191 466.895 454.808 466.895 446.468C466.895 463.149 483.576 465.234 483.576 465.234Z" fill="#00E1C6"/>
+                    <!-- Camera -->
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M270.651 58.5633C273.776 58.5633 276.31 56.0993 276.31 53.0599C276.31 50.0206 273.776 47.5566 270.651 47.5566C267.525 47.5566 264.992 50.0206 264.992 53.0599C264.992 56.0993 267.525 58.5633 270.651 58.5633Z" fill="#262C2D"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M270.651 56.4993C272.604 56.4993 274.187 54.9593 274.187 53.0597C274.187 51.1601 272.604 49.6201 270.651 49.6201C268.697 49.6201 267.114 51.1601 267.114 53.0597C267.114 54.9593 268.697 56.4993 270.651 56.4993Z" fill="#121515"/>
+                    <path opacity="0.4" fill-rule="evenodd" clip-rule="evenodd" d="M270.651 52.3719C271.041 52.3719 271.358 52.0639 271.358 51.684C271.358 51.3041 271.041 50.9961 270.651 50.9961C270.26 50.9961 269.943 51.3041 269.943 51.684C269.943 52.0639 270.26 52.3719 270.651 52.3719Z" fill="#636F73"/>
+                  </svg>
+                  <!-- App screenshot overlaid on phone screen -->
+                  <img
+                    class="phone-screen-image"
+                    src={project.image}
+                    alt={`${project.title} - App screenshot`}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                </div>
+              ) : project.mockupType === 'browser-phone' ? (
+                <!-- Laptop + Phone mockup for Offitec -->
+                <div class="browser-phone-mockup-wrapper">
+                  <svg class="browser-phone-frame" viewBox="0 0 541 544" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Molecules -->
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(1 0 0 -1 469.148 465.234)" fill="#CCFE12"/>
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(1 0 0 -1 398.25 543.426)" fill="#CCFE12"/>
+                    <path d="M485.823 465.233C485.823 465.233 469.142 465.233 469.142 480.871C469.142 473.573 462.887 464.19 452.461 464.19C463.929 464.19 469.142 454.807 469.142 446.467C469.142 463.148 485.823 465.233 485.823 465.233Z" fill="#CCFE12"/>
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(-1 0 0 1 504.664 0)" fill="#CCFE12"/>
+                    <path d="M417.091 79.2356C417.091 79.2356 433.772 78.193 433.772 62.5547C433.772 69.8526 440.028 79.2356 450.453 79.2356C438.985 79.2356 433.772 88.6186 433.772 96.9591C433.772 80.2782 417.091 79.2356 417.091 79.2356Z" fill="#CCFE12"/>
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(-1 0 0 1 433.77 79.2344)" fill="#CCFE12"/>
+                    <path d="M73.2461 94.7656C73.2461 85.9291 80.4095 78.7656 89.2461 78.7656H417.547C426.383 78.7656 433.547 85.9291 433.547 94.7656V310.766C433.547 319.602 426.383 326.766 417.547 326.766H89.2461C80.4095 326.766 73.2461 319.602 73.2461 310.766V94.7656Z" fill="#CCFE12"/>
+                    <rect x="73.1406" y="405.898" width="70.8939" height="79.2344" rx="16" transform="rotate(180 73.1406 405.898)" fill="#CCFE12"/>
+                    <rect x="144.035" y="484.09" width="70.8939" height="79.2344" rx="16" transform="rotate(180 144.035 484.09)" fill="#CCFE12"/>
+                    <path d="M56.4585 405.897C56.4585 405.897 73.1394 405.897 73.1394 421.535C73.1394 414.237 79.3947 404.854 89.8203 404.854C78.3522 404.854 73.1394 395.471 73.1394 387.131C73.1394 403.812 56.4585 405.897 56.4585 405.897Z" fill="#CCFE12"/>
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(1 0 0 -1 73.5 327)" fill="#CCFE12"/>
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(1 0 0 -1 2.60938 405.191)" fill="#CCFE12"/>
+                    <path d="M90.1822 326.998C90.1822 326.998 73.5012 326.998 73.5012 342.637C73.5012 335.339 67.2459 325.956 56.8203 325.956C68.2884 325.956 73.5012 316.573 73.5012 308.232C73.5012 324.913 90.1822 326.998 90.1822 326.998Z" fill="#CCFE12"/>
+                    <!-- Shadow -->
+                    <g filter="url(#filter0_bp)">
+                      <path d="M68.8999 412.469H473.832C478.201 412.469 488.776 413.594 497.451 414.982C506.127 416.37 509.09 417.495 504.068 417.495H38.6638C33.6423 417.495 36.6047 416.37 45.2804 414.982C53.956 413.594 64.5309 412.469 68.8999 412.469Z" fill="black" fill-opacity="0.4"/>
+                    </g>
+                    <!-- Laptop body -->
+                    <g filter="url(#filter1_bp)">
+                      <path d="M63.0566 146.799C63.0566 140.044 63.0566 136.666 64.3938 134.086C65.5701 131.816 67.4469 129.971 69.7554 128.815C72.3798 127.5 75.8153 127.5 82.6863 127.5H459.79C466.661 127.5 470.096 127.5 472.721 128.815C475.029 129.971 476.906 131.816 478.082 134.086C479.42 136.666 479.42 140.044 479.42 146.799V389.149C479.42 395.904 479.42 399.282 478.082 401.862C476.906 404.132 475.029 405.977 472.721 407.134C470.096 408.448 466.661 408.448 459.79 408.448H82.6863C75.8153 408.448 72.3798 408.448 69.7554 407.134C67.4469 405.977 65.5701 404.132 64.3938 401.862C63.0566 399.282 63.0566 395.904 63.0566 389.149V146.799Z" fill="#3A4245"/>
+                    </g>
+                    <path d="M64.0791 146.196C64.0791 140.004 64.0791 136.907 65.3049 134.542C66.3831 132.462 68.1035 130.77 70.2196 129.71C72.6253 128.505 75.7745 128.505 82.0729 128.505H460.404C466.702 128.505 469.851 128.505 472.257 129.71C474.373 130.77 476.093 132.462 477.172 134.542C478.397 136.907 478.397 140.004 478.397 146.196V389.751C478.397 395.944 478.397 399.04 477.172 401.405C476.093 403.486 474.373 405.177 472.257 406.238C469.851 407.443 466.702 407.443 460.404 407.443H82.0729C75.7745 407.443 72.6253 407.443 70.2196 406.238C68.1035 405.177 66.3831 403.486 65.3049 401.405C64.0791 399.04 64.0791 395.944 64.0791 389.751V146.196Z" fill="#262C2D"/>
+                    <path d="M65.1016 145.594C65.1016 139.964 65.1016 137.149 66.2159 134.999C67.1961 133.108 68.7601 131.57 70.6838 130.606C72.8708 129.511 75.7337 129.511 81.4596 129.511H461.017C466.743 129.511 469.606 129.511 471.793 130.606C473.717 131.57 475.281 133.108 476.261 134.999C477.375 137.149 477.375 139.964 477.375 145.594V390.355C477.375 395.985 477.375 398.8 476.261 400.95C475.281 402.841 473.717 404.379 471.793 405.343C469.606 406.438 466.743 406.438 461.017 406.438H81.4596C75.7337 406.438 72.8708 406.438 70.6838 405.343C68.7601 404.379 67.1961 402.841 66.2159 400.95C65.1016 398.8 65.1016 395.985 65.1016 390.355V145.594Z" fill="#121515"/>
+                    <rect x="65.1016" y="393.119" width="412.273" height="7.53886" fill="#262C2D"/>
+                    <!-- Camera -->
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M271.238 138.808C272.015 138.808 272.644 138.189 272.644 137.426C272.644 136.663 272.015 136.044 271.238 136.044C270.462 136.044 269.833 136.663 269.833 137.426C269.833 138.189 270.462 138.808 271.238 138.808Z" fill="#262C2D"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M271.238 138.29C271.724 138.29 272.117 137.903 272.117 137.426C272.117 136.949 271.724 136.562 271.238 136.562C270.753 136.562 270.36 136.949 270.36 137.426C270.36 137.903 270.753 138.29 271.238 138.29Z" fill="#121515"/>
+                    <!-- Laptop base -->
+                    <path d="M14.2383 401.161C14.2383 400.883 14.4671 400.658 14.7495 400.658H270.727C271.009 400.658 271.238 400.883 271.238 401.161V408.448H14.2383V401.161Z" fill="url(#paint0_bp)"/>
+                    <path d="M528.11 401.161C528.11 400.883 527.881 400.658 527.599 400.658H271.622C271.339 400.658 271.11 400.883 271.11 401.161V408.448H528.11V401.161Z" fill="url(#paint1_bp)"/>
+                    <path d="M240.439 406.187H302.037C305.284 406.187 307.916 403.712 307.916 400.658H234.561C234.561 403.712 237.193 406.187 240.439 406.187Z" fill="#4E4F53"/>
+                    <path d="M528.238 408.448C528.218 408.461 516.959 415.484 480.059 415.484H62.418C25.5179 415.484 14.2585 408.461 14.2383 408.448H528.238Z" fill="url(#paint3_bp)"/>
+                    <!-- Phone -->
+                    <path d="M143.37 193.983H143.739C144.147 193.983 144.478 194.317 144.478 194.729V231.749C144.478 232.161 144.147 232.495 143.739 232.495H143.37V193.983Z" fill="#121515"/>
+                    <path d="M143.37 253.37H143.739C144.147 253.37 144.478 253.704 144.478 254.116V272.78C144.478 273.192 144.147 273.526 143.739 273.526H143.37V253.37Z" fill="#121515"/>
+                    <path d="M0 169.293C0 155.287 0 148.284 4.07248 143.64C4.65077 142.98 5.28138 142.366 5.95848 141.803C10.7267 137.836 17.9162 137.836 32.2951 137.836H111.074C125.453 137.836 132.643 137.836 137.411 141.803C138.088 142.366 138.719 142.98 139.297 143.64C143.37 148.284 143.37 155.287 143.37 169.293V415.191C143.37 429.197 143.37 436.2 139.297 440.844C138.719 441.504 138.088 442.118 137.411 442.681C132.643 446.648 125.453 446.648 111.074 446.648H32.2951C17.9162 446.648 10.7267 446.648 5.95848 442.681C5.28138 442.118 4.65077 441.504 4.07248 440.844C0 436.2 0 429.197 0 415.191V169.293Z" fill="#3A4245"/>
+                    <path d="M0.739258 166.936C0.739258 155.162 0.739258 149.275 3.99168 145.257C4.72917 144.345 5.57443 143.522 6.50993 142.804C10.6356 139.636 16.6792 139.636 28.7665 139.636H114.603C126.691 139.636 132.734 139.636 136.86 142.804C137.796 143.522 138.641 144.345 139.378 145.257C142.631 149.275 142.631 155.162 142.631 166.936V417.549C142.631 429.322 142.631 435.209 139.378 439.228C138.641 440.139 137.796 440.962 136.86 441.681C132.734 444.849 126.691 444.849 114.603 444.849H28.7665C16.6792 444.849 10.6356 444.849 6.50993 441.681C5.57443 440.962 4.72917 440.139 3.99168 439.228C0.739258 435.209 0.739258 429.322 0.739258 417.549V166.936Z" fill="#121515"/>
+                    <!-- Phone camera -->
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M70.9456 152.593C72.9863 152.593 74.6407 150.982 74.6407 148.994C74.6407 147.006 72.9863 145.395 70.9456 145.395C68.9048 145.395 67.2505 147.006 67.2505 148.994C67.2505 150.982 68.9048 152.593 70.9456 152.593Z" fill="#262C2D"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M70.9457 151.243C72.2211 151.243 73.2551 150.236 73.2551 148.994C73.2551 147.751 72.2211 146.744 70.9457 146.744C69.6702 146.744 68.6362 147.751 68.6362 148.994C68.6362 150.236 69.6702 151.243 70.9457 151.243Z" fill="#121515"/>
+                    <defs>
+                      <filter id="filter0_bp" x="21.2192" y="397.469" width="500.293" height="35.0264" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                        <feGaussianBlur stdDeviation="7.5" result="effect1_foregroundBlur"/>
+                      </filter>
+                      <filter id="filter1_bp" x="59.0566" y="125.5" width="424.363" height="288.948" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                        <feOffset/>
+                        <feGaussianBlur stdDeviation="1"/>
+                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0.0823529 0 0 0 0 0.25098 0 0 0 0.14 0"/>
+                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                        <feOffset dy="2"/>
+                        <feGaussianBlur stdDeviation="2"/>
+                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0.0823529 0 0 0 0 0.25098 0 0 0 0.05 0"/>
+                        <feBlend mode="normal" in2="effect1_dropShadow" result="effect2_dropShadow"/>
+                        <feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow" result="shape"/>
+                      </filter>
+                      <linearGradient id="paint0_bp" x1="14.2383" y1="404.679" x2="271.238" y2="404.679" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#303135"/>
+                        <stop offset="0.135753" stop-color="#4E4F53"/>
+                        <stop offset="0.756906" stop-color="#818286"/>
+                        <stop offset="1" stop-color="#818286"/>
+                      </linearGradient>
+                      <linearGradient id="paint1_bp" x1="528.11" y1="404.679" x2="271.11" y2="404.679" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#303135"/>
+                        <stop offset="0.135753" stop-color="#4E4F53"/>
+                        <stop offset="0.756906" stop-color="#818286"/>
+                        <stop offset="1" stop-color="#818286"/>
+                      </linearGradient>
+                      <linearGradient id="paint3_bp" x1="271.238" y1="408.448" x2="271.238" y2="415.484" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#303135"/>
+                        <stop offset="1" stop-color="#08090D"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <!-- Screenshots -->
+                  <img class="bp-laptop-screen" src={project.image} alt={`${project.title} - Website`} loading="lazy" />
+                  <img class="bp-phone-screen" src={project.phoneImage} alt={`${project.title} - Mobile`} loading="lazy" />
+                </div>
+              ) : (
+                <!-- Browser/Laptop mockup with molecule frame -->
+                <div class="browser-mockup-wrapper">
+                  <svg class="browser-molecule-frame" viewBox="0 0 538 544" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Top right molecules -->
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(1 0 0 -1 466.902 465.234)" fill="#CCFE12"/>
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(1 0 0 -1 396.004 543.426)" fill="#CCFE12"/>
+                    <path d="M483.577 465.233C483.577 465.233 466.896 465.233 466.896 480.871C466.896 473.573 460.64 464.19 450.215 464.19C461.683 464.19 466.896 454.807 466.896 446.467C466.896 463.148 483.577 465.233 483.577 465.233Z" fill="#CCFE12"/>
+                    <!-- Top left molecules -->
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(-1 0 0 1 502.422 0)" fill="#CCFE12"/>
+                    <path d="M414.845 79.2356C414.845 79.2356 431.526 78.193 431.526 62.5547C431.526 69.8526 437.781 79.2356 448.207 79.2356C436.739 79.2356 431.526 88.6186 431.526 96.9591C431.526 80.2782 414.845 79.2356 414.845 79.2356Z" fill="#CCFE12"/>
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(-1 0 0 1 431.527 79.2344)" fill="#CCFE12"/>
+                    <path d="M71.0039 94.7656C71.0039 85.9291 78.1674 78.7656 87.0039 78.7656H415.305C424.141 78.7656 431.305 85.9291 431.305 94.7656V310.766C431.305 319.602 424.141 326.766 415.305 326.766H87.0039C78.1674 326.766 71.0039 319.602 71.0039 310.766V94.7656Z" fill="#CCFE12"/>
+                    <!-- Bottom left molecules -->
+                    <rect x="70.8945" y="405.898" width="70.8939" height="79.2344" rx="16" transform="rotate(180 70.8945 405.898)" fill="#CCFE12"/>
+                    <rect x="141.789" y="484.09" width="70.8939" height="79.2344" rx="16" transform="rotate(180 141.789 484.09)" fill="#CCFE12"/>
+                    <path d="M54.2124 405.897C54.2124 405.897 70.8933 405.897 70.8933 421.535C70.8933 414.237 77.1486 404.854 87.5742 404.854C76.1061 404.854 70.8933 395.471 70.8933 387.131C70.8933 403.812 54.2124 405.897 54.2124 405.897Z" fill="#CCFE12"/>
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(1 0 0 -1 71.2539 327)" fill="#CCFE12"/>
+                    <rect width="70.8939" height="79.2344" rx="16" transform="matrix(1 0 0 -1 0.363281 405.191)" fill="#CCFE12"/>
+                    <path d="M87.9361 326.998C87.9361 326.998 71.2551 326.998 71.2551 342.637C71.2551 335.339 64.9998 325.956 54.5742 325.956C66.0424 325.956 71.2551 316.573 71.2551 308.232C71.2551 324.913 87.9361 326.998 87.9361 326.998Z" fill="#CCFE12"/>
+                    <!-- Shadow -->
+                    <g filter="url(#filter0_f_browser)">
+                      <path d="M66.6582 412.469H471.59C475.959 412.469 486.534 413.594 495.21 414.982C503.885 416.37 506.848 417.495 501.826 417.495H36.4221C31.4006 417.495 34.363 416.37 43.0387 414.982C51.7143 413.594 62.2892 412.469 66.6582 412.469Z" fill="black" fill-opacity="0.4"/>
+                    </g>
+                    <!-- Laptop body -->
+                    <g filter="url(#filter1_dd_browser)">
+                      <path d="M60.8145 146.799C60.8145 140.044 60.8145 136.666 62.1516 134.086C63.3279 131.816 65.2047 129.971 67.5132 128.815C70.1376 127.5 73.5731 127.5 80.4441 127.5H457.548C464.419 127.5 467.854 127.5 470.479 128.815C472.787 129.971 474.664 131.816 475.84 134.086C477.177 136.666 477.177 140.044 477.177 146.799V389.149C477.177 395.904 477.177 399.282 475.84 401.862C474.664 404.132 472.787 405.977 470.479 407.134C467.854 408.448 464.419 408.448 457.548 408.448H80.4441C73.5731 408.448 70.1376 408.448 67.5132 407.134C65.2047 405.977 63.3279 404.132 62.1516 401.862C60.8145 399.282 60.8145 395.904 60.8145 389.149V146.799Z" fill="#3A4245"/>
+                    </g>
+                    <path d="M61.8369 146.196C61.8369 140.004 61.8369 136.907 63.0627 134.542C64.1409 132.462 65.8613 130.77 67.9774 129.71C70.3831 128.505 73.5323 128.505 79.8307 128.505H458.161C464.46 128.505 467.609 128.505 470.015 129.71C472.131 130.77 473.851 132.462 474.929 134.542C476.155 136.907 476.155 140.004 476.155 146.196V389.751C476.155 395.944 476.155 399.04 474.929 401.405C473.851 403.486 472.131 405.177 470.015 406.238C467.609 407.443 464.46 407.443 458.161 407.443H79.8307C73.5323 407.443 70.3831 407.443 67.9774 406.238C65.8613 405.177 64.1409 403.486 63.0627 401.405C61.8369 399.04 61.8369 395.944 61.8369 389.751V146.196Z" fill="#262C2D"/>
+                    <path d="M62.8594 145.594C62.8594 139.964 62.8594 137.149 63.9737 134.999C64.9539 133.108 66.5179 131.57 68.4416 130.606C70.6286 129.511 73.4916 129.511 79.2174 129.511H458.775C464.501 129.511 467.364 129.511 469.551 130.606C471.474 131.57 473.038 133.108 474.019 134.999C475.133 137.149 475.133 139.964 475.133 145.594V390.355C475.133 395.985 475.133 398.8 474.019 400.95C473.038 402.841 471.474 404.379 469.551 405.343C467.364 406.438 464.501 406.438 458.775 406.438H79.2174C73.4916 406.438 70.6286 406.438 68.4416 405.343C66.5179 404.379 64.9539 402.841 63.9737 400.95C62.8594 398.8 62.8594 395.985 62.8594 390.355V145.594Z" fill="#121515"/>
+                    <rect x="62.8594" y="393.119" width="412.273" height="7.53886" fill="#262C2D"/>
+                    <!-- Camera -->
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M268.997 138.808C269.773 138.808 270.402 138.189 270.402 137.426C270.402 136.663 269.773 136.044 268.997 136.044C268.22 136.044 267.591 136.663 267.591 137.426C267.591 138.189 268.22 138.808 268.997 138.808Z" fill="#262C2D"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M268.997 138.29C269.482 138.29 269.875 137.903 269.875 137.426C269.875 136.949 269.482 136.562 268.997 136.562C268.512 136.562 268.118 136.949 268.118 137.426C268.118 137.903 268.512 138.29 268.997 138.29Z" fill="#121515"/>
+                    <path opacity="0.4" fill-rule="evenodd" clip-rule="evenodd" d="M268.997 137.254C269.094 137.254 269.173 137.176 269.173 137.081C269.173 136.986 269.094 136.908 268.997 136.908C268.9 136.908 268.821 136.986 268.821 137.081C268.821 137.176 268.9 137.254 268.997 137.254Z" fill="#636F73"/>
+                    <!-- Laptop base left -->
+                    <path d="M11.9961 401.161C11.9961 400.883 12.225 400.658 12.5073 400.658H268.485C268.767 400.658 268.996 400.883 268.996 401.161V408.448H11.9961V401.161Z" fill="url(#paint0_linear_browser)"/>
+                    <!-- Laptop base right -->
+                    <path d="M525.868 401.161C525.868 400.883 525.639 400.658 525.357 400.658H269.379C269.097 400.658 268.868 400.883 268.868 401.161V408.448H525.868V401.161Z" fill="url(#paint1_linear_browser)"/>
+                    <!-- Laptop notch -->
+                    <path d="M238.197 406.187H299.795C303.042 406.187 305.674 403.712 305.674 400.658H232.318C232.318 403.712 234.95 406.187 238.197 406.187Z" fill="#4E4F53"/>
+                    <path d="M238.197 406.187H299.795C303.042 406.187 305.674 403.712 305.674 400.658H232.318C232.318 403.712 234.95 406.187 238.197 406.187Z" fill="url(#paint2_linear_browser)"/>
+                    <!-- Laptop front -->
+                    <path d="M525.996 408.448C525.976 408.461 514.716 415.484 477.816 415.484H60.1758C23.2757 415.484 12.0164 408.461 11.9961 408.448H525.996Z" fill="url(#paint3_linear_browser)"/>
+                    <defs>
+                      <filter id="filter0_f_browser" x="18.9775" y="397.469" width="500.293" height="35.0264" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                        <feGaussianBlur stdDeviation="7.5" result="effect1_foregroundBlur"/>
+                      </filter>
+                      <filter id="filter1_dd_browser" x="56.8145" y="125.5" width="424.363" height="288.948" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                        <feOffset/>
+                        <feGaussianBlur stdDeviation="1"/>
+                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0.0823529 0 0 0 0 0.25098 0 0 0 0.14 0"/>
+                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                        <feOffset dy="2"/>
+                        <feGaussianBlur stdDeviation="2"/>
+                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0.0823529 0 0 0 0 0.25098 0 0 0 0.05 0"/>
+                        <feBlend mode="normal" in2="effect1_dropShadow" result="effect2_dropShadow"/>
+                        <feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow" result="shape"/>
+                      </filter>
+                      <linearGradient id="paint0_linear_browser" x1="11.9961" y1="404.679" x2="268.996" y2="404.679" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#303135"/>
+                        <stop offset="0.0218797" stop-color="#535458"/>
+                        <stop offset="0.0363004" stop-color="#4D4E52"/>
+                        <stop offset="0.05818" stop-color="#333438"/>
+                        <stop offset="0.0865241" stop-color="#35363A"/>
+                        <stop offset="0.135753" stop-color="#4E4F53"/>
+                        <stop offset="0.756906" stop-color="#818286"/>
+                        <stop offset="1" stop-color="#818286"/>
+                      </linearGradient>
+                      <linearGradient id="paint1_linear_browser" x1="525.868" y1="404.679" x2="268.868" y2="404.679" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#303135"/>
+                        <stop offset="0.0218797" stop-color="#535458"/>
+                        <stop offset="0.0363004" stop-color="#4D4E52"/>
+                        <stop offset="0.05818" stop-color="#333438"/>
+                        <stop offset="0.0865241" stop-color="#35363A"/>
+                        <stop offset="0.135753" stop-color="#4E4F53"/>
+                        <stop offset="0.756906" stop-color="#818286"/>
+                        <stop offset="1" stop-color="#818286"/>
+                      </linearGradient>
+                      <linearGradient id="paint2_linear_browser" x1="232.318" y1="403.422" x2="305.674" y2="403.422" gradientUnits="userSpaceOnUse">
+                        <stop stop-opacity="0.5"/>
+                        <stop offset="0.139373" stop-color="#818487" stop-opacity="0"/>
+                        <stop offset="0.860627" stop-color="#818487" stop-opacity="0"/>
+                        <stop offset="1" stop-opacity="0.5"/>
+                      </linearGradient>
+                      <linearGradient id="paint3_linear_browser" x1="268.996" y1="408.448" x2="268.996" y2="415.484" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#303135"/>
+                        <stop offset="1" stop-color="#08090D"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <!-- Website screenshot overlaid on laptop screen -->
+                  <img
+                    class="browser-screen-image"
+                    src={project.image}
+                    alt={`${project.title} - Website screenshot`}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+      </div>
+    </div>
+
+    <!-- Navigation arrow right -->
+    <button class="nav-arrow next" aria-label={lang === 'es' ? 'Siguiente proyecto' : 'Next project'}>
+      <svg width="32" height="52" viewBox="0 0 32 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.14087 15.9521C9.14087 16.5043 9.58871 16.952 10.1409 16.9521L14.5012 16.9522L14.6233 16.9561C15.8431 17.0399 15.9295 18.3742 15.9299 18.3809L15.9299 22.0254C15.9301 22.5775 16.3778 23.0254 16.9299 23.0254L21.717 23.0254C22.2692 23.0254 22.7168 22.5775 22.717 22.0254L22.717 17.9522C22.717 17.3999 22.2693 16.9522 21.717 16.9522L17.4485 16.9522L17.3137 16.9463C16.6367 16.8937 15.9302 16.4443 15.9299 15.5234C15.9299 15.5296 15.929 15.5358 15.929 15.542L15.929 11.8789C15.9288 11.3269 15.481 10.879 14.929 10.8789L10.1409 10.8789C9.58883 10.8791 9.14106 11.3269 9.14087 11.8789L9.14087 15.9521Z" fill="currentColor"/>
+        <path d="M22.7151 24.4536C22.7151 24.4536 22.6258 23.0247 21.2861 23.0247C21.9113 23.0247 22.7151 22.4888 22.7151 21.5957C22.7151 22.5781 23.5189 23.0247 24.2334 23.0247C22.8044 23.0247 22.7151 24.4536 22.7151 24.4536Z" fill="currentColor"/>
+        <rect width="6.07304" height="6.78755" rx="1" transform="matrix(-4.37114e-08 1 1 4.37114e-08 2.49609 5)" fill="currentColor"/>
+        <path d="M9.28174 12.5024C9.28174 12.5024 9.19243 11.0735 7.85278 11.0735C8.47795 11.0735 9.28174 10.5376 9.28174 9.64453C9.28174 10.6269 10.0855 11.0735 10.8 11.0735C9.37105 11.0735 9.28174 12.5024 9.28174 12.5024Z" fill="currentColor"/>
+        <rect width="6.07304" height="6.78755" rx="1" transform="matrix(-4.37114e-08 1 1 4.37114e-08 22.7166 23.0244)" fill="currentColor"/>
+        <path d="M9.14087 36.0488C9.14093 35.4967 9.58875 35.049 10.1409 35.0488L14.5012 35.0488L14.6233 35.0449C15.8461 34.9609 15.9299 33.6201 15.9299 33.6201L15.9299 29.9766C15.9299 29.4243 16.3777 28.9766 16.9299 28.9766L21.717 28.9766C22.2693 28.9766 22.717 29.4243 22.717 29.9766L22.717 34.0488C22.717 34.6011 22.2693 35.0488 21.717 35.0488L17.4485 35.0488L17.3137 35.0547C16.6366 35.1072 15.9299 35.5574 15.9299 36.4785C15.9299 36.4724 15.929 36.466 15.929 36.46L15.929 40.1221C15.9289 40.6742 15.4811 41.1219 14.929 41.1221L10.1409 41.1221C9.58874 41.1219 9.14092 40.6742 9.14087 40.1221L9.14087 36.0488Z" fill="currentColor"/>
+        <path d="M22.7151 27.5474C22.7151 27.5474 22.6258 28.9763 21.2861 28.9763C21.9113 28.9763 22.7151 29.5122 22.7151 30.4053C22.7151 29.4229 23.5189 28.9763 24.2334 28.9763C22.8044 28.9763 22.7151 27.5474 22.7151 27.5474Z" fill="currentColor"/>
+        <rect x="2.49634" y="46.999" width="6.07304" height="6.78755" rx="1" transform="rotate(-90 2.49634 46.999)" fill="currentColor"/>
+        <path d="M9.28199 39.4966C9.28199 39.4966 9.19268 40.9255 7.85303 40.9255C8.4782 40.9255 9.28199 41.4614 9.28199 42.3545C9.28199 41.3721 10.0858 40.9255 10.8003 40.9255C9.3713 40.9255 9.28199 39.4966 9.28199 39.4966Z" fill="currentColor"/>
+        <rect x="22.7166" y="28.835" width="6.07304" height="6.78755" rx="1" transform="rotate(-90 22.7166 28.835)" fill="currentColor"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Carousel indicators -->
+  <div class="carousel-indicators">
+    {projects.map((_, index) => (
+      <button
+        class={`indicator ${index === 0 ? 'active' : ''}`}
+        data-index={index}
+        aria-label={`${lang === 'es' ? 'Ir al proyecto' : 'Go to project'} ${index + 1}`}
+      ></button>
+    ))}
+  </div>
+</section>
+
+<script>
+  const track = document.querySelector('.carousel-track') as HTMLElement;
+  const slides = document.querySelectorAll('.carousel-slide');
+  const indicators = document.querySelectorAll('.indicator');
+  const prevButton = document.querySelector('.nav-arrow.prev') as HTMLButtonElement;
+  const nextButton = document.querySelector('.nav-arrow.next') as HTMLButtonElement;
+
+  let currentIndex = 0;
+  const totalSlides = slides.length;
+  let isAnimating = false;
+
+  function goToSlide(index: number) {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    // Normalize index
+    if (index < 0) index = totalSlides - 1;
+    if (index >= totalSlides) index = 0;
+
+    currentIndex = index;
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    // Update indicators
+    indicators.forEach((ind, i) => {
+      ind.classList.toggle('active', i === currentIndex);
+    });
+
+    setTimeout(() => {
+      isAnimating = false;
+    }, 500);
+  }
+
+  // Event listeners for arrows
+  prevButton?.addEventListener('click', () => goToSlide(currentIndex - 1));
+  nextButton?.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+  // Event listeners for indicators
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => goToSlide(index));
+  });
+
+  // Touch/swipe support
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  track.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  track.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        goToSlide(currentIndex + 1);
+      } else {
+        goToSlide(currentIndex - 1);
+      }
+    }
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      goToSlide(currentIndex - 1);
+    } else if (e.key === 'ArrowRight') {
+      goToSlide(currentIndex + 1);
+    }
+  });
+
+  // Auto-play (optional - disabled by default)
+  // setInterval(() => goToSlide(currentIndex + 1), 5000);
+</script>
+
+<style>
+  .project-showcase {
+    padding: 100px 0;
+    background-color: var(--bg-secondary);
+    overflow: hidden;
+  }
+
+  :global([data-theme="dark"]) .project-showcase {
+    background-color: var(--bg-color);
+  }
+
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 80px;
+    display: flex;
+    align-items: center;
+  }
+
+  .carousel-viewport {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .carousel-slide {
+    min-width: 100%;
+    flex-shrink: 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .slide-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .project-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-text {
+    flex: 1;
+  }
+
+  .project-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-gray);
+    margin-bottom: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+  }
+
+  .project-title {
+    font-size: 36px;
+    line-height: 48px;
+    font-weight: 600;
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 20px;
+  }
+
+  .title-highlight {
+    background-color: var(--color-lime);
+    color: var(--color-black);
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  .project-description {
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--text-color);
+    opacity: 0.8;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    margin-bottom: 24px;
+    white-space: pre-line;
+  }
+
+  .project-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .view-project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-cyan);
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .view-project-link:hover {
+    color: var(--color-lime);
+  }
+
+  .view-project-link svg {
+    transition: transform 0.3s ease;
+  }
+
+  .view-project-link:hover svg {
+    transform: translate(3px, -3px);
+  }
+
+  .tag {
+    background: transparent;
+    color: var(--text-color);
+    padding: 6px 14px;
+    border-radius: 56px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid currentColor;
+    opacity: 0.7;
+  }
+
+  /* Navigation arrows */
+  .nav-arrow {
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 10px;
+  }
+
+  .nav-arrow svg {
+    width: 32px;
+    height: 52px;
+  }
+
+  .nav-arrow:hover {
+    color: var(--color-cyan);
+  }
+
+  /* Mockup container */
+  .mockup-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 450px;
+  }
+
+  /* Phone mockup with molecule frame */
+  .phone-mockup-wrapper {
+    position: relative;
+    width: 320px;
+    height: 324px;
+  }
+
+  .phone-molecule-frame {
+    width: 100%;
+    height: 100%;
+  }
+
+  .phone-screen-image {
+    position: absolute;
+    top: 8.1%;
+    left: 31%;
+    width: 40.5%;
+    height: 83.5%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  /* Browser/Laptop mockup wrapper */
+  .browser-mockup-wrapper {
+    position: relative;
+    width: 400px;
+    height: 410px;
+  }
+
+  .browser-molecule-frame {
+    width: 100%;
+    height: 100%;
+  }
+
+  .browser-screen-image {
+    position: absolute;
+    top: 26.5%;
+    left: 13.3%;
+    width: 73.5%;
+    height: 45.5%;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+
+  /* Browser + Phone combined mockup (Offitec) */
+  .browser-phone-mockup-wrapper {
+    position: relative;
+    width: 400px;
+    height: 410px;
+  }
+
+  .browser-phone-frame {
+    width: 100%;
+    height: 100%;
+  }
+
+  .bp-laptop-screen {
+    position: absolute;
+    top: 26.5%;
+    left: 13.8%;
+    width: 73%;
+    height: 45.5%;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+
+  .bp-phone-screen {
+    position: absolute;
+    top: 28.5%;
+    left: 0.8%;
+    width: 25.3%;
+    height: 54%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  /* Carousel indicators */
+  .carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 40px;
+  }
+
+  .indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--text-light);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    opacity: 0.4;
+  }
+
+  .indicator:hover {
+    opacity: 0.6;
+  }
+
+  .indicator.active {
+    background: var(--color-cyan);
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  @media (max-width: 1024px) {
+    .carousel-container {
+      padding: 0 20px;
+    }
+
+    .slide-content {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .project-info {
+      order: 2;
+    }
+
+    .mockup-container {
+      order: 1;
+    }
+
+    .project-text {
+      text-align: center;
+    }
+
+    .project-tags {
+      justify-content: center;
+    }
+
+    .carousel-slide {
+      padding: 0 10px;
+    }
+
+    .nav-arrow {
+      display: none;
+    }
+
+    .carousel-indicators {
+      margin-top: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .project-showcase {
+      padding: 80px 0;
+    }
+
+    .project-title {
+      font-size: 28px;
+      line-height: 38px;
+    }
+
+    .project-description {
+      font-size: 13px;
+      line-height: 22px;
+    }
+
+    .mockup-container {
+      min-height: 350px;
+    }
+
+    .phone-frame img {
+      width: 200px;
+    }
+
+    .phone-frame {
+      padding: 8px;
+      border-radius: 28px;
+    }
+
+    .browser-frame {
+      min-width: 280px;
+    }
+
+    .molecule-decoration {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .project-showcase {
+      padding: 60px 0;
+    }
+
+    .project-title {
+      font-size: 24px;
+      line-height: 34px;
+    }
+
+    .phone-frame img {
+      width: 160px;
+    }
+
+    .carousel-slide {
+      padding: 0 15px;
+    }
+  }
+</style>

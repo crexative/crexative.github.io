@@ -3,7 +3,7 @@ export default {
   nav: {
     home: 'Home',
     services: 'Services',
-    about: 'About',
+    projects: 'Projects',
     contact: 'Contact',
     portfolio: 'Portfolio',
   },
@@ -40,6 +40,14 @@ export default {
     },
   },
 
+  // Project Showcase Section
+  project: {
+    label: 'MOBILE APPS',
+    title: 'Tómate tu Tiempo',
+    description: 'Personal management app designed to help users manage their time and improve daily productivity.\n\nAn intuitive app to organize tasks, create routines, and achieve work-life balance.',
+    tags: ['Android', 'UI/UX Design'],
+  },
+
   // About Section
   about: {
     title: 'Why Choose Us',
@@ -60,6 +68,10 @@ export default {
       qualityDesc: 'We meet deadlines, respect budgets, and deliver exactly what we promise. No surprises.',
       partnership: 'Your Success is Our Success',
       partnershipDesc: 'We\'re not just vendors, we\'re your tech team. We\'re with you from idea to growth.',
+    },
+    featured: {
+      title: 'Long-Lasting Solutions',
+      description: 'We build professional quality software that works today and stays efficient tomorrow. Your investment is protected for the long term.',
     },
   },
 
