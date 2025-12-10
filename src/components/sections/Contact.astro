@@ -90,22 +90,6 @@ const contactSchema = {
         </form>
       </div>
 
-      <!-- Success Modal -->
-      <div class="modal-overlay" id="success-modal">
-        <div class="modal-content">
-          <div class="modal-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-          </div>
-          <h3>{lang === 'es' ? '¡Mensaje Enviado!' : 'Message Sent!'}</h3>
-          <p>{lang === 'es' ? 'Gracias por contactarnos. Te responderemos en menos de 24 horas.' : 'Thanks for reaching out. We\'ll get back to you within 24 hours.'}</p>
-          <button class="btn-lime modal-close" id="modal-close">
-            {lang === 'es' ? 'Entendido' : 'Got it'}
-          </button>
-        </div>
-      </div>
-
       <!-- Right: Info Cards + WhatsApp -->
       <div class="contact-info">
         <div class="info-card">
@@ -146,6 +130,22 @@ const contactSchema = {
   <!-- Structured Data -->
   <script type="application/ld+json" set:html={JSON.stringify(contactSchema)} is:inline />
 </section>
+
+<!-- Success Modal - Outside section for proper fixed positioning -->
+<div class="modal-overlay" id="success-modal">
+  <div class="modal-content">
+    <div class="modal-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+    <h3>{lang === 'es' ? '¡Mensaje Enviado!' : 'Message Sent!'}</h3>
+    <p>{lang === 'es' ? 'Gracias por contactarnos. Te responderemos en menos de 24 horas.' : 'Thanks for reaching out. We\'ll get back to you within 24 hours.'}</p>
+    <button class="btn-lime modal-close" id="modal-close">
+      {lang === 'es' ? 'Entendido' : 'Got it'}
+    </button>
+  </div>
+</div>
 
 <script>
   const form = document.getElementById('contact-form') as HTMLFormElement;
@@ -367,8 +367,8 @@ const contactSchema = {
     display: none !important;
   }
 
-  /* Success Modal */
-  .modal-overlay {
+  /* Success Modal - Global styles since modal is outside scoped section */
+  :global(.modal-overlay) {
     position: fixed;
     top: 0;
     left: 0;
@@ -382,31 +382,35 @@ const contactSchema = {
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
+    padding: 20px;
+    box-sizing: border-box;
   }
 
-  .modal-overlay.active {
+  :global(.modal-overlay.active) {
     opacity: 1;
     visibility: visible;
   }
 
-  .modal-content {
-    background: var(--bg-secondary);
+  :global(.modal-content) {
+    background: var(--bg-secondary, #1a1a1a);
     border-radius: 16px;
     padding: 48px;
     max-width: 400px;
+    width: 100%;
     text-align: center;
     transform: scale(0.9);
     transition: transform 0.3s ease;
+    box-sizing: border-box;
   }
 
-  .modal-overlay.active .modal-content {
+  :global(.modal-overlay.active .modal-content) {
     transform: scale(1);
   }
 
-  .modal-icon {
+  :global(.modal-icon) {
     width: 72px;
     height: 72px;
-    background: var(--color-cyan);
+    background: var(--color-cyan, #00E1C6);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -414,30 +418,59 @@ const contactSchema = {
     margin: 0 auto 24px;
   }
 
-  .modal-icon svg {
+  :global(.modal-icon svg) {
     width: 36px;
     height: 36px;
     color: #000;
   }
 
-  .modal-content h3 {
+  :global(.modal-content h3) {
     font-size: 24px;
     font-weight: 600;
-    color: var(--text-color);
+    color: var(--text-color, #fff);
     margin-bottom: 12px;
     font-family: 'Poppins', sans-serif;
   }
 
-  .modal-content p {
+  :global(.modal-content p) {
     font-size: 14px;
-    color: var(--text-gray);
+    color: var(--text-gray, #8E8E93);
     margin-bottom: 28px;
     line-height: 1.6;
     font-family: 'Poppins', sans-serif;
   }
 
-  .modal-close {
+  :global(.modal-close) {
     min-width: 160px;
+    background-color: var(--color-lime, #CCFE12);
+    color: #000000;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  :global(.modal-close:hover) {
+    background-color: #b8e510;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 480px) {
+    :global(.modal-content) {
+      padding: 32px 24px;
+    }
+
+    :global(.modal-content h3) {
+      font-size: 20px;
+    }
+
+    :global(.modal-content p) {
+      font-size: 13px;
+    }
   }
 
   @media (max-width: 1024px) {
