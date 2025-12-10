@@ -162,19 +162,31 @@ const contactSchema = {
 
     try {
       const formData = new FormData(form);
-      const response = await fetch('/', {
+
+      // Encode form data for Netlify
+      const encodedData = new URLSearchParams();
+      formData.forEach((value, key) => {
+        encodedData.append(key, value.toString());
+      });
+
+      const response = await fetch(form.action || '/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData as any).toString()
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Accept': 'application/json'
+        },
+        body: encodedData.toString()
       });
 
       if (response.ok) {
         modal.classList.add('active');
         form.reset();
       } else {
+        console.error('Form submission failed:', response.status, response.statusText);
         alert('Error al enviar el mensaje. Por favor intenta de nuevo.');
       }
     } catch (error) {
+      console.error('Form submission error:', error);
       alert('Error al enviar el mensaje. Por favor intenta de nuevo.');
     } finally {
       submitBtn.textContent = originalText;
