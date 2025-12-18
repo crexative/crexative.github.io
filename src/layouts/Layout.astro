@@ -71,25 +71,49 @@ const languageName = getLanguageName(currentLang);
 		<!-- Structured Data -->
 		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
 
-		<!-- DNS Prefetch for external resources -->
-		<link rel="dns-prefetch" href="//fonts.googleapis.com">
-		<link rel="dns-prefetch" href="//fonts.gstatic.com">
-
-		<!-- Preconnect to critical third-party origins -->
+		<!-- Preconnect to critical third-party origins (must be early) -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-		<!-- Poppins typography for new design -->
-		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" onload="this.media='all'">
-		<noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
+		<!-- Critical font preload for faster LCP -->
+		<link rel="preload" href="https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="https://fonts.gstatic.com/s/poppins/v21/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2" as="font" type="font/woff2" crossorigin>
 
-		<!-- Preload critical resources -->
-		<link rel="preload" href="/images/hero-bg-new.webp" as="image" type="image/webp">
-		<link rel="preload" href="/images/crexative.svg" as="image" type="image/svg+xml">
-		<link rel="preload" href="/favicon.svg" as="image" type="image/svg+xml">
+		<!-- Inline critical font-face to avoid render blocking -->
+		<style>
+			@font-face {
+				font-family: 'Poppins';
+				font-style: normal;
+				font-weight: 400;
+				font-display: swap;
+				src: url(https://fonts.gstatic.com/s/poppins/v21/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2) format('woff2');
+			}
+			@font-face {
+				font-family: 'Poppins';
+				font-style: normal;
+				font-weight: 500;
+				font-display: swap;
+				src: url(https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLGT9Z1xlFd2JQEk.woff2) format('woff2');
+			}
+			@font-face {
+				font-family: 'Poppins';
+				font-style: normal;
+				font-weight: 600;
+				font-display: swap;
+				src: url(https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLEj6Z1xlFd2JQEk.woff2) format('woff2');
+			}
+		</style>
 
-		<!-- Resource hints for better loading -->
+		<!-- Non-critical font weights loaded async -->
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet"></noscript>
+
+		<!-- Preload critical LCP image with high priority -->
+		<link rel="preload" href="/images/logo/crexative.svg" as="image" type="image/svg+xml" fetchpriority="high">
+
+		<!-- Prefetch non-critical images -->
 		<link rel="prefetch" href="/images/about.webp">
+		<link rel="prefetch" href="/images/mcp_colombia.webp">
 
 		<!-- Performance optimization meta tags -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -104,6 +128,13 @@ const languageName = getLanguageName(currentLang);
 	</head>
 	<body>
 		<slot />
+		<script is:inline>
+			// Inline critical script to prevent FOUC
+			(function() {
+				var theme = localStorage.getItem('crexative-theme') || 'dark';
+				document.documentElement.setAttribute('data-theme', theme);
+			})();
+		</script>
 		<script>
 			import { THEME, THEME_STORAGE_KEY } from '../constants/theme.constants';
 
@@ -267,6 +298,13 @@ const languageName = getLanguageName(currentLang);
 
 	img {
 		max-width: 100%;
+		height: auto;
+		content-visibility: auto;
+	}
+
+	/* Reduce CLS with aspect-ratio hints */
+	img[width][height] {
+		aspect-ratio: attr(width) / attr(height);
 	}
 
 	a {
@@ -283,6 +321,11 @@ const languageName = getLanguageName(currentLang);
 		max-width: 1200px;
 		margin: 0 auto;
 		padding: 0 20px;
+	}
+
+	/* Optimize paint containment for sections */
+	section {
+		contain: layout style;
 	}
 
 	.primary-color {

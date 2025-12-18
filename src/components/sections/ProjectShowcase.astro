@@ -158,6 +158,9 @@ const projects = [
                     src={project.image}
                     alt={`${project.title} - App screenshot`}
                     loading={index === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                    width="220"
+                    height="450"
                   />
                 </div>
               ) : project.mockupType === 'browser-phone' ? (
@@ -244,8 +247,8 @@ const projects = [
                     </defs>
                   </svg>
                   <!-- Screenshots -->
-                  <img class="bp-laptop-screen" src={project.image} alt={`${project.title} - Website`} loading="lazy" />
-                  <img class="bp-phone-screen" src={project.phoneImage} alt={`${project.title} - Mobile`} loading="lazy" />
+                  <img class="bp-laptop-screen" src={project.image} alt={`${project.title} - Website`} loading="lazy" decoding="async" width="400" height="250" />
+                  <img class="bp-phone-screen" src={project.phoneImage} alt={`${project.title} - Mobile`} loading="lazy" decoding="async" width="140" height="280" />
                 </div>
               ) : (
                 <!-- Browser/Laptop mockup with molecule frame -->
@@ -349,6 +352,10 @@ const projects = [
                     src={project.image}
                     alt={`${project.title} - Website screenshot`}
                     loading={index === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                    width="400"
+                    height="250"
+                    fetchpriority={index === 0 ? 'high' : 'auto'}
                   />
                 </div>
               )}

@@ -7,7 +7,7 @@ export default defineConfig({
     base: '/',
     compressHTML: true,
     build: {
-        inlineStylesheets: 'auto',
+        inlineStylesheets: 'always', // Inline all CSS to reduce render-blocking
         assets: '_astro'
     },
     output: 'static',
@@ -21,7 +21,7 @@ export default defineConfig({
                     assetFileNames: (assetInfo) => {
                         if (!assetInfo.name) return 'assets/[name].[hash].[ext]';
                         const name = assetInfo.name;
-                        if (/\.(png|jpe?g|svg|gif|tiff|bmp|ico)$/i.test(name)) {
+                        if (/\.(png|jpe?g|svg|gif|tiff|bmp|ico|webp)$/i.test(name)) {
                             return `images/[name].[hash].[ext]`;
                         }
                         if (/\.(css)$/i.test(name)) {
@@ -31,9 +31,10 @@ export default defineConfig({
                     }
                 }
             },
-            cssCodeSplit: true,
+            cssCodeSplit: false, // Bundle CSS together for faster initial load
             sourcemap: false,
-            minify: 'esbuild'
+            minify: 'esbuild',
+            target: 'es2020' // Modern browsers for smaller bundles
         },
         css: {
             devSourcemap: false
