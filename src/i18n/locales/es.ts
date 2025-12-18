@@ -24,7 +24,7 @@ export default {
     description: 'Combinamos automatización inteligente, desarrollo móvil y web para crear soluciones que generan resultados reales y medibles',
     automation: {
       title: 'Automatización Inteligente',
-      description: 'Elimina tareas repetitivas y ahorra hasta 20 horas semanales. Conectamos tus herramientas favoritas para que trabajen solas mientras tú te enfocas en hacer crecer tu negocio.',
+      description: 'Elimina tareas repetitivas de forma automática. Conectamos tus herramientas favoritas para que trabajen solas mientras tú te enfocas en hacer crecer tu negocio.',
     },
     mobile: {
       title: 'Aplicaciones Móviles',

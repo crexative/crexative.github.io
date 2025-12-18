@@ -24,7 +24,7 @@ export default {
     description: 'We combine intelligent automation, mobile and web development to create solutions that deliver real, measurable results',
     automation: {
       title: 'Intelligent Automation',
-      description: 'Eliminate repetitive tasks and save up to 20 hours weekly. We connect your favorite tools to work on autopilot while you focus on growing your business.',
+      description: 'Eliminate repetitive tasks automatically. We connect your favorite tools to work on autopilot while you focus on growing your business.',
     },
     mobile: {
       title: 'Mobile Apps',

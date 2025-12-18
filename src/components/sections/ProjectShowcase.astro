@@ -9,16 +9,16 @@ const { lang } = Astro.props;
 // Only showing projects with live links
 const projects = [
   {
-    id: 'busticket',
-    label: lang === 'es' ? 'APLICACIONES MÓVILES' : 'MOBILE APPS',
-    title: 'BusTicket',
+    id: 'colombia-mcp',
+    label: lang === 'es' ? 'INTEGRACIONES AI' : 'AI INTEGRATIONS',
+    title: 'Colombia MCP Server',
     description: lang === 'es'
-      ? 'Aplicación para compra y gestión de boletos de autobús interurbano. Búsqueda de rutas, selección de asientos y pago digital.\n\nNotificaciones en tiempo real sobre el estado del viaje.'
-      : 'App for purchasing and managing intercity bus tickets. Route search, seat selection and digital payment.\n\nReal-time notifications about trip status.',
-    tags: ['Android', 'iOS', 'Fintech'],
-    image: '/images/busticket.webp',
-    mockupType: 'phone',
-    link: 'https://play.google.com/store/apps/details?id=com.smartgeeks.busticket'
+      ? 'Servidor MCP que proporciona información geográfica, turística y cultural de Colombia. 15 herramientas especializadas para Claude, Cursor, VS Code y Windsurf.\n\nDatos de departamentos, municipios, parques naturales, aeropuertos y símbolos patrios.'
+      : 'MCP Server providing geographic, tourism and cultural information about Colombia. 15 specialized tools for Claude, Cursor, VS Code and Windsurf.\n\nData on departments, municipalities, natural parks, airports and national symbols.',
+    tags: ['MCP', 'AI', 'Open Source'],
+    image: '/images/mcp_colombia.png',
+    mockupType: 'browser',
+    link: 'https://www.npmjs.com/package/@crexative/colombia-mcp-server'
   },
   {
     id: 'best-coffee',
