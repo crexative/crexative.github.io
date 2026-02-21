@@ -108,9 +108,8 @@ const languageName = getLanguageName(currentLang);
 		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
 		<noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet"></noscript>
 
-		<!-- Prefetch non-critical images for below-the-fold sections -->
-		<link rel="prefetch" href="/images/about.webp">
-		<link rel="prefetch" href="/images/mcp_colombia.webp">
+		<!-- Page-specific resource hints (preloads/prefetches injected by each page) -->
+		<slot name="head" />
 
 		<!-- Performance optimization meta tags -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -124,6 +123,7 @@ const languageName = getLanguageName(currentLang);
 		<link rel="manifest" href="/manifest.json">
 	</head>
 	<body>
+		<a href="#main-content" class="skip-link">Skip to main content</a>
 		<slot />
 		<script is:inline>
 			// Inline critical script to prevent FOUC
@@ -133,13 +133,9 @@ const languageName = getLanguageName(currentLang);
 			})();
 		</script>
 		<script>
-			import { THEME, THEME_STORAGE_KEY } from '../constants/theme.constants';
+			import { THEME_STORAGE_KEY } from '../constants/theme.constants';
 
-			// Check for saved theme preference or default to dark theme
-			const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || THEME.DARK;
-			document.documentElement.setAttribute('data-theme', savedTheme);
-
-			// Listen for theme toggle events
+			// Listen for theme toggle events (FOUC prevention handled by inline script above)
 			document.addEventListener('themeToggle', (e) => {
 				const newTheme = (e as CustomEvent).detail.theme;
 				document.documentElement.setAttribute('data-theme', newTheme);
@@ -307,6 +303,33 @@ const languageName = getLanguageName(currentLang);
 	/* Reduce CLS with aspect-ratio hints */
 	img[width][height] {
 		aspect-ratio: attr(width) / attr(height);
+	}
+
+	/* Skip navigation link */
+	.skip-link {
+		position: absolute;
+		left: -9999px;
+		top: auto;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+	}
+
+	.skip-link:focus {
+		position: fixed;
+		left: 50%;
+		transform: translateX(-50%);
+		top: 8px;
+		width: auto;
+		height: auto;
+		padding: 8px 24px;
+		background: var(--color-lime);
+		color: #000;
+		font-weight: 600;
+		font-family: 'Poppins', sans-serif;
+		border-radius: 4px;
+		font-size: 14px;
+		z-index: 9999;
 	}
 
 	a {

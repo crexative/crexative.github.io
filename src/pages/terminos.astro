@@ -14,9 +14,9 @@ const t = useTranslations(lang);
   description={t('legal.terms.metaDescription')}
   lang={lang}
 >
-  <Navbar lang={lang} />
+  <Navbar brandName={SITE_CONFIG.name} lang={lang} />
 
-  <main class="legal-page">
+  <main id="main-content" class="legal-page">
     <div class="container">
       <article class="legal-content">
         <header class="legal-header">
