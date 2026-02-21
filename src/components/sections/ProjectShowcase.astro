@@ -401,78 +401,133 @@ const projects = [
   const indicators = document.querySelectorAll('.indicator');
   const prevButton = document.querySelector('.nav-arrow.prev') as HTMLButtonElement;
   const nextButton = document.querySelector('.nav-arrow.next') as HTMLButtonElement;
+  const viewport = document.querySelector('.carousel-viewport') as HTMLElement;
 
   let currentIndex = 0;
   const totalSlides = slides.length;
   let isAnimating = false;
 
+  function updateIndicators() {
+    indicators.forEach((ind, i) => ind.classList.toggle('active', i === currentIndex));
+  }
+
   function goToSlide(index: number) {
     if (isAnimating) return;
     isAnimating = true;
-
-    // Normalize index
     if (index < 0) index = totalSlides - 1;
     if (index >= totalSlides) index = 0;
-
     currentIndex = index;
+    track.style.transition = 'transform 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
     track.style.transform = `translateX(-${currentIndex * 100}%)`;
-
-    // Update indicators
-    indicators.forEach((ind, i) => {
-      ind.classList.toggle('active', i === currentIndex);
-    });
-
-    setTimeout(() => {
-      isAnimating = false;
-    }, 500);
+    updateIndicators();
+    setTimeout(() => { isAnimating = false; }, 450);
   }
 
-  // Event listeners for arrows
+  // Arrow buttons
   prevButton?.addEventListener('click', () => goToSlide(currentIndex - 1));
   nextButton?.addEventListener('click', () => goToSlide(currentIndex + 1));
 
-  // Event listeners for indicators
+  // Dot indicators
   indicators.forEach((indicator, index) => {
     indicator.addEventListener('click', () => goToSlide(index));
   });
 
-  // Touch/swipe support
-  let touchStartX = 0;
-  let touchEndX = 0;
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') goToSlide(currentIndex - 1);
+    else if (e.key === 'ArrowRight') goToSlide(currentIndex + 1);
+  });
 
-  track.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
+  // ── Swipe / drag ────────────────────────────────────────────────
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let dragCurrentX = 0;
+  let dragStartTime = 0;
+  let isDragging = false;
+  let isHorizontal: boolean | null = null; // null = not yet determined
+
+  const SWIPE_THRESHOLD = 40;   // px – minimum distance to count as swipe
+  const VELOCITY_THRESHOLD = 0.3; // px/ms – fast flick even if short distance
+  const RUBBER_BAND = 0.2;      // resistance factor at the edges (0–1)
+
+  function getBaseOffset() {
+    return -currentIndex * 100; // % units
+  }
+
+  function setTrackX(pct: number, animated = false) {
+    track.style.transition = animated
+      ? 'transform 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+      : 'none';
+    track.style.transform = `translateX(${pct}%)`;
+  }
+
+  viewport.addEventListener('touchstart', (e) => {
+    if (isAnimating) return;
+    const t = e.changedTouches[0];
+    dragStartX = t.clientX;
+    dragStartY = t.clientY;
+    dragCurrentX = t.clientX;
+    dragStartTime = Date.now();
+    isDragging = true;
+    isHorizontal = null;
+    track.style.transition = 'none';
   }, { passive: true });
 
-  track.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-  }, { passive: true });
+  viewport.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    const t = e.changedTouches[0];
+    dragCurrentX = t.clientX;
 
-  function handleSwipe() {
-    const swipeThreshold = 50;
-    const diff = touchStartX - touchEndX;
+    const dx = dragCurrentX - dragStartX;
+    const dy = t.clientY - dragStartY;
 
-    if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0) {
-        goToSlide(currentIndex + 1);
-      } else {
-        goToSlide(currentIndex - 1);
-      }
+    // Determine scroll axis on first significant move
+    if (isHorizontal === null && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) {
+      isHorizontal = Math.abs(dx) > Math.abs(dy);
+    }
+
+    if (!isHorizontal) return; // vertical scroll — don't interfere
+    e.preventDefault();
+
+    // Convert px drag to percentage of slide width
+    const slideWidth = viewport.offsetWidth;
+    let dragPct = (dx / slideWidth) * 100;
+
+    // Rubber-band resistance at the edges
+    const atStart = currentIndex === 0 && dx > 0;
+    const atEnd = currentIndex === totalSlides - 1 && dx < 0;
+    if (atStart || atEnd) {
+      dragPct = dragPct * RUBBER_BAND;
+    }
+
+    setTrackX(getBaseOffset() + dragPct);
+  }, { passive: false });
+
+  function endDrag() {
+    if (!isDragging) return;
+    isDragging = false;
+
+    if (!isHorizontal) return; // was a vertical scroll — snap back silently
+
+    const dx = dragCurrentX - dragStartX;
+    const dt = Date.now() - dragStartTime;
+    const velocity = Math.abs(dx) / dt; // px/ms
+    const slideWidth = viewport.offsetWidth;
+    const dragPct = Math.abs(dx) / slideWidth;
+
+    const isFlick = velocity > VELOCITY_THRESHOLD;
+    const isFarEnough = dragPct > 0.25; // dragged more than 25% of slide
+
+    if ((isFlick || isFarEnough) && Math.abs(dx) > SWIPE_THRESHOLD) {
+      goToSlide(dx < 0 ? currentIndex + 1 : currentIndex - 1);
+    } else {
+      // Snap back to current slide
+      setTrackX(getBaseOffset(), true);
     }
   }
 
-  // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') {
-      goToSlide(currentIndex - 1);
-    } else if (e.key === 'ArrowRight') {
-      goToSlide(currentIndex + 1);
-    }
-  });
-
-  // Auto-play (optional - disabled by default)
-  // setInterval(() => goToSlide(currentIndex + 1), 5000);
+  viewport.addEventListener('touchend', endDrag, { passive: true });
+  viewport.addEventListener('touchcancel', endDrag, { passive: true });
 </script>
 
 <style>
@@ -494,20 +549,24 @@ const projects = [
     padding: 0 80px;
     display: flex;
     align-items: center;
+    box-sizing: border-box;
   }
 
   .carousel-viewport {
     flex: 1;
+    min-width: 0;
     overflow: hidden;
   }
 
   .carousel-track {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    width: 100%;
   }
 
   .carousel-slide {
     min-width: 100%;
+    width: 100%;
     flex-shrink: 0;
     padding: 0 20px;
     box-sizing: border-box;
@@ -521,6 +580,7 @@ const projects = [
     align-items: center;
     max-width: 1100px;
     margin: 0 auto;
+    overflow: hidden;
   }
 
   .project-info {
@@ -648,18 +708,19 @@ const projects = [
     justify-content: center;
     align-items: center;
     min-height: 450px;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   /* Phone mockup with molecule frame */
   .phone-mockup-wrapper {
     position: relative;
     width: 320px;
-    height: 324px;
   }
 
   .phone-molecule-frame {
     width: 100%;
-    height: 100%;
+    height: auto;
   }
 
   .phone-screen-image {
@@ -676,12 +737,11 @@ const projects = [
   .browser-mockup-wrapper {
     position: relative;
     width: 400px;
-    height: 410px;
   }
 
   .browser-molecule-frame {
     width: 100%;
-    height: 100%;
+    height: auto;
   }
 
   .browser-screen-image {
@@ -698,12 +758,11 @@ const projects = [
   .browser-phone-mockup-wrapper {
     position: relative;
     width: 400px;
-    height: 410px;
   }
 
   .browser-phone-frame {
     width: 100%;
-    height: 100%;
+    height: auto;
   }
 
   .bp-laptop-screen {
@@ -758,20 +817,38 @@ const projects = [
 
   @media (max-width: 1024px) {
     .carousel-container {
-      padding: 0 20px;
+      padding: 0;
+    }
+
+    .carousel-viewport {
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      flex-shrink: 0;
+      padding: 0 24px;
+      box-sizing: border-box;
+      overflow: hidden;
     }
 
     .slide-content {
-      grid-template-columns: 1fr;
-      gap: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
     }
 
     .project-info {
       order: 2;
+      width: 100%;
     }
 
     .mockup-container {
       order: 1;
+      min-height: auto;
+      width: 100%;
     }
 
     .project-text {
@@ -782,8 +859,8 @@ const projects = [
       justify-content: center;
     }
 
-    .carousel-slide {
-      padding: 0 10px;
+    .view-project-link {
+      justify-content: center;
     }
 
     .nav-arrow {
@@ -793,16 +870,28 @@ const projects = [
     .carousel-indicators {
       margin-top: 20px;
     }
+
+    /* Scale mockup wrappers to fit mobile screens */
+    .browser-mockup-wrapper,
+    .browser-phone-mockup-wrapper {
+      width: min(320px, 80vw);
+      margin: 0 auto;
+    }
+
+    .phone-mockup-wrapper {
+      width: min(260px, 65vw);
+      margin: 0 auto;
+    }
   }
 
   @media (max-width: 768px) {
     .project-showcase {
-      padding: 80px 0;
+      padding: 60px 0;
     }
 
     .project-title {
-      font-size: 28px;
-      line-height: 38px;
+      font-size: 26px;
+      line-height: 36px;
     }
 
     .project-description {
@@ -810,44 +899,46 @@ const projects = [
       line-height: 22px;
     }
 
-    .mockup-container {
-      min-height: 350px;
+    .carousel-slide {
+      padding: 0 20px;
     }
 
-    .phone-frame img {
-      width: 200px;
+    .browser-mockup-wrapper,
+    .browser-phone-mockup-wrapper {
+      width: min(280px, 75vw);
     }
 
-    .phone-frame {
-      padding: 8px;
-      border-radius: 28px;
-    }
-
-    .browser-frame {
-      min-width: 280px;
-    }
-
-    .molecule-decoration {
-      display: none;
+    .phone-mockup-wrapper {
+      width: min(220px, 60vw);
     }
   }
 
   @media (max-width: 480px) {
     .project-showcase {
-      padding: 60px 0;
-    }
-
-    .project-title {
-      font-size: 24px;
-      line-height: 34px;
-    }
-
-    .phone-frame img {
-      width: 160px;
+      padding: 40px 0;
     }
 
     .carousel-slide {
-      padding: 0 15px;
+      padding: 0 16px;
+    }
+
+    .project-title {
+      font-size: 22px;
+      line-height: 30px;
+    }
+
+    .project-description {
+      font-size: 12px;
+      line-height: 20px;
+    }
+
+    .browser-mockup-wrapper,
+    .browser-phone-mockup-wrapper {
+      width: min(250px, 72vw);
+    }
+
+    .phone-mockup-wrapper {
+      width: min(190px, 55vw);
     }
   }
 </style>

@@ -75,8 +75,8 @@ const languageName = getLanguageName(currentLang);
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-		<!-- Critical font preload for faster LCP -->
-		<link rel="preload" href="https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2" as="font" type="font/woff2" crossorigin>
+		<!-- Critical font preload for faster LCP (weight 600 for h1, weight 400 for body) -->
+		<link rel="preload" href="https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLEj6Z1xlFd2JQEk.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
 		<link rel="preload" href="https://fonts.gstatic.com/s/poppins/v21/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2" as="font" type="font/woff2" crossorigin>
 
 		<!-- Inline critical font-face to avoid render blocking -->
@@ -104,14 +104,11 @@ const languageName = getLanguageName(currentLang);
 			}
 		</style>
 
-		<!-- Non-critical font weights loaded async -->
+		<!-- Non-critical font weight 300 loaded async -->
 		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
 		<noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet"></noscript>
 
-		<!-- Preload critical LCP image with high priority -->
-		<link rel="preload" href="/images/logo/crexative.svg" as="image" type="image/svg+xml" fetchpriority="high">
-
-		<!-- Prefetch non-critical images -->
+		<!-- Prefetch non-critical images for below-the-fold sections -->
 		<link rel="prefetch" href="/images/about.webp">
 		<link rel="prefetch" href="/images/mcp_colombia.webp">
 
@@ -227,7 +224,12 @@ const languageName = getLanguageName(currentLang);
 		background-color: transparent !important;
 	}
 
-	html,
+	html {
+		margin: 0;
+		width: 100%;
+		overflow-x: clip; /* Safari iOS: clip is stronger than hidden for fixed children */
+	}
+
 	body {
 		margin: 0;
 		width: 100%;
