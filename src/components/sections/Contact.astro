@@ -51,7 +51,7 @@ const contactSchema = {
           <input type="hidden" name="access_key" value={FORM_CONFIG.web3formsAccessKey} />
           <input type="hidden" name="subject" value="Nuevo mensaje de contacto - CREXATIVE" />
           <input type="hidden" name="from_name" value="CREXATIVE Website" />
-          <input type="checkbox" name="botcheck" class="hidden" style="display: none;" aria-hidden="true" />
+          <input type="checkbox" name="botcheck" tabindex="-1" aria-label="do not fill" class="hidden" style="display: none;" />
 
           <div class="form-group">
             <label for="contact-name" class="sr-only">{t('contact.form.name')}</label>
@@ -98,7 +98,7 @@ const contactSchema = {
       <div class="contact-info">
         <div class="info-card">
           <div class="info-icon">
-            <img src="/images/icons/contact-clock.svg" alt="" aria-hidden="true" width="32" height="32" loading="lazy" />
+            <img src="/images/icons/contact-clock.svg" alt={lang === 'es' ? 'Reloj' : 'Clock'} width="32" height="32" loading="lazy" />
           </div>
           <div class="info-content">
             <span class="info-text">{t('misc.responseTime')}</span>
@@ -107,7 +107,7 @@ const contactSchema = {
 
         <div class="info-card">
           <div class="info-icon">
-            <img src="/images/icons/contact-globe.svg" alt="" aria-hidden="true" width="32" height="32" loading="lazy" />
+            <img src="/images/icons/contact-globe.svg" alt={lang === 'es' ? 'Globo terráqueo' : 'Globe'} width="32" height="32" loading="lazy" />
           </div>
           <div class="info-content">
             <span class="info-text">{t('misc.workingGlobally')}</span>
@@ -116,7 +116,7 @@ const contactSchema = {
 
         <div class="info-card">
           <div class="info-icon">
-            <img src="/images/icons/contact-calendar.svg" alt="" aria-hidden="true" width="32" height="32" loading="lazy" />
+            <img src="/images/icons/contact-calendar.svg" alt={lang === 'es' ? 'Calendario' : 'Calendar'} width="32" height="32" loading="lazy" />
           </div>
           <div class="info-content">
             <span class="info-text">{t('contact.details.hours')}</span>
@@ -124,7 +124,7 @@ const contactSchema = {
         </div>
 
         <a href={whatsappLink} target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
-          <img src="/images/icons/contact-whatsapp.svg" alt="" aria-hidden="true" width="24" height="24" loading="lazy" />
+          <img src="/images/icons/contact-whatsapp.svg" alt="WhatsApp" width="24" height="24" loading="lazy" />
           <span>{lang === 'es' ? 'Escribir al Whatsapp' : 'Message on WhatsApp'}</span>
         </a>
       </div>
@@ -274,7 +274,8 @@ const contactSchema = {
 
   .form-group input:focus,
   .form-group textarea:focus {
-    outline: none;
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(0, 225, 198, 0.1);
   }

@@ -61,11 +61,11 @@ const structuredData = {
     </div>
 
     <div class="services-grid" itemprop="makesOffer" itemscope itemtype="https://schema.org/Offer">
-      {services.map((service) => (
+      {services.map((service, index) => (
         <article class="service-card" itemscope itemtype="https://schema.org/Service">
           <div class="card-content">
             <div class="service-icon-container">
-              <img src={service.icon} alt="" aria-hidden="true" width="64" height="64" decoding="async" />
+              <img src={service.icon} alt={service.name} width="64" height="64" decoding="async" loading={index > 1 ? 'lazy' : undefined} />
             </div>
             <div class="service-text">
               <h3 itemprop="name">{service.name}</h3>

@@ -191,7 +191,7 @@ export default {
     lastUpdated: 'Última actualización: 1 de diciembre de 2025',
     privacy: {
       title: 'Política de Privacidad',
-      metaDescription: 'Política de privacidad de Crexative para el servicio de atención por WhatsApp',
+      metaDescription: 'Política de privacidad de Crexative para WhatsApp. Conoce cómo protegemos y gestionamos tus datos personales de forma segura y transparente.',
       intro: 'En Crexative, respetamos tu privacidad y nos comprometemos a proteger tus datos personales. Esta política describe cómo recopilamos, usamos y protegemos la información cuando interactúas con nuestro bot de WhatsApp.',
       section1: {
         title: '1. Responsable del Tratamiento',
@@ -245,7 +245,7 @@ export default {
     },
     terms: {
       title: 'Términos de Servicio',
-      metaDescription: 'Términos y condiciones del servicio de atención por WhatsApp de Crexative',
+      metaDescription: 'Términos y condiciones del servicio de atención por WhatsApp de Crexative. Reglas de uso, limitaciones y derechos que aplican a nuestros servicios.',
       intro: 'Estos términos rigen el uso del bot de WhatsApp de Crexative. Al interactuar con nuestro bot, aceptas estos términos.',
       section1: {
         title: '1. Descripción del Servicio',
@@ -294,7 +294,7 @@ export default {
     },
     deleteData: {
       title: 'Eliminación de Datos',
-      metaDescription: 'Instrucciones para solicitar la eliminación de tus datos personales de Crexative',
+      metaDescription: 'Instrucciones para solicitar la eliminación de tus datos de Crexative. Ejerce tu derecho al olvido de forma sencilla conforme a las leyes de Colombia.',
       intro: 'En Crexative respetamos tu derecho a controlar tus datos personales. Aquí te explicamos cómo solicitar la eliminación de tu información.',
       section1: {
         title: '1. Tu Derecho a la Eliminación',
