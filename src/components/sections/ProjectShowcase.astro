@@ -73,6 +73,19 @@ const projects = [
 ---
 
 <section id="projects" class="project-showcase">
+  <!-- Section header -->
+  <div class="showcase-header">
+    <div class="header-eyebrow">
+      <span class="eyebrow-bar" aria-hidden="true"></span>
+      <span class="eyebrow-text">{lang === 'es' ? 'Portafolio' : 'Portfolio'}</span>
+    </div>
+    {lang === 'es' ? (
+      <h2>Proyectos <em class="accent-em">destacados</em></h2>
+    ) : (
+      <h2>Featured <em class="accent-em">projects</em></h2>
+    )}
+  </div>
+
   <div class="carousel-container">
     <!-- Navigation arrow left -->
     <button class="nav-arrow prev" aria-label={lang === 'es' ? 'Proyecto anterior' : 'Previous project'}>
@@ -531,14 +544,58 @@ const projects = [
 </script>
 
 <style>
+  /* ─── Section shell ──────────────────────────────────────── */
   .project-showcase {
-    padding: 100px 0;
+    padding: 120px 0 80px;
     background-color: var(--bg-secondary);
     overflow: hidden;
   }
 
   :global([data-theme="dark"]) .project-showcase {
     background-color: var(--bg-color);
+  }
+
+  /* ─── Section header ─────────────────────────────────────── */
+  .showcase-header {
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 0 20px;
+  }
+
+  .header-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-gray);
+    margin-bottom: 20px;
+  }
+
+  .eyebrow-bar {
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--color-lime);
+    flex-shrink: 0;
+  }
+
+  .showcase-header h2 {
+    font-family: 'Syne', 'Poppins', sans-serif;
+    font-size: 52px;
+    line-height: 1.06;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-color);
+    margin: 0;
+  }
+
+  .accent-em {
+    font-style: italic;
+    color: var(--color-lime);
   }
 
   .carousel-container {
@@ -593,21 +650,34 @@ const projects = [
   }
 
   .project-label {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--text-gray);
-    margin-bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     font-family: 'Poppins', sans-serif;
-    font-weight: 400;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-cyan);
+    margin-bottom: 16px;
+  }
+
+  .project-label::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--color-cyan);
+    flex-shrink: 0;
   }
 
   .project-title {
-    font-size: 36px;
-    line-height: 48px;
-    font-weight: 600;
+    font-family: 'Syne', 'Poppins', sans-serif;
+    font-size: 38px;
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -0.025em;
     color: var(--text-color);
-    font-family: 'Poppins', sans-serif;
     margin-bottom: 20px;
   }
 

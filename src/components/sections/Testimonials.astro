@@ -1,4 +1,10 @@
 ---
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'es' } = Astro.props;
+
 const testimonials = [
   {
     id: 1,
@@ -41,397 +47,434 @@ const testimonials = [
     project: "SaaS Dashboard Development"
   }
 ];
+
+const heading = lang === 'es'
+  ? { label: 'Testimonios', title: 'Lo que dicen nuestros', accent: 'clientes' }
+  : { label: 'Testimonials', title: 'What our', accent: 'clients say' };
 ---
 
 <section class="testimonials" itemscope itemtype="https://schema.org/Organization">
   <div class="container">
     <div class="section-header">
-      <p class="subtitle">TESTIMONIALS</p>
-      <h2>WHAT OUR <span class="primary-color">CLIENTS</span> SAY</h2>
-      <p class="section-description">
-        Don't just take our word for it. Here's what our satisfied clients have to say about working with us.
-      </p>
+      <div class="header-eyebrow">
+        <span class="eyebrow-bar" aria-hidden="true"></span>
+        <span class="eyebrow-text">{heading.label}</span>
+      </div>
+      <h2>
+        {heading.title} <em class="accent-em">{heading.accent}</em>
+      </h2>
     </div>
-    
+
     <div class="testimonials-slider">
       <div class="testimonials-track" id="testimonialsTrack">
-        {testimonials.map((testimonial, index) => (
+        {testimonials.map((testimonial) => (
           <article class="testimonial-card" itemscope itemtype="https://schema.org/Review">
-            <div class="testimonial-content">
-              <div class="quote-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
-                  <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
+            <!-- Quote mark decoration -->
+            <div class="quote-mark" aria-hidden="true">"</div>
+
+            <!-- Star rating -->
+            <div class="rating" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+              <meta itemprop="ratingValue" content={testimonial.rating} />
+              <meta itemprop="bestRating" content="5" />
+              {Array.from({ length: 5 }, (_, i) => (
+                <svg
+                  class={`star ${i < testimonial.rating ? 'filled' : ''}`}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"></polygon>
                 </svg>
-              </div>
-              
-              <div class="rating" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
-                <meta itemprop="ratingValue" content={testimonial.rating} />
-                <meta itemprop="bestRating" content="5" />
-                {Array.from({ length: 5 }, (_, i) => (
-                  <svg 
-                    class={`star ${i < testimonial.rating ? 'filled' : ''}`}
-                    xmlns="http://www.w3.org/2000/svg" 
-                    width="20" 
-                    height="20" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    stroke-width="2" 
-                    stroke-linecap="round" 
-                    stroke-linejoin="round"
-                  >
-                    <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"></polygon>
-                  </svg>
-                ))}
-              </div>
-              
-              <blockquote itemprop="reviewBody">
-                "{testimonial.content}"
-              </blockquote>
-              
-              <div class="project-info">
-                <span class="project-label">Project:</span>
-                <span class="project-name">{testimonial.project}</span>
-              </div>
+              ))}
             </div>
-            
+
+            <!-- Quote -->
+            <blockquote itemprop="reviewBody">
+              {testimonial.content}
+            </blockquote>
+
+            <!-- Project tag -->
+            <div class="project-tag">
+              <span class="project-dot" aria-hidden="true"></span>
+              <span class="project-name">{testimonial.project}</span>
+            </div>
+
+            <!-- Author -->
             <div class="testimonial-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
-              <div class="author-image">
-                <img 
-                  src={testimonial.image} 
-                  alt={testimonial.name}
-                  width="60"
-                  height="60"
-                  loading="lazy"
-                  itemprop="image"
-                />
+              <div class="author-avatar" aria-hidden="true">
+                {testimonial.name.charAt(0)}
               </div>
               <div class="author-info">
-                <h4 itemprop="name">{testimonial.name}</h4>
-                <p itemprop="jobTitle">{testimonial.position}</p>
-                <p class="company" itemprop="worksFor">{testimonial.company}</p>
+                <span class="author-name" itemprop="name">{testimonial.name}</span>
+                <span class="author-role">
+                  <span itemprop="jobTitle">{testimonial.position}</span>
+                  {' · '}
+                  <span class="author-company" itemprop="worksFor">{testimonial.company}</span>
+                </span>
               </div>
             </div>
           </article>
         ))}
       </div>
-      
+
+      <!-- Controls -->
       <div class="slider-controls">
-        <button class="slider-btn prev" id="prevBtn" aria-label="Previous testimonial">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <button class="slider-btn prev" id="prevBtn" aria-label={lang === 'es' ? 'Anterior' : 'Previous'}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="15,18 9,12 15,6"></polyline>
           </svg>
         </button>
-        <button class="slider-btn next" id="nextBtn" aria-label="Next testimonial">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <div class="slider-dots" id="sliderDots">
+          {testimonials.map((_, index) => (
+            <button class={`dot ${index === 0 ? 'active' : ''}`} data-slide={index} aria-label={`${lang === 'es' ? 'Testimonial' : 'Testimonial'} ${index + 1}`}></button>
+          ))}
+        </div>
+        <button class="slider-btn next" id="nextBtn" aria-label={lang === 'es' ? 'Siguiente' : 'Next'}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="9,18 15,12 9,6"></polyline>
           </svg>
         </button>
-      </div>
-      
-      <div class="slider-dots" id="sliderDots">
-        {testimonials.map((_, index) => (
-          <button class={`dot ${index === 0 ? 'active' : ''}`} data-slide={index} aria-label={`Go to testimonial ${index + 1}`}></button>
-        ))}
       </div>
     </div>
   </div>
 </section>
 
-<style>
-  .testimonials {
-    padding: 120px 0;
-    background: var(--bg-tertiary);
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .testimonials::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    opacity: 0.03;
-    z-index: 1;
-  }
-  
-  .container {
-    position: relative;
-    z-index: 2;
-  }
-  
-  .section-header {
-    text-align: center;
-    margin-bottom: 80px;
-  }
-  
-  .subtitle {
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 16px;
-    color: var(--primary-color);
-    font-family: 'Inter', sans-serif;
-  }
-  
-  .section-description {
-    max-width: 600px;
-    margin: 20px auto 0;
-    font-size: 18px;
-    line-height: 1.7;
-    color: var(--text-gray);
-  }
-  
-  .testimonials-slider {
-    position: relative;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  
-  .testimonials-track {
-    display: flex;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    gap: 40px;
-  }
-  
-  .testimonial-card {
-    min-width: 100%;
-    background: white;
-    border-radius: 24px;
-    padding: 50px 40px 40px;
-    box-shadow: var(--shadow-xl);
-    position: relative;
-    border: 1px solid var(--border-color);
-  }
-  
-  .quote-icon {
-    position: absolute;
-    top: -16px;
-    left: 40px;
-    background: var(--gradient-primary);
-    color: white;
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow-lg);
-  }
-  
-  .rating {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 24px;
-  }
-  
-  .star {
-    color: #e5e7eb;
-    transition: color 0.2s ease;
-  }
-  
-  .star.filled {
-    color: #fbbf24;
-    fill: #fbbf24;
-  }
-  
-  .testimonial-content blockquote {
-    font-size: 20px;
-    line-height: 1.8;
-    color: var(--text-secondary);
-    margin: 0 0 24px 0;
-    font-style: italic;
-    position: relative;
-  }
-  
-  .project-info {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 32px;
-    padding: 12px 20px;
-    background: var(--bg-secondary);
-    border-radius: 50px;
-    width: fit-content;
-  }
-  
-  .project-label {
-    font-size: 14px;
-    color: var(--text-gray);
-    font-weight: 500;
-  }
-  
-  .project-name {
-    font-size: 14px;
-    color: var(--primary-color);
-    font-weight: 600;
-  }
-  
-  .testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    border-top: 1px solid var(--border-color);
-    padding-top: 32px;
-  }
-  
-  .author-image {
-    position: relative;
-  }
-  
-  .author-image img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--border-color);
-  }
-  
-  .author-info h4 {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 4px;
-    color: var(--text-color);
-    font-family: 'Inter', sans-serif;
-  }
-  
-  .author-info p {
-    font-size: 14px;
-    color: var(--text-gray);
-    margin: 0;
-    line-height: 1.4;
-  }
-  
-  .company {
-    font-weight: 500;
-    color: var(--primary-color) !important;
-  }
-  
-  .slider-controls {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 40px;
-  }
-  
-  .slider-btn {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 2px solid var(--border-color);
-    background: white;
-    color: var(--text-gray);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: var(--shadow-sm);
-  }
-  
-  .slider-btn:hover {
-    background: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-  }
-  
-  .slider-dots {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 32px;
-  }
-  
-  .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: none;
-    background: var(--border-color);
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .dot.active {
-    background: var(--primary-color);
-    transform: scale(1.2);
-  }
-  
-  @media (max-width: 768px) {
-    .testimonials {
-      padding: 80px 0;
-    }
-    
-    .testimonial-card {
-      padding: 40px 24px 32px;
-    }
-    
-    .quote-icon {
-      left: 24px;
-      width: 56px;
-      height: 56px;
-    }
-    
-    .testimonial-content blockquote {
-      font-size: 18px;
-    }
-    
-    .testimonial-author {
-      flex-direction: column;
-      text-align: center;
-      gap: 16px;
-    }
-  }
-</style>
-
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const track = document.getElementById('testimonialsTrack');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
+    const track = document.getElementById('testimonialsTrack') as HTMLElement;
+    const prevBtn = document.getElementById('prevBtn') as HTMLButtonElement;
+    const nextBtn = document.getElementById('nextBtn') as HTMLButtonElement;
     const dots = document.querySelectorAll('.dot');
-    
+
     let currentSlide = 0;
     const totalSlides = dots.length;
-    
+
     function updateSlider() {
       const translateX = -currentSlide * 100;
       track.style.transform = `translateX(${translateX}%)`;
-      
-      // Update dots
       dots.forEach((dot, index) => {
         dot.classList.toggle('active', index === currentSlide);
       });
     }
-    
+
     function nextSlide() {
       currentSlide = (currentSlide + 1) % totalSlides;
       updateSlider();
     }
-    
+
     function prevSlide() {
       currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
       updateSlider();
     }
-    
+
     nextBtn.addEventListener('click', nextSlide);
     prevBtn.addEventListener('click', prevSlide);
-    
+
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
         currentSlide = index;
         updateSlider();
       });
     });
-    
-    // Auto-play functionality
-    setInterval(nextSlide, 6000);
+
+    setInterval(nextSlide, 7000);
   });
 </script>
+
+<style>
+  /* ─── Section shell ──────────────────────────────────────── */
+  .testimonials {
+    padding: 120px 0;
+    background: var(--bg-secondary);
+  }
+
+  /* ─── Section header ─────────────────────────────────────── */
+  .section-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .header-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-gray);
+    margin-bottom: 20px;
+  }
+
+  .eyebrow-bar {
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--color-lime);
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-family: 'Syne', 'Poppins', sans-serif;
+    font-size: 52px;
+    line-height: 1.06;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-color);
+  }
+
+  .accent-em {
+    font-style: italic;
+    color: var(--color-lime);
+  }
+
+  /* ─── Slider ─────────────────────────────────────────────── */
+  .testimonials-slider {
+    position: relative;
+    max-width: 760px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .testimonials-track {
+    display: flex;
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ─── Card ───────────────────────────────────────────────── */
+  .testimonial-card {
+    min-width: 100%;
+    background: var(--bg-color);
+    border-radius: 20px;
+    padding: 44px 48px;
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  /* Large background quote mark */
+  .quote-mark {
+    position: absolute;
+    top: -16px;
+    left: 36px;
+    font-family: 'Syne', serif;
+    font-size: 160px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--color-lime);
+    opacity: 0.08;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* ─── Rating ─────────────────────────────────────────────── */
+  .rating {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .star {
+    color: rgba(204, 254, 18, 0.2);
+  }
+
+  .star.filled {
+    color: var(--color-lime);
+    fill: var(--color-lime);
+  }
+
+  /* ─── Quote ──────────────────────────────────────────────── */
+  blockquote {
+    font-family: 'Poppins', sans-serif;
+    font-size: 19px;
+    line-height: 1.75;
+    color: var(--text-color);
+    margin: 0 0 28px 0;
+    font-weight: 300;
+    position: relative;
+    opacity: 0.9;
+  }
+
+  /* ─── Project tag ────────────────────────────────────────── */
+  .project-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 32px;
+    padding: 7px 14px;
+    background: var(--bg-secondary);
+    border-radius: 100px;
+    border: 1px solid var(--border-color);
+  }
+
+  .project-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-cyan);
+    flex-shrink: 0;
+  }
+
+  .project-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: var(--color-cyan);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  /* ─── Author ─────────────────────────────────────────────── */
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 28px;
+  }
+
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-cyan), var(--color-lime));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: #000;
+    flex-shrink: 0;
+  }
+
+  .author-name {
+    display: block;
+    font-family: 'Syne', 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-color);
+    letter-spacing: -0.01em;
+    margin-bottom: 3px;
+  }
+
+  .author-role {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: var(--text-gray);
+    font-weight: 400;
+  }
+
+  .author-company {
+    color: var(--color-cyan);
+    font-weight: 500;
+  }
+
+  /* ─── Controls ───────────────────────────────────────────── */
+  .slider-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 36px;
+  }
+
+  .slider-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--text-gray);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  .slider-btn:hover {
+    background: var(--color-lime);
+    border-color: var(--color-lime);
+    color: #000;
+    transform: translateY(-2px);
+  }
+
+  .slider-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: none;
+    background: var(--border-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .dot.active {
+    background: var(--color-lime);
+    width: 20px;
+    border-radius: 3px;
+  }
+
+  /* ─── Responsive ──────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .testimonials {
+      padding: 80px 0;
+    }
+
+    h2 {
+      font-size: 36px;
+    }
+
+    .testimonial-card {
+      padding: 36px 28px;
+    }
+
+    blockquote {
+      font-size: 17px;
+    }
+
+    .section-header {
+      margin-bottom: 48px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .testimonials {
+      padding: 60px 0;
+    }
+
+    h2 {
+      font-size: 30px;
+    }
+
+    .testimonial-card {
+      padding: 28px 20px;
+    }
+
+    blockquote {
+      font-size: 15px;
+    }
+
+    .quote-mark {
+      font-size: 120px;
+    }
+  }
+</style>

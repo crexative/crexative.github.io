@@ -9,276 +9,492 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang as 'en' | 'es');
 
-// WhatsApp link
 const whatsappMessage = encodeURIComponent(t('contact.whatsappMessage'));
 const whatsappLink = `https://wa.me/${CONTACT_INFO.whatsapp}?text=${whatsappMessage}`;
+
+const stats = lang === 'es'
+  ? [
+      { value: '5+', label: 'Años de experiencia' },
+      { value: '20+', label: 'Proyectos entregados' },
+      { value: '3', label: 'Países atendidos' },
+    ]
+  : [
+      { value: '5+', label: 'Years of experience' },
+      { value: '20+', label: 'Projects delivered' },
+      { value: '3', label: 'Countries served' },
+    ];
 ---
 
 <section class="hero" itemscope itemtype="https://schema.org/Organization">
-  <!-- Block/Node Decorations -->
-  <div class="blocks-decoration" aria-hidden="true">
-    <svg class="hero-shapes" viewBox="0 0 619 564" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path class="molecule-path" d="M216.534 405.898C225.371 405.898 232.534 413.062 232.534 421.898V466.444C232.566 474.765 237.781 484.091 249.214 484.091H287.429C296.265 484.091 303.429 491.254 303.429 500.091V547.325C303.429 556.162 296.265 563.325 287.429 563.325H248.534C239.698 563.325 232.534 556.162 232.534 547.325V500.686C232.534 500.714 232.533 500.743 232.533 500.771C232.533 485.133 215.852 485.133 215.852 485.133H177.641C168.804 485.133 161.641 477.969 161.641 469.133V421.898C161.641 413.062 168.804 405.898 177.641 405.898H216.534ZM432.12 405.898C440.957 405.898 448.12 413.062 448.12 421.898V466.444C448.152 474.765 453.367 484.09 464.8 484.09C464.777 484.09 464.754 484.091 464.73 484.091H503.015C511.851 484.091 519.015 491.254 519.015 500.091V547.325C519.015 556.162 511.851 563.325 503.015 563.325H464.121C455.285 563.325 448.121 556.162 448.121 547.325V500.634C448.121 500.68 448.119 500.726 448.119 500.771C448.119 486.112 433.461 485.194 431.626 485.137L431.438 485.133H393.227C384.39 485.133 377.227 477.969 377.227 469.133V421.898C377.227 413.062 384.39 405.898 393.227 405.898H432.12ZM680.803 387.073C680.803 395.414 686.015 404.797 697.483 404.797H735.698C744.535 404.797 751.698 411.96 751.698 420.797V465.363C751.739 473.679 756.955 482.989 768.378 482.989H806.589C815.425 482.989 822.589 490.153 822.589 498.989V546.224C822.589 555.06 815.425 562.224 806.589 562.224H767.695C758.859 562.224 751.695 555.06 751.695 546.224V499.559C751.616 484.032 735.016 484.031 735.016 484.031H696.805C687.968 484.031 680.805 476.868 680.805 468.031V421.34C680.804 421.386 680.803 421.432 680.803 421.478C680.803 405.876 664.2 404.802 664.122 404.797C664.199 404.792 680.803 403.715 680.803 387.073ZM573.904 246.328C582.741 246.328 589.904 253.492 589.904 262.328V308.075C589.905 307.997 589.908 307.918 589.908 307.839C589.908 316.161 595.098 325.52 606.513 325.562H644.8C653.636 325.562 660.8 332.725 660.8 341.562V388.796C660.8 397.632 653.636 404.796 644.8 404.796H605.906C597.07 404.796 589.906 397.632 589.906 388.796V342.132C589.832 327.572 575.241 325.749 573.414 325.578L573.227 325.562H535.693L535.506 325.578C533.674 325.75 519.012 327.581 519.012 342.243C519.012 342.206 519.011 342.169 519.011 342.132V389.84C519.011 398.676 511.847 405.84 503.011 405.84H393.223C384.386 405.84 377.223 398.676 377.223 389.84V341.562C377.223 332.726 384.386 325.563 393.223 325.562H502.331C513.754 325.562 518.97 316.252 519.011 307.937V262.328C519.011 253.492 526.174 246.328 535.011 246.328H573.904ZM507.019 0C515.855 0 523.019 7.16344 523.019 16V63.2344C523.019 72.0709 515.855 79.2344 507.019 79.2344H468.808C457.34 79.2344 452.127 88.6176 452.127 96.958C452.127 96.8186 452.122 96.6802 452.12 96.543V142.469C452.12 151.305 444.957 158.469 436.12 158.469H397.909C386.62 158.469 381.393 167.561 381.232 175.801V221.704C381.232 230.541 374.069 237.704 365.232 237.704H234.722C225.885 237.704 218.722 230.541 218.722 221.704V174.47C218.722 165.633 225.885 158.47 234.722 158.47H364.559C364.551 158.469 364.547 158.469 364.547 158.469C364.547 158.469 381.148 157.431 381.227 141.898V95.2344C381.227 86.3978 388.39 79.2344 397.227 79.2344H435.445C435.445 79.2344 452.047 78.197 452.125 62.6641V16C452.125 7.16344 459.288 0 468.125 0H507.019ZM54.8936 80C63.7301 80 70.8936 87.1634 70.8936 96V140.859C70.8956 140.73 70.9004 140.599 70.9004 140.468C70.9004 148.808 76.113 158.191 87.5811 158.191H125.792C134.629 158.191 141.792 165.355 141.792 174.191V221.426C141.792 230.262 134.629 237.426 125.792 237.426H86.8984C78.0619 237.426 70.8984 230.262 70.8984 221.426V174.761C70.8219 159.713 55.2276 159.249 54.2656 159.234H16C7.16344 159.234 2.86795e-07 152.071 0 143.234V96C0 87.1634 7.16344 80 16 80H54.8936Z" fill="#00E1C6" fill-opacity="0"/>
-    </svg>
+  <!-- Background atmospheric layers -->
+  <div class="hero-backdrop" aria-hidden="true">
+    <div class="dot-grid"></div>
+    <div class="glow-teal"></div>
+    <div class="glow-lime"></div>
   </div>
 
-  <div class="container">
+  <!-- Right-side geometric decoration -->
+  <div class="hero-visual" aria-hidden="true">
+    <svg class="geo-svg" viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Axis lines -->
+      <line x1="0" y1="240" x2="480" y2="240" stroke="rgba(0,225,198,0.06)" stroke-width="1"/>
+      <line x1="240" y1="0" x2="240" y2="480" stroke="rgba(0,225,198,0.06)" stroke-width="1"/>
+      <!-- Outer ring - slow rotating dashes -->
+      <circle cx="240" cy="240" r="210" stroke="rgba(0,225,198,0.07)" stroke-width="1" stroke-dasharray="6 14"/>
+      <!-- Mid ring -->
+      <circle cx="240" cy="240" r="150" stroke="rgba(0,225,198,0.1)" stroke-width="1" stroke-dasharray="4 10"/>
+      <!-- Inner accent ring -->
+      <circle cx="240" cy="240" r="90" stroke="rgba(204,254,18,0.15)" stroke-width="1.5"/>
+      <!-- Core ring -->
+      <circle cx="240" cy="240" r="40" stroke="rgba(204,254,18,0.35)" stroke-width="1.5"/>
+      <!-- Center dot -->
+      <circle cx="240" cy="240" r="5" fill="#CCFE12" opacity="0.9"/>
+      <!-- Compass marks -->
+      <circle cx="240" cy="30" r="3" fill="rgba(0,225,198,0.4)"/>
+      <circle cx="240" cy="450" r="3" fill="rgba(0,225,198,0.4)"/>
+      <circle cx="30" cy="240" r="3" fill="rgba(0,225,198,0.4)"/>
+      <circle cx="450" cy="240" r="3" fill="rgba(0,225,198,0.4)"/>
+      <!-- Diagonal accent lines -->
+      <line x1="90" y1="90" x2="150" y2="150" stroke="rgba(204,254,18,0.08)" stroke-width="1"/>
+      <line x1="390" y1="90" x2="330" y2="150" stroke="rgba(204,254,18,0.08)" stroke-width="1"/>
+      <line x1="90" y1="390" x2="150" y2="330" stroke="rgba(204,254,18,0.08)" stroke-width="1"/>
+      <line x1="390" y1="390" x2="330" y2="330" stroke="rgba(204,254,18,0.08)" stroke-width="1"/>
+    </svg>
+    <div class="geo-number" aria-hidden="true">01</div>
+  </div>
+
+  <!-- Main layout -->
+  <div class="hero-main">
     <div class="hero-content">
+      <!-- Eyebrow label -->
+      <div class="eyebrow">
+        <span class="eyebrow-bar" aria-hidden="true"></span>
+        <span>{lang === 'es' ? 'Agencia de Desarrollo de Software' : 'Software Development Agency'}</span>
+      </div>
+
+      <!-- Heading -->
       <h1 itemprop="name">
         {lang === 'es' ? (
           <>
-            <span class="highlight">Tecnología</span> que impulsa tu Negocio al <span class="highlight">siguiente nivel</span>
+            Tecnología que<br/>
+            <em class="accent-em">impulsa</em> tu<br/>
+            negocio
           </>
         ) : (
           <>
-            <span class="highlight">Technology</span> that drives your Business to the <span class="highlight">next level</span>
+            Technology that<br/>
+            <em class="accent-em">drives</em> your<br/>
+            business
           </>
         )}
       </h1>
-      <p class="description" itemprop="description">
+
+      <!-- Description -->
+      <p class="hero-desc" itemprop="description">
         {t('hero.description')}
       </p>
-      <a href={whatsappLink} target="_blank" rel="noopener noreferrer" class="btn-cta">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+
+      <!-- CTA -->
+      <a href={whatsappLink} target="_blank" rel="noopener noreferrer" class="hero-cta">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
         {lang === 'es' ? 'Chatea con nosotros' : 'Chat with us'}
-        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <line x1="5" y1="12" x2="19" y2="12"></line>
           <polyline points="12 5 19 12 12 19"></polyline>
         </svg>
       </a>
     </div>
   </div>
+
+  <!-- Stats bar -->
+  <div class="hero-stats">
+    <div class="stats-inner">
+      {stats.map((stat, i) => (
+        <>
+          <div class="stat-item">
+            <span class="stat-value">{stat.value}</span>
+            <span class="stat-label">{stat.label}</span>
+          </div>
+          {i < stats.length - 1 && <div class="stat-sep" aria-hidden="true"></div>}
+        </>
+      ))}
+    </div>
+  </div>
 </section>
 
 <style>
+  /* ─── Section shell ──────────────────────────────────────── */
   .hero {
-    min-height: 607px;
+    min-height: 100vh;
     position: relative;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     overflow: hidden;
-    padding-top: 100px;
-    background: linear-gradient(180deg, #f5f5f5 0%, #e8e8e8 100%);
+    background: #050508;
   }
 
-  :global([data-theme="dark"]) .hero {
-    background:
-      radial-gradient(ellipse 80% 60% at 85% 80%, rgba(80, 80, 80, 0.4) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 90% 90%, rgba(120, 120, 120, 0.3) 0%, transparent 50%),
-      linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #111111 100%);
-  }
-
-  /* Block decorations */
-  .blocks-decoration {
+  /* ─── Atmospheric background ─────────────────────────────── */
+  .hero-backdrop {
     position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .dot-grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.055) 1px, transparent 1px);
+    background-size: 30px 30px;
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 15%, black 50%, rgba(0,0,0,0.6) 85%, transparent 100%);
+  }
+
+  .glow-teal {
+    position: absolute;
+    right: 5%;
+    top: 15%;
+    width: 640px;
+    height: 640px;
+    background: radial-gradient(circle, rgba(0,225,198,0.065) 0%, transparent 65%);
+    border-radius: 50%;
+  }
+
+  .glow-lime {
+    position: absolute;
+    left: -8%;
+    bottom: 5%;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(204,254,18,0.04) 0%, transparent 65%);
+    border-radius: 50%;
+  }
+
+  /* ─── Geometric decoration ───────────────────────────────── */
+  .hero-visual {
+    position: absolute;
+    right: -2%;
     top: 50%;
-    right: -5%;
     transform: translateY(-50%);
-    width: 45%;
-    max-width: 550px;
-    height: auto;
+    width: 540px;
+    height: 540px;
+    pointer-events: none;
     z-index: 1;
+  }
+
+  .geo-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    animation: slowSpin 80s linear infinite;
+  }
+
+  @keyframes slowSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  .geo-number {
+    position: absolute;
+    bottom: 16px;
+    left: 8px;
+    font-family: 'Syne', 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 140px;
+    line-height: 1;
+    color: rgba(255,255,255,0.018);
+    letter-spacing: -0.04em;
+    user-select: none;
     pointer-events: none;
   }
 
-  .hero-shapes {
+  /* ─── Main layout ─────────────────────────────────────────── */
+  .hero-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
     width: 100%;
-    height: auto;
-    animation: floatContainer 8s ease-in-out 3.5s infinite;
-    will-change: transform;
-  }
-
-  .molecule-path {
-    stroke: #00E1C6;
-    stroke-width: 2;
-    stroke-dasharray: 6000;
-    stroke-dashoffset: 6000;
-    animation:
-      draw 3s ease-out forwards,
-      fillIn 0.8s ease-out 2.5s forwards;
-  }
-
-  @keyframes draw {
-    0% {
-      stroke-dashoffset: 6000;
-    }
-    100% {
-      stroke-dashoffset: 0;
-    }
-  }
-
-  @keyframes fillIn {
-    0% {
-      fill-opacity: 0;
-    }
-    100% {
-      fill-opacity: 1;
-    }
-  }
-
-  @keyframes floatContainer {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-12px);
-    }
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    padding-top: 100px;
+    position: relative;
+    z-index: 2;
   }
 
   .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 692px;
+    max-width: 660px;
   }
 
+  /* ─── Eyebrow ─────────────────────────────────────────────── */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 36px;
+  }
+
+  .eyebrow-bar {
+    display: block;
+    width: 36px;
+    height: 1px;
+    background: var(--color-lime);
+    flex-shrink: 0;
+  }
+
+  /* ─── Heading ─────────────────────────────────────────────── */
   h1 {
-    font-size: 44px;
-    line-height: 64px;
-    font-weight: 600;
-    color: #000000;
-    margin-bottom: 24px;
-    font-family: 'Poppins', sans-serif;
-  }
-
-  :global([data-theme="dark"]) h1 {
+    font-family: 'Syne', 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 76px;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
     color: #ffffff;
+    margin-bottom: 28px;
   }
 
-  .highlight {
-    background-color: var(--color-lime);
-    color: #000000;
-    padding: 4px 10px;
+  .accent-em {
+    font-style: italic;
+    color: var(--color-lime);
+    position: relative;
+    display: inline-block;
   }
 
-  .description {
-    font-size: 18px;
-    line-height: 32px;
-    color: #333333;
-    margin-bottom: 32px;
-    font-weight: 300;
+  .accent-em::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-lime);
+    opacity: 0.35;
+    border-radius: 1px;
+  }
+
+  /* ─── Description ─────────────────────────────────────────── */
+  .hero-desc {
     font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 48px;
+    font-weight: 300;
+    max-width: 520px;
   }
 
-  :global([data-theme="dark"]) .description {
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .btn-cta {
+  /* ─── CTA button ──────────────────────────────────────────── */
+  .hero-cta {
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    background: #333333;
-    border: none;
-    color: #ffffff;
+    background: var(--color-lime);
+    color: #000000;
     padding: 16px 32px;
-    border-radius: 50px;
+    border-radius: 8px;
     font-family: 'Poppins', sans-serif;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 16px;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
   }
 
-  :global([data-theme="dark"]) .btn-cta {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+  .hero-cta:hover {
+    background: #b8e510;
+    transform: translateY(-3px);
+    box-shadow: 0 14px 36px rgba(204,254,18,0.22);
   }
 
-  .btn-cta:hover {
-    background: #000000;
-    transform: translateY(-2px);
+  /* ─── Stats bar ───────────────────────────────────────────── */
+  .hero-stats {
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid rgba(255,255,255,0.07);
   }
 
-  :global([data-theme="dark"]) .btn-cta:hover {
-    background: rgba(255, 255, 255, 0.2);
+  .stats-inner {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
   }
 
-  .btn-cta svg {
-    width: 20px;
-    height: 20px;
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 28px 40px;
   }
 
-  .btn-cta .arrow {
-    margin-left: 4px;
+  .stat-item:first-child {
+    padding-left: 0;
+  }
+
+  .stat-value {
+    font-family: 'Syne', 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 34px;
+    color: var(--color-lime);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: rgba(255,255,255,0.38);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .stat-sep {
+    width: 1px;
+    height: 36px;
+    background: rgba(255,255,255,0.09);
+    flex-shrink: 0;
+  }
+
+  /* ─── Light mode ──────────────────────────────────────────── */
+  :global([data-theme="light"]) .hero {
+    background: #f4f4f7;
+  }
+
+  :global([data-theme="light"]) .dot-grid {
+    background-image: radial-gradient(circle, rgba(0,0,0,0.07) 1px, transparent 1px);
+  }
+
+  :global([data-theme="light"]) h1 {
+    color: #08080f;
+  }
+
+  :global([data-theme="light"]) .eyebrow {
+    color: rgba(0,0,0,0.38);
+  }
+
+  :global([data-theme="light"]) .hero-desc {
+    color: rgba(0,0,0,0.55);
+  }
+
+  :global([data-theme="light"]) .hero-stats {
+    border-top-color: rgba(0,0,0,0.08);
+  }
+
+  :global([data-theme="light"]) .stat-label {
+    color: rgba(0,0,0,0.38);
+  }
+
+  :global([data-theme="light"]) .stat-sep {
+    background: rgba(0,0,0,0.1);
+  }
+
+  :global([data-theme="light"]) .glow-teal {
+    background: radial-gradient(circle, rgba(0,225,198,0.09) 0%, transparent 65%);
+  }
+
+  :global([data-theme="light"]) .glow-lime {
+    background: radial-gradient(circle, rgba(150,200,0,0.07) 0%, transparent 65%);
+  }
+
+  :global([data-theme="light"]) .geo-number {
+    color: rgba(0,0,0,0.025);
+  }
+
+  /* ─── Responsive ──────────────────────────────────────────── */
+  @media (max-width: 1200px) {
+    .hero-visual {
+      width: 440px;
+      height: 440px;
+      opacity: 0.55;
+    }
+
+    h1 { font-size: 66px; }
   }
 
   @media (max-width: 1024px) {
-    .blocks-decoration {
-      width: 40%;
-      right: -10%;
+    .hero-visual {
+      width: 360px;
+      height: 360px;
+      opacity: 0.35;
+      right: -5%;
     }
 
-    .hero-shapes {
-      opacity: 0.8;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-shapes {
-      animation: none;
-    }
-    .molecule-path {
-      animation: none;
-      stroke-dashoffset: 0;
-      fill-opacity: 1;
-    }
+    h1 { font-size: 58px; }
   }
 
   @media (max-width: 768px) {
     .hero {
-      min-height: 500px;
-      padding-top: 120px;
+      min-height: auto;
     }
 
-    .blocks-decoration {
-      display: none;
+    .hero-visual { display: none; }
+
+    .hero-main {
+      padding-top: 130px;
+      padding-bottom: 60px;
     }
 
     .hero-content {
+      max-width: 100%;
       text-align: center;
+    }
+
+    .eyebrow { justify-content: center; }
+
+    h1 { font-size: 46px; }
+
+    .hero-desc {
+      font-size: 16px;
       max-width: 100%;
     }
 
-    h1 {
-      font-size: 32px;
-      line-height: 48px;
-    }
-
-    .description {
-      font-size: 16px;
-      line-height: 28px;
-    }
-
-    .btn-cta {
+    .hero-cta {
       width: 100%;
       justify-content: center;
-      max-width: 320px;
-      margin: 0 auto;
-      display: flex;
     }
+
+    .stats-inner { justify-content: center; }
+
+    .stat-item {
+      padding: 24px 28px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .stat-value { font-size: 28px; }
   }
 
   @media (max-width: 480px) {
-    .hero {
-      min-height: 450px;
-      padding-top: 100px;
+    h1 { font-size: 36px; }
+
+    .stats-inner {
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 20px;
     }
 
-    h1 {
-      font-size: 28px;
-      line-height: 40px;
+    .stat-sep { display: none; }
+
+    .stat-item {
+      flex: 1;
+      min-width: 100px;
+      padding: 12px 8px;
     }
 
-    .description {
-      font-size: 15px;
-      line-height: 24px;
-    }
+    .stat-value { font-size: 26px; }
+  }
 
-    .btn-cta {
-      padding: 14px 24px;
-      font-size: 15px;
-    }
+  @media (prefers-reduced-motion: reduce) {
+    .geo-svg { animation: none; }
   }
 </style>

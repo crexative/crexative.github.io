@@ -108,6 +108,10 @@ const languageName = getLanguageName(currentLang);
 		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
 		<noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet"></noscript>
 
+		<!-- Syne display font for headings - async load -->
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap" rel="stylesheet"></noscript>
+
 		<!-- Page-specific resource hints (preloads/prefetches injected by each page) -->
 		<slot name="head" />
 

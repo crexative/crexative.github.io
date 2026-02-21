@@ -10,24 +10,28 @@ const t = useTranslations(lang as 'en' | 'es');
 
 const services = [
   {
+    number: '01',
     name: t('services.automation.title'),
     description: t('services.automation.description'),
     icon: '/images/icons/service-automation.svg',
     techTags: ['n8n', 'AI', 'MCP', 'Zapier', 'Make']
   },
   {
+    number: '02',
     name: t('services.web.title'),
     description: t('services.web.description'),
     icon: '/images/icons/service-web.svg',
     techTags: ['React', 'Node.js', 'TypeScript']
   },
   {
+    number: '03',
     name: t('services.mobile.title'),
     description: t('services.mobile.description'),
     icon: '/images/icons/service-mobile.svg',
     techTags: ['Kotlin Multiplatform', 'iOS', 'Android']
   },
   {
+    number: '04',
     name: t('services.custom.title'),
     description: t('services.custom.description'),
     icon: '/images/icons/service-custom.svg',
@@ -56,25 +60,34 @@ const structuredData = {
 <section id="services" class="services" itemscope itemtype="https://schema.org/Organization">
   <div class="container">
     <div class="section-header">
-      <p class="subtitle">{t('services.title')}</p>
+      <div class="header-eyebrow">
+        <span class="eyebrow-bar" aria-hidden="true"></span>
+        <span class="eyebrow-text">{t('services.title')}</span>
+      </div>
       <h2>{t('services.subtitle')}</h2>
     </div>
 
     <div class="services-grid" itemprop="makesOffer" itemscope itemtype="https://schema.org/Offer">
       {services.map((service, index) => (
         <article class="service-card" itemscope itemtype="https://schema.org/Service">
-          <div class="card-content">
-            <div class="service-icon-container">
-              <img src={service.icon} alt={service.name} width="64" height="64" decoding="async" loading={index > 1 ? 'lazy' : undefined} />
-            </div>
-            <div class="service-text">
-              <h3 itemprop="name">{service.name}</h3>
-              <p itemprop="description">{service.description}</p>
-              <div class="service-tags">
-                {service.techTags.map(tag => (
-                  <span class="tag-pill">{tag}</span>
-                ))}
-              </div>
+          <div class="card-number" aria-hidden="true">{service.number}</div>
+          <div class="card-icon-wrap">
+            <img
+              src={service.icon}
+              alt={service.name}
+              width="56"
+              height="56"
+              decoding="async"
+              loading={index > 1 ? 'lazy' : undefined}
+            />
+          </div>
+          <div class="card-body">
+            <h3 itemprop="name">{service.name}</h3>
+            <p itemprop="description">{service.description}</p>
+            <div class="service-tags">
+              {service.techTags.map(tag => (
+                <span class="tag-pill">{tag}</span>
+              ))}
             </div>
           </div>
         </article>
@@ -88,137 +101,187 @@ const structuredData = {
 
 <style>
   .services {
-    padding: 100px 0;
+    padding: 120px 0;
     background-color: var(--bg-color);
+    position: relative;
   }
 
+  /* ─── Section header ─────────────────────────────────────── */
   .section-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 72px;
   }
 
-  .subtitle {
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
-    color: var(--text-gray);
+  .header-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
     font-family: 'Poppins', sans-serif;
-    font-weight: 400;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-gray);
+    margin-bottom: 20px;
+  }
+
+  .eyebrow-bar {
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--color-lime);
+    flex-shrink: 0;
   }
 
   h2 {
-    font-size: 44px;
-    line-height: 64px;
-    font-weight: 600;
+    font-family: 'Syne', 'Poppins', sans-serif;
+    font-size: 52px;
+    line-height: 1.06;
+    font-weight: 800;
+    letter-spacing: -0.03em;
     color: var(--text-color);
-    font-family: 'Poppins', sans-serif;
   }
 
+  /* ─── Grid ───────────────────────────────────────────────── */
   .services-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
-  }
-
-  .service-card {
-    background-color: var(--bg-color);
-    border-radius: 6px;
-    padding: 40px 32px;
-    border: 1px solid var(--color-gray-500);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .service-card:hover {
-    border-color: var(--primary-color);
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 225, 198, 0.1);
-  }
-
-  .card-content {
-    display: flex;
     gap: 24px;
   }
 
-  .service-icon-container {
-    flex-shrink: 0;
-    width: 120px;
-    height: 120px;
+  /* ─── Card ───────────────────────────────────────────────── */
+  .service-card {
+    position: relative;
+    background-color: var(--bg-secondary);
+    border-radius: 16px;
+    padding: 44px 40px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 0% 0%, rgba(0,225,198,0.05) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: inherit;
+  }
+
+  .service-card:hover {
+    border-color: rgba(0,225,198,0.3);
+    transform: translateY(-4px);
+    box-shadow:
+      0 0 0 1px rgba(0,225,198,0.1),
+      0 24px 48px rgba(0,0,0,0.2);
+  }
+
+  .service-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Background number */
+  .card-number {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    font-family: 'Syne', 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 72px;
+    line-height: 1;
+    color: rgba(255,255,255,0.025);
+    letter-spacing: -0.04em;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  :global([data-theme="light"]) .card-number {
+    color: rgba(0,0,0,0.04);
+  }
+
+  /* Icon */
+  .card-icon-wrap {
+    width: 64px;
+    height: 64px;
     background: var(--icon-bg);
-    border-radius: 12px;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
   }
 
-  .service-icon-container img {
-    width: 64px;
-    height: 64px;
+  .card-icon-wrap img {
+    width: 36px;
+    height: 36px;
     object-fit: contain;
   }
 
-  .service-text {
-    flex: 1;
+  /* Card body */
+  .card-body {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
+    position: relative;
+    z-index: 1;
   }
 
   h3 {
-    font-size: 26px;
-    line-height: 28px;
-    font-weight: 500;
+    font-family: 'Syne', 'Poppins', sans-serif;
+    font-size: 24px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     color: var(--text-color);
-    font-family: 'Poppins', sans-serif;
     margin: 0;
   }
 
   .service-card p {
     color: var(--text-color);
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 300;
     font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    font-weight: 300;
     margin: 0;
-    opacity: 0.9;
+    opacity: 0.75;
   }
 
+  /* Tags */
   .service-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 8px;
     margin-top: 8px;
   }
 
   .tag-pill {
     background: transparent;
     color: var(--text-color);
-    padding: 8px 16px;
-    border-radius: 56px;
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 400;
+    padding: 6px 14px;
+    border-radius: 100px;
     font-family: 'Poppins', sans-serif;
-    border: 1px solid var(--text-color);
-    transition: all 0.2s ease;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    border: 1px solid var(--border-color);
+    opacity: 0.7;
+    transition: opacity 0.2s ease, border-color 0.2s ease, color 0.2s ease;
   }
 
-  .tag-pill:hover {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: #000000;
+  .service-card:hover .tag-pill {
+    opacity: 1;
+    border-color: rgba(0,225,198,0.35);
+    color: var(--color-cyan);
   }
 
+  /* ─── Responsive ──────────────────────────────────────────── */
   @media (max-width: 1024px) {
-    .card-content {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .service-tags {
-      justify-content: center;
-    }
+    h2 { font-size: 44px; }
   }
 
   @media (max-width: 768px) {
@@ -228,31 +291,19 @@ const structuredData = {
 
     .services-grid {
       grid-template-columns: 1fr;
-      gap: 24px;
-    }
-
-    .service-card {
-      padding: 32px 24px;
+      gap: 16px;
     }
 
     h2 {
-      font-size: 32px;
-      line-height: 48px;
+      font-size: 36px;
     }
 
-    h3 {
-      font-size: 22px;
-      line-height: 26px;
+    .service-card {
+      padding: 36px 28px;
     }
 
-    .service-icon-container {
-      width: 100px;
-      height: 100px;
-    }
-
-    .service-icon-container img {
-      width: 48px;
-      height: 48px;
+    .section-header {
+      margin-bottom: 48px;
     }
   }
 
@@ -261,30 +312,16 @@ const structuredData = {
       padding: 60px 0;
     }
 
-    .service-card {
-      padding: 24px 20px;
-    }
-
     h2 {
-      font-size: 28px;
-      line-height: 40px;
+      font-size: 30px;
     }
 
-    h3 {
-      font-size: 20px;
+    .service-card {
+      padding: 28px 20px;
     }
 
-    .service-card p {
-      font-size: 14px;
-    }
+    h3 { font-size: 20px; }
 
-    .tag-pill {
-      padding: 6px 12px;
-      font-size: 12px;
-    }
-
-    .service-tags {
-      gap: 8px;
-    }
+    .service-card p { font-size: 14px; }
   }
 </style>
