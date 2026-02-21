@@ -224,7 +224,12 @@ const languageName = getLanguageName(currentLang);
 		background-color: transparent !important;
 	}
 
-	html,
+	html {
+		margin: 0;
+		width: 100%;
+		overflow-x: clip; /* Safari iOS: clip is stronger than hidden for fixed children */
+	}
+
 	body {
 		margin: 0;
 		width: 100%;

@@ -31,16 +31,16 @@ const whatsappLink = `https://wa.me/${CONTACT_INFO.whatsapp}?text=${whatsappMess
   .sticky-cta {
     position: fixed;
     bottom: 30px;
-    right: 30px;
+    right: 0;
+    transform: translateX(-30px) translateY(100px);
     z-index: 1000;
     opacity: 0;
-    transform: translateY(100px);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   .sticky-cta.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(-30px) translateY(0);
   }
   
   .sticky-btn {
@@ -162,7 +162,12 @@ const whatsappLink = `https://wa.me/${CONTACT_INFO.whatsapp}?text=${whatsappMess
   @media (max-width: 768px) {
     .sticky-cta {
       bottom: 20px;
-      right: 20px;
+      right: 0;
+      transform: translateX(-20px) translateY(100px);
+    }
+
+    .sticky-cta.visible {
+      transform: translateX(-20px) translateY(0);
     }
     
     .sticky-btn {
