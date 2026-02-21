@@ -156,8 +156,8 @@ export default {
 
   // SEO
   seo: {
-    title: 'CREXATIVE - Automation, Mobile Apps & Web Development | Custom Software',
-    description: 'Intelligent automation, mobile apps for iOS and Android, and web development that drives your business. Technology solutions delivering real results worldwide from Colombia.',
+    title: 'CREXATIVE | Mobile Apps, Web & Automation Agency',
+    description: 'Intelligent automation, mobile apps for iOS & Android, and web development that drives your business. Technology solutions from Colombia.',
     keywords: 'process automation, business automation, mobile app development, iOS Android apps, web development, custom software, technology solutions, software development agency',
   },
 

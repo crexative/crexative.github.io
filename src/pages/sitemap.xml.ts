@@ -16,15 +16,10 @@ export const GET: APIRoute = () => {
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://crexative.com/images/hero.jpg</image:loc>
-      <image:title>CREXATIVE - Premium Software Development Agency in Medellín, Colombia</image:title>
-      <image:caption>Expert team of developers creating innovative software solutions</image:caption>
-      <image:geo_location>Medellín, Colombia</image:geo_location>
-    </image:image>
-    <image:image>
-      <image:loc>https://crexative.com/images/about.png</image:loc>
+      <image:loc>https://crexative.com/images/about.webp</image:loc>
       <image:title>CREXATIVE Development Team</image:title>
       <image:caption>Our passionate team of software engineers and developers in Medellín</image:caption>
+      <image:geo_location>Medellín, Colombia</image:geo_location>
     </image:image>
   </url>
   

@@ -33,11 +33,14 @@ const pageKeywords = t('seo.keywords');
 	canonical={getCanonicalUrl('/en/')}
 	lang={lang}
 >
+	<link rel="preload" href="/images/mcp_colombia.webp" as="image" slot="head" />
 	<Navbar brandName={SITE_CONFIG.name} lang={lang} />
-	<Hero lang={lang} />
-	<Services lang={lang} />
-	<ProjectShowcase lang={lang} />
-	<Contact lang={lang} />
+	<main id="main-content">
+		<Hero lang={lang} />
+		<Services lang={lang} />
+		<ProjectShowcase lang={lang} />
+		<Contact lang={lang} />
+	</main>
 	<Footer lang={lang} />
 	<StickyCallToAction lang={lang} />
 </Layout>

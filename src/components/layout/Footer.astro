@@ -16,7 +16,7 @@ const currentYear = new Date().getFullYear();
       <!-- Brand Column -->
       <div class="footer-brand">
         <a href={lang === 'en' ? '/en' : '/'} class="footer-logo">
-          <img src="/images/logo/crexative.svg" alt="CREXATIVE" class="footer-logo-image" />
+          <img src="/images/logo/crexative.svg" alt="CREXATIVE" class="footer-logo-image" width="140" height="32" loading="lazy" />
         </a>
         <p class="footer-tagline">{t('footer.description')}</p>
         <div class="footer-social">
@@ -44,7 +44,7 @@ const currentYear = new Date().getFullYear();
 
       <!-- Navigation Column -->
       <div class="footer-nav">
-        <h4>{t('footer.sections.company')}</h4>
+        <h3>{t('footer.sections.company')}</h3>
         <ul>
           <li><a href={lang === 'en' ? '/en' : '/'}>{t('footer.links.home')}</a></li>
           <li><a href="#services">{t('footer.links.services')}</a></li>
@@ -55,7 +55,7 @@ const currentYear = new Date().getFullYear();
 
       <!-- Services Column -->
       <div class="footer-nav">
-        <h4>{t('footer.sections.services')}</h4>
+        <h3>{t('footer.sections.services')}</h3>
         <ul>
           <li><a href="#services">{t('footer.servicesList.automation')}</a></li>
           <li><a href="#services">{t('footer.servicesList.web')}</a></li>
@@ -66,7 +66,7 @@ const currentYear = new Date().getFullYear();
 
       <!-- Contact Column -->
       <div class="footer-nav">
-        <h4>{t('footer.sections.contact')}</h4>
+        <h3>{t('footer.sections.contact')}</h3>
         <ul>
           <li><a href={`mailto:${t('contact.details.email')}`}>{t('contact.details.email')}</a></li>
           <li><span>{t('contact.details.address')}</span></li>
@@ -81,9 +81,9 @@ const currentYear = new Date().getFullYear();
       <div class="footer-bottom-content">
         <p class="copyright">&copy; {currentYear} CREXATIVE. {t('footer.copyright')}</p>
         <div class="footer-legal">
-          <a href="/privacidad">{t('footer.links.privacy')}</a>
-          <a href="/terminos">{t('footer.links.terms')}</a>
-          <a href="/eliminar-datos">{lang === 'es' ? 'Eliminación de Datos' : 'Data Deletion'}</a>
+          <a href="/privacidad/">{t('footer.links.privacy')}</a>
+          <a href="/terminos/">{t('footer.links.terms')}</a>
+          <a href="/eliminar-datos/">{lang === 'es' ? 'Eliminación de Datos' : 'Data Deletion'}</a>
         </div>
         <p class="made-with">{t('footer.madeWith')}</p>
       </div>
