@@ -82,6 +82,18 @@ const t = useTranslations(lang as 'en' | 'es');
 
 **Carousel (ProjectShowcase)** - CSS-based carousel with `translateX` transforms. Key: `carousel-container` needs `box-sizing: border-box` when using padding + `width: 100%`, and `carousel-viewport` needs `min-width: 0` as a flex child for proper overflow handling.
 
+**Hardcoded text anti-pattern** - Some components contain hardcoded strings or `lang === 'es' ? '...' : '...'` ternaries instead of using `t()`. Always check for this before editing copy — the fix is to add the key to both locale files and use `t('key')` in the component. Known past occurrences: `Hero.astro` (title, CTA button), `Contact.astro` (WhatsApp button text, modal strings).
+
+**SVG icons on lime background** - The accent color `#CCFE12` (lime) is used as button backgrounds (`.btn-lime`, `.whatsapp-cta`). SVG icons loaded via `<img>` with white or green fill become invisible against this background. Fix: apply `filter: brightness(0)` to the `img` element to force the icon to render black, which has a ~13:1 contrast ratio against lime (well above WCAG AA).
+
+**Hero title highlight pattern** - The hero `<h1>` uses three translation keys to allow a `<span class="highlight">` (lime background) on a specific phrase: `hero.titleBefore`, `hero.titleHighlight`, `hero.titleAfter`. When changing the hero headline, update all three keys in both locale files.
+
+## Claude Code Configuration
+
+`.claude/settings.local.json` — pre-authorized Bash permissions for common commands (pnpm, git, gh, etc.) so Claude doesn't prompt on every tool call. MCP servers enabled: `chrome-devtools`.
+
+This file is local-only and not committed to the repo.
+
 ## Deployment
 
 - Platform: Cloudflare Pages (custom domain via `public/CNAME`)
