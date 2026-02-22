@@ -10,18 +10,18 @@ export default {
 
   // Hero Section
   hero: {
-    title: 'Technology That Takes Your Business to the Next Level',
-    subtitle: 'Intelligent automation, cross-platform mobile apps, and web development that transform your vision into results',
-    description: 'From automating processes with AI to building cross-platform apps and high-performance websites. Solutions designed to grow your business.',
-    cta: 'Let\'s Talk About Your Project',
+    title: 'Your Business Grows Faster When Technology Works For You',
+    subtitle: 'We automate what slows you down, build the apps your customers need, and create websites that turn visitors into buyers.',
+    description: 'AI-powered automation, mobile apps for iOS and Android, and high-performance web development — all under one team.',
+    cta: 'Get a Free Consultation',
     ctaSecondary: 'View Our Services',
   },
 
   // Services Section
   services: {
-    title: 'Our Services',
-    subtitle: 'Technology solutions that drive your business forward',
-    description: 'We combine intelligent automation, mobile and web development to create solutions that deliver real, measurable results',
+    title: 'What We Build For You',
+    subtitle: 'Less time on manual work. More customers. More revenue.',
+    description: 'Every service is designed to solve a real business problem, not to add technology for its own sake.',
     automation: {
       title: 'Intelligent Automation',
       description: 'Eliminate repetitive tasks automatically. We connect your favorite tools to work on autopilot while you focus on growing your business.',
@@ -50,11 +50,11 @@ export default {
 
   // About Section
   about: {
-    title: 'Why Choose Us',
-    subtitle: 'Technology that delivers real results',
-    description: 'We don\'t sell code, we create solutions that solve problems. Our team combines technical expertise with deep business understanding to deliver results that matter.',
-    mission: 'We make technology work for you, not the other way around. We automate the tedious, optimize the complex, and build what you need.',
-    vision: 'We believe every business deserves technology that drives growth, without unnecessary complications or exorbitant costs.',
+    title: 'A Team That Gets Your Business',
+    subtitle: 'We\'re not just developers. We\'re your technology partner.',
+    description: 'Lots of agencies ship code. We deliver outcomes. We understand how your business works before we write a single line.',
+    mission: 'We make technology work for you, not the other way around. We automate the tedious, optimize the complex, and build what you actually need.',
+    vision: 'Every business deserves technology that drives growth, without unnecessary complications or costs you can\'t justify.',
     stats: {
       experience: 'Years of Experience',
       projects: 'Projects Completed',
@@ -62,26 +62,26 @@ export default {
       team: 'Team Members',
     },
     values: {
-      innovation: 'Cutting-Edge Technology',
-      innovationDesc: 'We use the most modern and effective tools on the market so your solution never becomes obsolete.',
-      quality: 'Guaranteed Delivery',
-      qualityDesc: 'We meet deadlines, respect budgets, and deliver exactly what we promise. No surprises.',
+      innovation: 'Tools Built to Last',
+      innovationDesc: 'We use proven, modern technology so your solution keeps working in 3 years, not just at launch.',
+      quality: 'We Deliver What We Promise',
+      qualityDesc: 'Deadlines, budgets, scope — we respect them all. If something changes, you hear it from us first.',
       partnership: 'Your Success is Our Success',
-      partnershipDesc: 'We\'re not just vendors, we\'re your tech team. We\'re with you from idea to growth.',
+      partnershipDesc: 'We don\'t close the deal and disappear. We\'re with you from the first call until your solution is generating results.',
     },
     featured: {
-      title: 'Long-Lasting Solutions',
-      description: 'We build professional quality software that works today and stays efficient tomorrow. Your investment is protected for the long term.',
+      title: 'Built to Last',
+      description: 'Software that works today and stays efficient two years from now. No technical debt that costs you more down the road.',
     },
   },
 
   // Contact Section
   contact: {
-    title: 'Let\'s Start Your Project',
-    subtitle: 'Have an idea? Let\'s make it happen',
-    description: 'Message us on WhatsApp and let\'s talk about your project. Quick response, no commitment, no unnecessary jargon.',
-    whatsappCTA: 'Chat on WhatsApp',
-    whatsappMessage: 'Hi! I\'d like to talk about a project.',
+    title: 'Ready to Get Your Project Moving?',
+    subtitle: 'Tell us what you need. We respond within 24 hours.',
+    description: 'No complicated forms or endless meetings. Message us on WhatsApp and we\'ll give you clarity on how we can help.',
+    whatsappCTA: 'Chat on WhatsApp Now',
+    whatsappMessage: 'Hi! I have a project in mind and I\'d like to know how you can help.',
     form: {
       name: 'Full Name',
       namePlaceholder: 'Enter your full name',
@@ -114,7 +114,7 @@ export default {
 
   // Footer
   footer: {
-    description: 'Technology solutions that drive businesses forward. Automation, mobile apps, and web development worldwide',
+    description: 'Automation, apps, and websites that grow your business. From Colombia, for the world.',
     sections: {
       company: 'Company',
       services: 'Services',
@@ -148,16 +148,16 @@ export default {
 
   // Sticky CTA
   sticky: {
-    title: 'Let\'s Talk About Your Project',
-    subtitle: 'Chat with us on WhatsApp',
+    title: 'Have a Project in Mind?',
+    subtitle: 'Response within 24 hours on WhatsApp',
     cta: 'WhatsApp',
     ctaSecondary: 'View Services',
   },
 
   // SEO
   seo: {
-    title: 'CREXATIVE | Mobile Apps, Web & Automation Agency',
-    description: 'Intelligent automation, mobile apps for iOS & Android, and web development that drives your business. Technology solutions from Colombia.',
+    title: 'CREXATIVE | Automation, Apps & Web Development That Grows Your Business',
+    description: 'We automate your processes, build apps for iOS & Android, and create websites that convert. Software development team from Colombia, working worldwide.',
     keywords: 'process automation, business automation, mobile app development, iOS Android apps, web development, custom software, technology solutions, software development agency',
   },
 
@@ -195,19 +195,19 @@ export default {
     sunday: 'Sunday:',
     closed: 'Closed',
     saturdayHours: '10:00 AM - 2:00 PM COT',
-    getQuote: 'Get Your Free Quote',
-    quoteDescription: 'Tell us about your project and we\'ll provide a detailed proposal within 48 hours.',
+    getQuote: 'Request Your Free Proposal',
+    quoteDescription: 'Tell us what you need and we\'ll send a clear proposal with timeline and costs within 48 hours.',
     projectBudget: 'Project Budget',
     selectBudget: 'Select budget range',
     under5k: 'Under $5,000',
     over50k: '$50,000+',
     other: 'Other',
     cleanCode: 'Built to Last',
-    cleanCodeDesc: 'We build professional-quality software that works today and stays efficient tomorrow. Your investment is protected for the long run.',
-    modernDesign: 'Experiences Users Love',
-    modernDesignDesc: 'We create intuitive, attractive interfaces that your users will enjoy using. Beauty and functionality in perfect harmony.',
-    scalableArchitecture: 'Grow Without Limits',
-    scalableArchitectureDesc: 'Your business will grow, and so will your technology. We design solutions that adapt to your growth without headaches or surprise costs.',
+    cleanCodeDesc: 'Software that works today and stays efficient two years from now. No technical debt that costs you more down the road.',
+    modernDesign: 'Interfaces Your Users Actually Enjoy',
+    modernDesignDesc: 'We design for understanding, trust, and return visits. Functional first. Beautiful always.',
+    scalableArchitecture: 'Scale at Your Own Pace',
+    scalableArchitectureDesc: 'We design for where you are today and where you\'re going tomorrow. No rewriting everything when your business takes off.',
     paymentIntegration: 'Payment Integration',
   },
 };
