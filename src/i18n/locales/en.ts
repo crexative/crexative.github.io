@@ -11,6 +11,9 @@ export default {
   // Hero Section
   hero: {
     title: 'Your Business Grows Faster When Technology Works For You',
+    titleBefore: 'Your Business',
+    titleHighlight: 'Grows Faster',
+    titleAfter: 'When Technology Works For You',
     subtitle: 'We automate what slows you down, build the apps your customers need, and create websites that turn visitors into buyers.',
     description: 'AI-powered automation, mobile apps for iOS and Android, and high-performance web development — all under one team.',
     cta: 'Get a Free Consultation',

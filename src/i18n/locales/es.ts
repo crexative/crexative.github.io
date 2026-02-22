@@ -11,6 +11,9 @@ export default {
   // Hero Section
   hero: {
     title: 'Tu Negocio Crece Más Rápido Cuando la Tecnología Trabaja Para Ti',
+    titleBefore: 'Tu Negocio',
+    titleHighlight: 'Crece Más Rápido',
+    titleAfter: 'Cuando la Tecnología Trabaja Para Ti',
     subtitle: 'Automatizamos lo que te quita tiempo, construimos las apps que tus clientes necesitan y creamos webs que convierten visitas en ventas.',
     description: 'Automatización con IA, aplicaciones móviles para iOS y Android, y desarrollo web de alto rendimiento. Todo bajo un mismo equipo.',
     cta: 'Obtén una Consulta Gratis',
