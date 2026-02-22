@@ -10,18 +10,21 @@ export default {
 
   // Hero Section
   hero: {
-    title: 'Tecnología Que Impulsa Tu Negocio al Siguiente Nivel',
-    subtitle: 'Automatización inteligente, apps móviles multiplataforma y desarrollo web que transforman tu visión en resultados',
-    description: 'Desde automatizar procesos con IA hasta crear apps multiplataforma y webs de alto rendimiento. Soluciones diseñadas para hacer crecer tu negocio.',
-    cta: 'Hablemos de Tu Proyecto',
+    title: 'Tu Negocio Crece Más Rápido Cuando la Tecnología Trabaja Para Ti',
+    titleBefore: 'Tu Negocio',
+    titleHighlight: 'Crece Más Rápido',
+    titleAfter: 'Cuando la Tecnología Trabaja Para Ti',
+    subtitle: 'Automatizamos lo que te quita tiempo, construimos las apps que tus clientes necesitan y creamos webs que convierten visitas en ventas.',
+    description: 'Automatización con IA, aplicaciones móviles para iOS y Android, y desarrollo web de alto rendimiento. Todo bajo un mismo equipo.',
+    cta: 'Obtén una Consulta Gratis',
     ctaSecondary: 'Ver Nuestros Servicios',
   },
 
   // Services Section
   services: {
-    title: 'Nuestros Servicios',
-    subtitle: 'Soluciones tecnológicas que impulsan tu negocio hacia el futuro',
-    description: 'Combinamos automatización inteligente, desarrollo móvil y web para crear soluciones que generan resultados reales y medibles',
+    title: 'Lo Que Construimos Para Ti',
+    subtitle: 'Menos tiempo en tareas manuales. Más clientes. Más ventas.',
+    description: 'Cada servicio está diseñado para resolver un problema real de tu negocio, no para agregar tecnología por agregarla.',
     automation: {
       title: 'Automatización Inteligente',
       description: 'Elimina tareas repetitivas de forma automática. Conectamos tus herramientas favoritas para que trabajen solas mientras tú te enfocas en hacer crecer tu negocio.',
@@ -50,11 +53,11 @@ export default {
 
   // About Section
   about: {
-    title: 'Por Qué Elegirnos',
-    subtitle: 'Tecnología que genera resultados reales',
-    description: 'No vendemos código, creamos soluciones que resuelven problemas. Nuestro equipo combina experiencia técnica con comprensión profunda del negocio para entregar resultados que importan.',
-    mission: 'Hacemos que la tecnología trabaje para ti, no al revés. Automatizamos lo tedioso, optimizamos lo complejo y construimos lo que necesitas.',
-    vision: 'Creemos que cada empresa merece tecnología que impulse su crecimiento, sin complicaciones innecesarias ni costos desorbitantes.',
+    title: 'Un Equipo Que Entiende Tu Negocio',
+    subtitle: 'No somos solo desarrolladores. Somos tu socio tecnológico.',
+    description: 'Muchas agencias entregan código. Nosotros entregamos resultados. Entendemos cómo funciona tu negocio antes de escribir una sola línea.',
+    mission: 'Hacemos que la tecnología trabaje para ti, no al revés. Automatizamos lo tedioso, optimizamos lo complejo y construimos lo que realmente necesitas.',
+    vision: 'Cada empresa merece tecnología que impulse su crecimiento, sin complicaciones innecesarias ni costos que no puedas justificar.',
     stats: {
       experience: 'Años de Experiencia',
       projects: 'Proyectos Completados',
@@ -62,26 +65,26 @@ export default {
       team: 'Miembros del Equipo',
     },
     values: {
-      innovation: 'Tecnología de Punta',
-      innovationDesc: 'Usamos las herramientas más modernas y efectivas del mercado para que tu solución nunca quede obsoleta.',
-      quality: 'Entrega Garantizada',
-      qualityDesc: 'Cumplimos fechas, respetamos presupuestos y entregamos exactamente lo que prometemos. Sin sorpresas.',
+      innovation: 'Herramientas que Duran',
+      innovationDesc: 'Usamos tecnología probada y moderna para que tu solución siga funcionando en 3 años, no solo en el lanzamiento.',
+      quality: 'Entregamos lo que Prometemos',
+      qualityDesc: 'Fechas, presupuesto y alcance: los respetamos. Si algo cambia, te lo decimos antes, no después.',
       partnership: 'Tu Éxito es Nuestro Éxito',
-      partnershipDesc: 'No somos solo proveedores, somos tu equipo tecnológico. Estamos contigo desde la idea hasta el crecimiento.',
+      partnershipDesc: 'No cerramos el trato y desaparecemos. Estamos contigo desde la primera reunión hasta que tu solución genere resultados.',
     },
     featured: {
-      title: 'Soluciones Duraderas',
-      description: 'Construimos software de calidad profesional que funciona hoy y se mantiene eficiente mañana. Tu inversión está protegida a largo plazo.',
+      title: 'Construido Para Durar',
+      description: 'Software que funciona hoy y sigue siendo eficiente en dos años. Sin deuda técnica que te cueste más adelante.',
     },
   },
 
   // Contact Section
   contact: {
-    title: 'Comencemos Tu Proyecto',
-    subtitle: '¿Tienes una idea? Hagámosla realidad',
-    description: 'Escríbenos por WhatsApp y conversemos sobre tu proyecto. Respuesta rápida, sin compromiso, sin tecnicismos innecesarios.',
-    whatsappCTA: 'Escribir por WhatsApp',
-    whatsappMessage: '¡Hola! Me gustaría conversar sobre un proyecto.',
+    title: '¿Listo Para Que Tu Proyecto Despegue?',
+    subtitle: 'Cuéntanos qué necesitas. Respondemos en menos de 24 horas.',
+    description: 'Sin formularios complicados ni reuniones interminables. Escríbenos por WhatsApp y te damos claridad sobre cómo podemos ayudarte.',
+    whatsappCTA: 'Hablar por WhatsApp Ahora',
+    whatsappMessage: '¡Hola! Tengo un proyecto en mente y me gustaría saber cómo pueden ayudarme.',
     form: {
       name: 'Nombre Completo',
       namePlaceholder: 'Ingresa tu nombre completo',
@@ -114,7 +117,7 @@ export default {
 
   // Footer
   footer: {
-    description: 'Soluciones tecnológicas que impulsan negocios. Automatización, apps móviles y desarrollo web a nivel mundial',
+    description: 'Automatización, apps y webs que hacen crecer tu negocio. Desde Colombia para el mundo.',
     sections: {
       company: 'Empresa',
       services: 'Servicios',
@@ -148,16 +151,16 @@ export default {
 
   // Sticky CTA
   sticky: {
-    title: 'Hablemos de Tu Proyecto',
-    subtitle: 'Chatea con nosotros por WhatsApp',
+    title: '¿Tienes un Proyecto en Mente?',
+    subtitle: 'Respuesta en menos de 24 horas por WhatsApp',
     cta: 'WhatsApp',
     ctaSecondary: 'Ver Servicios',
   },
 
   // SEO
   seo: {
-    title: 'CREXATIVE | Apps Móviles, Web y Automatización',
-    description: 'Automatización inteligente, apps móviles para iOS y Android y desarrollo web. Soluciones tecnológicas que impulsan tu negocio desde Colombia para el mundo.',
+    title: 'CREXATIVE | Automatización, Apps y Desarrollo Web que Hacen Crecer Tu Negocio',
+    description: 'Automatizamos tus procesos, creamos apps para iOS y Android y construimos webs que venden. Equipo de desarrollo desde Colombia trabajando para el mundo.',
     keywords: 'automatización procesos, automatización empresarial, desarrollo apps móviles, aplicaciones iOS Android, desarrollo web, software personalizado, soluciones tecnológicas Colombia, agencia desarrollo software',
   },
 
@@ -341,19 +344,19 @@ export default {
     sunday: 'Domingo:',
     closed: 'Cerrado',
     saturdayHours: '10:00 AM - 2:00 PM COT',
-    getQuote: 'Obtén Tu Cotización Gratuita',
-    quoteDescription: 'Cuéntanos sobre tu proyecto y te proporcionaremos una propuesta detallada en 48 horas.',
+    getQuote: 'Solicita Tu Propuesta Sin Costo',
+    quoteDescription: 'Cuéntanos qué necesitas y te enviamos una propuesta clara con tiempos y costos en 48 horas.',
     projectBudget: 'Presupuesto del Proyecto',
     selectBudget: 'Seleccionar rango de presupuesto',
     under5k: 'Menos de $5,000',
     over50k: '$50,000+',
     other: 'Otro',
-    cleanCode: 'Soluciones Duraderas',
-    cleanCodeDesc: 'Construimos software de calidad profesional que funciona hoy y se mantiene eficiente mañana. Tu inversión está protegida a largo plazo.',
-    modernDesign: 'Experiencias Que Enamoran',
-    modernDesignDesc: 'Creamos interfaces intuitivas y atractivas que tus usuarios disfrutarán usar. Belleza y funcionalidad en perfecta armonía.',
-    scalableArchitecture: 'Crece Sin Límites',
-    scalableArchitectureDesc: 'Tu negocio crecerá, y tu tecnología también. Diseñamos soluciones que se adaptan a tu crecimiento sin dolores de cabeza ni costos sorpresa.',
+    cleanCode: 'Construido Para Durar',
+    cleanCodeDesc: 'Software que funciona hoy y sigue siendo eficiente en dos años. Sin deuda técnica que te cueste más adelante.',
+    modernDesign: 'Interfaces Que Tus Usuarios Disfrutan',
+    modernDesignDesc: 'Diseñamos para que los usuarios entiendan, confíen y regresen. Funcional primero, hermoso siempre.',
+    scalableArchitecture: 'Escala a tu Ritmo',
+    scalableArchitectureDesc: 'Diseñamos para donde estás hoy y para donde vas mañana. Nada de reescribir todo cuando tu negocio despegue.',
     paymentIntegration: 'Integración de Pagos',
   },
 };

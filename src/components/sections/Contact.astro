@@ -125,7 +125,7 @@ const contactSchema = {
 
         <a href={whatsappLink} target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
           <img src="/images/icons/contact-whatsapp.svg" alt="WhatsApp" width="24" height="24" loading="lazy" />
-          <span>{lang === 'es' ? 'Escribir al Whatsapp' : 'Message on WhatsApp'}</span>
+          <span>{t('contact.whatsappCTA')}</span>
         </a>
       </div>
     </div>
@@ -373,6 +373,7 @@ const contactSchema = {
   .whatsapp-cta img {
     width: 24px;
     height: 24px;
+    filter: brightness(0);
   }
 
   /* Screen reader only - visually hidden but accessible */
